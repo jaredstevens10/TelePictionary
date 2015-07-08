@@ -1,0 +1,443 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		172F7E101B4DD20800398D71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172F7E0F1B4DD20800398D71 /* AppDelegate.swift */; };
+		172F7E131B4DD20800398D71 /* TelePictionary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 172F7E111B4DD20800398D71 /* TelePictionary.xcdatamodeld */; };
+		172F7E151B4DD20800398D71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172F7E141B4DD20800398D71 /* ViewController.swift */; };
+		172F7E181B4DD20A00398D71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172F7E161B4DD20A00398D71 /* Main.storyboard */; };
+		172F7E1A1B4DD20A00398D71 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172F7E191B4DD20A00398D71 /* Images.xcassets */; };
+		172F7E1D1B4DD20A00398D71 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 172F7E1B1B4DD20A00398D71 /* LaunchScreen.xib */; };
+		172F7E291B4DD20A00398D71 /* TelePictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172F7E281B4DD20A00398D71 /* TelePictionaryTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		172F7E231B4DD20A00398D71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 172F7E021B4DD20600398D71 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 172F7E091B4DD20700398D71;
+			remoteInfo = TelePictionary;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		172F7E0A1B4DD20700398D71 /* TelePictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TelePictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		172F7E0E1B4DD20800398D71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		172F7E0F1B4DD20800398D71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		172F7E121B4DD20800398D71 /* TelePictionary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TelePictionary.xcdatamodel; sourceTree = "<group>"; };
+		172F7E141B4DD20800398D71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		172F7E171B4DD20A00398D71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		172F7E191B4DD20A00398D71 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		172F7E1C1B4DD20A00398D71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		172F7E221B4DD20A00398D71 /* TelePictionaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TelePictionaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		172F7E271B4DD20A00398D71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		172F7E281B4DD20A00398D71 /* TelePictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelePictionaryTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		172F7E071B4DD20700398D71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		172F7E1F1B4DD20A00398D71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		172F7E011B4DD20500398D71 = {
+			isa = PBXGroup;
+			children = (
+				172F7E0C1B4DD20700398D71 /* TelePictionary */,
+				172F7E251B4DD20A00398D71 /* TelePictionaryTests */,
+				172F7E0B1B4DD20700398D71 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		172F7E0B1B4DD20700398D71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				172F7E0A1B4DD20700398D71 /* TelePictionary.app */,
+				172F7E221B4DD20A00398D71 /* TelePictionaryTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		172F7E0C1B4DD20700398D71 /* TelePictionary */ = {
+			isa = PBXGroup;
+			children = (
+				172F7E0F1B4DD20800398D71 /* AppDelegate.swift */,
+				172F7E141B4DD20800398D71 /* ViewController.swift */,
+				172F7E161B4DD20A00398D71 /* Main.storyboard */,
+				172F7E191B4DD20A00398D71 /* Images.xcassets */,
+				172F7E1B1B4DD20A00398D71 /* LaunchScreen.xib */,
+				172F7E111B4DD20800398D71 /* TelePictionary.xcdatamodeld */,
+				172F7E0D1B4DD20700398D71 /* Supporting Files */,
+			);
+			path = TelePictionary;
+			sourceTree = "<group>";
+		};
+		172F7E0D1B4DD20700398D71 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				172F7E0E1B4DD20800398D71 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		172F7E251B4DD20A00398D71 /* TelePictionaryTests */ = {
+			isa = PBXGroup;
+			children = (
+				172F7E281B4DD20A00398D71 /* TelePictionaryTests.swift */,
+				172F7E261B4DD20A00398D71 /* Supporting Files */,
+			);
+			path = TelePictionaryTests;
+			sourceTree = "<group>";
+		};
+		172F7E261B4DD20A00398D71 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				172F7E271B4DD20A00398D71 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		172F7E091B4DD20700398D71 /* TelePictionary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 172F7E2C1B4DD20A00398D71 /* Build configuration list for PBXNativeTarget "TelePictionary" */;
+			buildPhases = (
+				172F7E061B4DD20700398D71 /* Sources */,
+				172F7E071B4DD20700398D71 /* Frameworks */,
+				172F7E081B4DD20700398D71 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TelePictionary;
+			productName = TelePictionary;
+			productReference = 172F7E0A1B4DD20700398D71 /* TelePictionary.app */;
+			productType = "com.apple.product-type.application";
+		};
+		172F7E211B4DD20A00398D71 /* TelePictionaryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 172F7E2F1B4DD20A00398D71 /* Build configuration list for PBXNativeTarget "TelePictionaryTests" */;
+			buildPhases = (
+				172F7E1E1B4DD20A00398D71 /* Sources */,
+				172F7E1F1B4DD20A00398D71 /* Frameworks */,
+				172F7E201B4DD20A00398D71 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				172F7E241B4DD20A00398D71 /* PBXTargetDependency */,
+			);
+			name = TelePictionaryTests;
+			productName = TelePictionaryTests;
+			productReference = 172F7E221B4DD20A00398D71 /* TelePictionaryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		172F7E021B4DD20600398D71 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Claven Solutions";
+				TargetAttributes = {
+					172F7E091B4DD20700398D71 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					172F7E211B4DD20A00398D71 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 172F7E091B4DD20700398D71;
+					};
+				};
+			};
+			buildConfigurationList = 172F7E051B4DD20600398D71 /* Build configuration list for PBXProject "TelePictionary" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 172F7E011B4DD20500398D71;
+			productRefGroup = 172F7E0B1B4DD20700398D71 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				172F7E091B4DD20700398D71 /* TelePictionary */,
+				172F7E211B4DD20A00398D71 /* TelePictionaryTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		172F7E081B4DD20700398D71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				172F7E181B4DD20A00398D71 /* Main.storyboard in Resources */,
+				172F7E1D1B4DD20A00398D71 /* LaunchScreen.xib in Resources */,
+				172F7E1A1B4DD20A00398D71 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		172F7E201B4DD20A00398D71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		172F7E061B4DD20700398D71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				172F7E151B4DD20800398D71 /* ViewController.swift in Sources */,
+				172F7E101B4DD20800398D71 /* AppDelegate.swift in Sources */,
+				172F7E131B4DD20800398D71 /* TelePictionary.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		172F7E1E1B4DD20A00398D71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				172F7E291B4DD20A00398D71 /* TelePictionaryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		172F7E241B4DD20A00398D71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 172F7E091B4DD20700398D71 /* TelePictionary */;
+			targetProxy = 172F7E231B4DD20A00398D71 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		172F7E161B4DD20A00398D71 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				172F7E171B4DD20A00398D71 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		172F7E1B1B4DD20A00398D71 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				172F7E1C1B4DD20A00398D71 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		172F7E2A1B4DD20A00398D71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		172F7E2B1B4DD20A00398D71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		172F7E2D1B4DD20A00398D71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = TelePictionary/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		172F7E2E1B4DD20A00398D71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = TelePictionary/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		172F7E301B4DD20A00398D71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TelePictionaryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TelePictionary.app/TelePictionary";
+			};
+			name = Debug;
+		};
+		172F7E311B4DD20A00398D71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TelePictionaryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TelePictionary.app/TelePictionary";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		172F7E051B4DD20600398D71 /* Build configuration list for PBXProject "TelePictionary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				172F7E2A1B4DD20A00398D71 /* Debug */,
+				172F7E2B1B4DD20A00398D71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		172F7E2C1B4DD20A00398D71 /* Build configuration list for PBXNativeTarget "TelePictionary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				172F7E2D1B4DD20A00398D71 /* Debug */,
+				172F7E2E1B4DD20A00398D71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		172F7E2F1B4DD20A00398D71 /* Build configuration list for PBXNativeTarget "TelePictionaryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				172F7E301B4DD20A00398D71 /* Debug */,
+				172F7E311B4DD20A00398D71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		172F7E111B4DD20800398D71 /* TelePictionary.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				172F7E121B4DD20800398D71 /* TelePictionary.xcdatamodel */,
+			);
+			currentVersion = 172F7E121B4DD20800398D71 /* TelePictionary.xcdatamodel */;
+			path = TelePictionary.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 172F7E021B4DD20600398D71 /* Project object */;
+}
