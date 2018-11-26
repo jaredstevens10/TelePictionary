@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="crayon.ttf">
+            <string>DKCoolCrayon</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="CustomView" id="iN0-l3-epB" customClass="CustomView" customModule="TelePictionary" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chalkboard bg" translatesAutoresizingMaskIntoConstraints="NO" id="4gC-0a-JMc">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SillyPixie" translatesAutoresizingMaskIntoConstraints="NO" id="LJ9-0p-HJ1">
+                    <rect key="frame" x="70" y="31" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="ipc-UL-dhb"/>
+                        <constraint firstAttribute="width" constant="60" id="qR2-xX-Tvf"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="839-Li-kxv">
+                    <rect key="frame" x="0.0" y="167" width="200" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="DKCoolCrayon" family="DK Cool Crayon" pointSize="15"/>
+                    <state key="normal" title="OK">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="4gC-0a-JMc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1o8-ND-HQd"/>
+                <constraint firstItem="LJ9-0p-HJ1" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5e0-KH-wXU"/>
+                <constraint firstAttribute="trailing" secondItem="4gC-0a-JMc" secondAttribute="trailing" id="U1d-cJ-jnp"/>
+                <constraint firstAttribute="bottom" secondItem="4gC-0a-JMc" secondAttribute="bottom" id="rS3-oq-CfJ"/>
+                <constraint firstItem="4gC-0a-JMc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="w8I-Ga-AKX"/>
+                <constraint firstItem="LJ9-0p-HJ1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="31" id="yhb-Qf-n89"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="110" y="234"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="SillyPixie" width="186" height="239"/>
+        <image name="chalkboard bg" width="935" height="701"/>
+    </resources>
+</document>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="crayon.ttf">
+            <string>DKCoolCrayon</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="LoadingView" id="iN0-l3-epB" customClass="LoadingViewOne" customModule="MessagesExtension" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0iA-jb-PSG">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ydi-M7-0h4">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSY-hC-SOg">
+                            <rect key="frame" x="236" y="214" width="128" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="yvU-D3-lfO"/>
+                                <constraint firstAttribute="width" constant="128" id="zKy-aR-9Jv"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="DKCoolCrayon" family="DK Cool Crayon" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="X2N-a6-eQU">
+                            <rect key="frame" x="282" y="247" width="37" height="37"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="X2N-a6-eQU" firstAttribute="centerX" secondItem="ydi-M7-0h4" secondAttribute="centerX" id="G6l-7c-30r"/>
+                        <constraint firstItem="ZSY-hC-SOg" firstAttribute="centerX" secondItem="ydi-M7-0h4" secondAttribute="centerX" id="M3D-Xc-qwL"/>
+                        <constraint firstItem="ZSY-hC-SOg" firstAttribute="centerY" secondItem="ydi-M7-0h4" secondAttribute="centerY" constant="-76" id="VLp-yr-CSw"/>
+                        <constraint firstItem="X2N-a6-eQU" firstAttribute="top" secondItem="ZSY-hC-SOg" secondAttribute="bottom" constant="12" id="sZc-4U-zsR"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="0iA-jb-PSG" secondAttribute="trailing" id="HxV-g4-jcJ"/>
+                <constraint firstAttribute="bottom" secondItem="ydi-M7-0h4" secondAttribute="bottom" id="LPK-G6-JnG"/>
+                <constraint firstAttribute="trailing" secondItem="ydi-M7-0h4" secondAttribute="trailing" id="MSb-6O-pur"/>
+                <constraint firstItem="0iA-jb-PSG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="MkO-99-4nN"/>
+                <constraint firstItem="ydi-M7-0h4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Mxh-nc-dbX"/>
+                <constraint firstItem="ydi-M7-0h4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="RVW-fI-EV6"/>
+                <constraint firstAttribute="bottom" secondItem="0iA-jb-PSG" secondAttribute="bottom" id="c4u-B4-IaC"/>
+                <constraint firstItem="0iA-jb-PSG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="d2D-zq-b8M"/>
+            </constraints>
+            <connections>
+                <outlet property="BGView" destination="0iA-jb-PSG" id="36X-7a-z5d"/>
+                <outlet property="actInd" destination="X2N-a6-eQU" id="4sz-67-3ef"/>
+                <outlet property="remindLBL" destination="ZSY-hC-SOg" id="hLF-xv-cpD"/>
+                <outlet property="theView" destination="ydi-M7-0h4" id="fVH-xG-Ixq"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
+        </view>
+    </objects>
+</document>

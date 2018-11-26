@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oy6-ac-ynp">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ZF-0W-OiB">
+                    <rect key="frame" x="0.0" y="79" width="375" height="463"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F3d-9M-VyN">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="463"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="F3d-9M-VyN" secondAttribute="trailing" id="KC0-RF-wed"/>
+                        <constraint firstItem="F3d-9M-VyN" firstAttribute="top" secondItem="1ZF-0W-OiB" secondAttribute="top" id="daD-JP-68F"/>
+                        <constraint firstItem="F3d-9M-VyN" firstAttribute="leading" secondItem="1ZF-0W-OiB" secondAttribute="leading" id="hBz-01-xuH"/>
+                        <constraint firstAttribute="bottom" secondItem="F3d-9M-VyN" secondAttribute="bottom" id="nxE-Jx-Hr5"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykS-WH-tnJ">
+                    <rect key="frame" x="0.0" y="542" width="375" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhQ-Jv-caj">
+                            <rect key="frame" x="287" y="15" width="80" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="3L4-Vf-sd7"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                            <state key="normal" title="Use Photo">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="UsePhotoBTN:" destination="iN0-l3-epB" eventType="touchUpInside" id="oeM-od-c3M"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWy-My-BUj">
+                            <rect key="frame" x="8" y="15" width="80" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="XgR-pm-5bw"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                            <state key="normal" title="Retake">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="RetakePhotoBTN:" destination="iN0-l3-epB" eventType="touchUpInside" id="8Pb-pW-kFR"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="vhQ-Jv-caj" secondAttribute="trailing" constant="8" id="BYx-jR-3VB"/>
+                        <constraint firstItem="lWy-My-BUj" firstAttribute="leading" secondItem="ykS-WH-tnJ" secondAttribute="leading" constant="8" id="RW4-pK-dZ8"/>
+                        <constraint firstAttribute="bottom" secondItem="vhQ-Jv-caj" secondAttribute="bottom" constant="15" id="TrR-Ra-EZn"/>
+                        <constraint firstItem="vhQ-Jv-caj" firstAttribute="top" secondItem="ykS-WH-tnJ" secondAttribute="top" constant="15" id="dgu-mG-4bd"/>
+                        <constraint firstAttribute="height" constant="60" id="n70-nf-zLK"/>
+                        <constraint firstItem="lWy-My-BUj" firstAttribute="top" secondItem="ykS-WH-tnJ" secondAttribute="top" constant="15" id="p3e-yj-BiP"/>
+                        <constraint firstAttribute="bottom" secondItem="lWy-My-BUj" secondAttribute="bottom" constant="15" id="qdQ-jD-6hS"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Oy6-ac-ynp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8TV-mm-GRo"/>
+                <constraint firstAttribute="trailing" secondItem="Oy6-ac-ynp" secondAttribute="trailing" id="CNx-wl-ekh"/>
+                <constraint firstItem="Oy6-ac-ynp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Dcl-1p-RJi"/>
+                <constraint firstItem="1ZF-0W-OiB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LQb-ut-9Ne"/>
+                <constraint firstAttribute="trailing" secondItem="ykS-WH-tnJ" secondAttribute="trailing" id="N2M-d1-Jls"/>
+                <constraint firstItem="1ZF-0W-OiB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="79" id="R1c-5x-L7K"/>
+                <constraint firstItem="ykS-WH-tnJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fJz-Uh-OFO"/>
+                <constraint firstAttribute="bottom" secondItem="ykS-WH-tnJ" secondAttribute="bottom" constant="65" id="gsh-DA-fZP"/>
+                <constraint firstAttribute="trailing" secondItem="1ZF-0W-OiB" secondAttribute="trailing" id="iXY-z1-SWg"/>
+                <constraint firstAttribute="bottom" secondItem="1ZF-0W-OiB" secondAttribute="bottom" constant="110" id="jYp-7p-CaF"/>
+                <constraint firstAttribute="bottom" secondItem="Oy6-ac-ynp" secondAttribute="bottom" id="uLa-sn-unm"/>
+                <constraint firstItem="ykS-WH-tnJ" firstAttribute="top" secondItem="1ZF-0W-OiB" secondAttribute="bottom" id="yV2-D1-O7w"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="jYp-7p-CaF"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="BGView" destination="Oy6-ac-ynp" id="6yj-Zw-cM4"/>
+                <outlet property="buttonsView" destination="ykS-WH-tnJ" id="qFy-0X-zqz"/>
+                <outlet property="previewView" destination="1ZF-0W-OiB" id="NGs-pV-hne"/>
+                <outlet property="retakePhoto_BTN" destination="lWy-My-BUj" id="9B8-Ck-tpz"/>
+                <outlet property="usePhoto_BTN" destination="vhQ-Jv-caj" id="Kiz-AT-DYi"/>
+            </connections>
+            <point key="canvasLocation" x="35.5" y="54.5"/>
+        </view>
+    </objects>
+</document>
