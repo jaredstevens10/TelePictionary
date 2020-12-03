@@ -15,6 +15,8 @@ import GameKit
     }
     
 class FBFriendsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+   
+    
     
     @IBOutlet var ActInd: UIActivityIndicatorView!
     
@@ -66,7 +68,7 @@ class FBFriendsViewController: UIViewController, UITableViewDataSource, UITableV
         var ProfileImagesString = [String]()
 
     //GAME CENTER VARIABLES
-        var localPlayer = GKLocalPlayer.localPlayer()
+        var localPlayer = GKLocalPlayer.local
         //var GCFriends = [NSString]()
     
         var gcEnabled = Bool()
@@ -90,7 +92,7 @@ class FBFriendsViewController: UIViewController, UITableViewDataSource, UITableV
             
             TableView.dataSource = self
             //TableView.delegate = self
-            self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+            self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
             
             if Reachability.isConnectedToNetwork() {
             print("about to perform GC login")
@@ -114,17 +116,14 @@ class FBFriendsViewController: UIViewController, UITableViewDataSource, UITableV
         
         if Reachability.isConnectedToNetwork() {
         
+          //  self.localPlayer.loadFriendPlayers(completionHandler: { GCFriends -> Void in
+            
+            /*
         self.localPlayer.loadFriendPlayers(completionHandler: { (GCFriends) -> Void in
-            
             print("GCFriend = \(GCFriends)")
-            
-            
             for myFriend in GCFriends.0! {
-                
                 let myFriendAlias = myFriend.alias
                 let myFriendID2 = myFriend.playerID
-                
-                
                 let myFriendID = myFriendID2!.replacingOccurrences(of: ":", with: "")
                 
                 // var myFriend = myFriend?.first
@@ -136,7 +135,6 @@ class FBFriendsViewController: UIViewController, UITableViewDataSource, UITableV
                 self.FBidArray.append(myFriendID as NSString)
                 // GCFriendsTemp.append(myFriendName!)
             }
-                
             /*
             for GCUsers in NameTable {
                 
@@ -144,21 +142,16 @@ class FBFriendsViewController: UIViewController, UITableViewDataSource, UITableV
             }
             */
             self.TableView.reloadData()
-            
         })
-        
-        
+            */
+            
+            
             } else {
             
             print("not connected to network")
             
             }
- 
-        
-        
-        
         //self.TableView.reloadData()
-        
         ActInd.stopAnimating()
     }
     
@@ -418,7 +411,7 @@ class FBFriendsViewController: UIViewController, UITableViewDataSource, UITableV
           //  if let url =
             if let url = URL(string: url) {
                 if let data = try? Data(contentsOf: url) {
-                    //imageURL.contentMode = UIViewContentMode.ScaleAspectFit
+                    //imageURL.contentMode = UIView.ContentMode.ScaleAspectFit
                     imageURL = UIImage(data: data)!
                     let tempimage = UIImage(data: data)
                     ProfileImages.append(tempimage!)
@@ -435,7 +428,7 @@ class FBFriendsViewController: UIViewController, UITableViewDataSource, UITableV
     
     func GameLogin () {
         print("login called")
-        //localPlayer = GKLocalPlayer.localPlayer()
+        //localPlayer = GKLocalPlayer.local
          var GCFriendsTemp = [NSString]()
         
         
@@ -451,8 +444,8 @@ class FBFriendsViewController: UIViewController, UITableViewDataSource, UITableV
                 print("Player authenticated")
                 
                 //self.player = localPlayer.displayName
-                self.playerid = self.localPlayer.playerID! as NSString
-                self.player = self.localPlayer.alias! as NSString
+                self.playerid = self.localPlayer.playerID as NSString
+                self.player = self.localPlayer.alias as NSString
                 
                 print("player: \(self.player)")
                 print("playerid: \(self.playerid)")
@@ -474,9 +467,8 @@ class FBFriendsViewController: UIViewController, UITableViewDataSource, UITableV
             
                 
                 
-                
-               
-                
+              //JARED 11-26-2020 - FIX BELOW
+            /*
                 self.localPlayer.loadFriendPlayers(completionHandler: { (GCFriends) -> Void in
 
                     print("GCFriend = \(GCFriends)")
@@ -501,7 +493,7 @@ class FBFriendsViewController: UIViewController, UITableViewDataSource, UITableV
                     
                     
                 })
-                
+                */
                 
                 
                 

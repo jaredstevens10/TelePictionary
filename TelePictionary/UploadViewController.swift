@@ -37,16 +37,18 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         let myPickerController = UIImagePickerController()
         myPickerController.delegate = self;
-        myPickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        myPickerController.sourceType = UIImagePickerController.SourceType.photoLibrary
         
         self.present(myPickerController, animated: true, completion: nil)
         
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
         
     {
-        myImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        myImageView.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        //myImageView.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        //myImageView.image = info[UIImagePickerController.InfoKey.originalImage]! as! UIImage
         
         self.dismiss(animated: true, completion: nil)
         
@@ -66,7 +68,8 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         let request = NSMutableURLRequest(url:myUrl!);
         request.httpMethod = "POST";
         
-        let imageData = UIImageJPEGRepresentation(myImageView.image!, 1)
+        //let imageData = UIImageJPEGRepresentation(myImageView.image!, 1)
+        let imageData = myImageView.image!.jpegData(compressionQuality: 1)
         
         let encodedImage = imageData!.base64EncodedString(options: [])
         

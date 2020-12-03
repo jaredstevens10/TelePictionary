@@ -38,7 +38,7 @@ class MergeVideoViewController: UIViewController, UIImagePickerControllerDelegat
     func savedPhotosAvailable() -> Bool {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) == false {
             let alert = UIAlertController(title: "Not Available", message: "No Saved Album found", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             return false
         }
@@ -63,7 +63,7 @@ class MergeVideoViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func exportDidFinish(_ session: AVAssetExportSession) {
-        if session.status == AVAssetExportSessionStatus.completed {
+        if session.status == AVAssetExportSession.Status.completed {
             let outputURL = session.outputURL
             let library = ALAssetsLibrary()
             
@@ -83,7 +83,7 @@ class MergeVideoViewController: UIViewController, UIImagePickerControllerDelegat
                             message = "Video saved"
                         }
                         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                 })
             }
@@ -121,8 +121,8 @@ class MergeVideoViewController: UIViewController, UIImagePickerControllerDelegat
         present(mediaPickerController, animated: true, completion: nil)
     }
     
-    func orientationFromTransform(_ transform: CGAffineTransform) -> (orientation: UIImageOrientation, isPortrait: Bool) {
-        var assetOrientation = UIImageOrientation.up
+    func orientationFromTransform(_ transform: CGAffineTransform) -> (orientation: UIImage.Orientation, isPortrait: Bool) {
+        var assetOrientation = UIImage.Orientation.up
         var isPortrait = false
         if transform.a == 0 && transform.b == 1.0 && transform.c == -1.0 && transform.d == 0 {
             assetOrientation = .right
@@ -140,7 +140,7 @@ class MergeVideoViewController: UIViewController, UIImagePickerControllerDelegat
     
     func videoCompositionInstructionForTrack(_ track: AVCompositionTrack, asset: AVAsset) -> AVMutableVideoCompositionLayerInstruction {
         let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
-        let assetTrack = asset.tracks(withMediaType: AVMediaTypeVideo)[0] 
+        let assetTrack = asset.tracks(withMediaType: AVMediaType.video)[0]
         
         let transform = assetTrack.preferredTransform
         let assetInfo = orientationFromTransform(transform)
@@ -150,7 +150,7 @@ class MergeVideoViewController: UIViewController, UIImagePickerControllerDelegat
             scaleToFitRatio = UIScreen.main.bounds.width / assetTrack.naturalSize.height
             let scaleFactor = CGAffineTransform(scaleX: scaleToFitRatio, y: scaleToFitRatio)
             instruction.setTransform(assetTrack.preferredTransform.concatenating(scaleFactor),
-                at: kCMTimeZero)
+                at: CMTime.zero)
         } else {
             let scaleFactor = CGAffineTransform(scaleX: scaleToFitRatio, y: scaleToFitRatio)
             var concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: UIScreen.main.bounds.width / 2))
@@ -161,7 +161,7 @@ class MergeVideoViewController: UIViewController, UIImagePickerControllerDelegat
                 let centerFix = CGAffineTransform(translationX: assetTrack.naturalSize.width, y: yFix)
                 concat = fixUpsideDown.concatenating(centerFix).concatenating(scaleFactor)
             }
-            instruction.setTransform(concat, at: kCMTimeZero)
+            instruction.setTransform(concat, at: CMTime.zero)
         }
         
         return instruction
@@ -176,24 +176,24 @@ class MergeVideoViewController: UIViewController, UIImagePickerControllerDelegat
             let mixComposition = AVMutableComposition()
             
             // 2 - Create two video tracks
-            let firstTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo,
+            let firstTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.video,
                 preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             
             do {
                 
-            try firstTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, firstAsset.duration),
-                of: firstAsset.tracks(withMediaType: AVMediaTypeVideo)[0] ,
-                at: kCMTimeZero)
+                try firstTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: firstAsset.duration),
+                of: firstAsset.tracks(withMediaType: AVMediaType.video)[0] ,
+                at: CMTime.zero)
             } catch {
                 print(error)
             }
             
-            let secondTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo,
+            let secondTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.video,
                 preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             
             do {
-            try secondTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
-                of: secondAsset.tracks(withMediaType: AVMediaTypeVideo)[0] ,
+                try secondTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: secondAsset.duration),
+                of: secondAsset.tracks(withMediaType: AVMediaType.video)[0] ,
                 at: firstAsset.duration)
             } catch {
                 print(error)
@@ -201,25 +201,25 @@ class MergeVideoViewController: UIViewController, UIImagePickerControllerDelegat
             
             
             let mainInstruction = AVMutableVideoCompositionInstruction()
-            mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeAdd(firstAsset.duration, secondAsset.duration))
+            mainInstruction.timeRange = CMTimeRangeMake(start: CMTime.zero, duration: CMTimeAdd(firstAsset.duration, secondAsset.duration))
             
-            let firstInstruction = videoCompositionInstructionForTrack(firstTrack, asset: firstAsset)
+            let firstInstruction = videoCompositionInstructionForTrack(firstTrack!, asset: firstAsset)
             firstInstruction.setOpacity(0.0, at: firstAsset.duration)
-            let secondInstruction = videoCompositionInstructionForTrack(secondTrack, asset: secondAsset)
+            let secondInstruction = videoCompositionInstructionForTrack(secondTrack!, asset: secondAsset)
             
             mainInstruction.layerInstructions = [firstInstruction, secondInstruction]
             let mainComposition = AVMutableVideoComposition()
             mainComposition.instructions = [mainInstruction]
-            mainComposition.frameDuration = CMTimeMake(1, 30)
+            mainComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)
             mainComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             
             // 3 - Audio track
             if let loadedAudioAsset = audioAsset {
-                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
                 do {
-               try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, CMTimeAdd(firstAsset.duration, secondAsset.duration)),
-                    of: loadedAudioAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
-                    at: kCMTimeZero)
+                    try audioTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: CMTimeAdd(firstAsset.duration, secondAsset.duration)),
+                    of: loadedAudioAsset.tracks(withMediaType: AVMediaType.audio)[0] ,
+                    at: CMTime.zero)
                 } catch {
                     print(error)
                 }
@@ -237,7 +237,7 @@ class MergeVideoViewController: UIViewController, UIImagePickerControllerDelegat
             // 5 - Create Exporter
             let exporter = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality)
             exporter!.outputURL = url
-            exporter!.outputFileType = AVFileTypeQuickTimeMovie
+            exporter!.outputFileType = AVFileType.mov
             exporter!.shouldOptimizeForNetworkUse = true
             exporter!.videoComposition = mainComposition
             
@@ -268,7 +268,7 @@ extension MergeVideoViewController {
                 secondAsset = avAsset
             }
             let alert = UIAlertController(title: "Asset Loaded", message: message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.Cancel, handler: nil))
             presentViewController(alert, animated: true, completion: nil)
         }
     }

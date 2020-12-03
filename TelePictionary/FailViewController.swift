@@ -50,10 +50,10 @@ class FailViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         self.navigationController?.popoverPresentationController?.backgroundColor = UIColor.lightGray
         
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: #selector(FailViewController.RefreshFailData(_:)), for: UIControlEvents.valueChanged)
+        self.refreshControl.addTarget(self, action: #selector(FailViewController.RefreshFailData(_:)), for: UIControl.Event.valueChanged)
         
         self.TableView.addSubview(refreshControl)
         
@@ -120,7 +120,7 @@ class FailViewController: UIViewController, UITableViewDataSource, UITableViewDe
         actInd.stopAnimating()
         
     }
-    func RefreshFailData(_ sender:AnyObject) {
+    @objc func RefreshFailData(_ sender:AnyObject) {
         print("removing array data")
         idArrayInfo.removeAll()
         userArrayInfo.removeAll()
@@ -201,7 +201,7 @@ class FailViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return userArrayInfo.count
     }
     
-    func DeleteFailClicked(_ sender: UIButton) {
+    @objc func DeleteFailClicked(_ sender: UIButton) {
         
         _ = idArrayInfo[sender.tag]
         

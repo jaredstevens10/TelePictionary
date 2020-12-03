@@ -67,7 +67,7 @@ class FirstLoadViewController: UIViewController, UIPageViewControllerDataSource,
         
         
         self.pageViewController2.view .removeFromSuperview()
-        self.pageViewController2.removeFromParentViewController()
+        self.pageViewController2.removeFromParent()
         reset()
         print("Index is \(index)")
     }
@@ -92,19 +92,19 @@ class FirstLoadViewController: UIViewController, UIPageViewControllerDataSource,
         
         let pageContentViewController = self.viewControllerAtIndex(0)
         
-        self.pageViewController2.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+        self.pageViewController2.setViewControllers([pageContentViewController!], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
         
         /* We are substracting 30 because we have a start again button whose height is 30*/
         self.pageViewController2.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-        self.addChildViewController(pageViewController2)
+        self.addChild(pageViewController2)
         self.view.addSubview(pageViewController2.view)
-        self.pageViewController2.didMove(toParentViewController: self)
+        self.pageViewController2.didMove(toParent: self)
     }
     
     @IBAction func start(_ sender: AnyObject) {
         let pageContentViewController = self.viewControllerAtIndex(0)
         
-        self.pageViewController2.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+        self.pageViewController2.setViewControllers([pageContentViewController!], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
     }
     /*
     override func viewDidLoad() {

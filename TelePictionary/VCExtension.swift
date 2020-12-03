@@ -25,8 +25,8 @@ print("photo from library")
     }
     
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage //2
         
         ShowingProfileView = true
         
@@ -98,7 +98,7 @@ print("photo from library")
 
     if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
     picker.allowsEditing = false
-    picker.sourceType = UIImagePickerControllerSourceType.camera
+    picker.sourceType = UIImagePickerController.SourceType.camera
     picker.cameraCaptureMode = .photo
     present(picker, animated: true, completion: nil)
     // mainImageView.image =
@@ -140,7 +140,7 @@ print("photo from library")
         
         var info = (notification as NSNotification).userInfo!
         
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
         
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
@@ -161,7 +161,7 @@ print("photo from library")
         
      var info = (notification as NSNotification).userInfo!
      
-     let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
      
         
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
@@ -476,8 +476,8 @@ print("photo from library")
             let smallImage = ProfileImage.image!.resize(0.5)
             
             
-            let imageData = UIImageJPEGRepresentation(smallImage, 0.6)
-            
+            //let imageData = UIImageJPEGRepresentation(smallImage, 0.6)
+            let imageData = smallImage.jpegData(compressionQuality: 0.6)
             ProfileImageFinal = imageData!.base64EncodedString(options: []) as NSString
             
             
@@ -677,8 +677,8 @@ print("photo from library")
         
         
         
-        var post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
-        
+        //var post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
+        var post = post_old.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
 
         
         post = ("\(post)&ImageData=\(ProfileImageFinal)")
@@ -699,7 +699,7 @@ print("photo from library")
     
     let url:URL = URL(string: "http://\(ServerInfo.sharedInstance)/Apps/TelePictionary/UpdateUserProfile.php")!
     
-    let postData:Data = post.data(using: String.Encoding.ascii)!
+    let postData:Data = post!.data(using: String.Encoding.ascii)!
     
     // var postData:NSData = post.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
     
@@ -1086,7 +1086,7 @@ extension Array {
 extension UIImage {
     func resize(scale:CGFloat)-> UIImage {
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: size.width*scale, height: size.height*scale)))
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        imageView.contentMode = UIView.ContentMode.ScaleAspectFit
         imageView.image = self
         UIGraphicsBeginImageContext(imageView.bounds.size)
         imageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
@@ -1096,7 +1096,7 @@ extension UIImage {
     }
     func resizeToWidth(width:CGFloat)-> UIImage {
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))))
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        imageView.contentMode = UIView.ContentMode.ScaleAspectFit
         imageView.image = self
         UIGraphicsBeginImageContext(imageView.bounds.size)
         imageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)

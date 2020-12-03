@@ -432,7 +432,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         
         /*
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.whiteColor()]
         }
         */
         //self.navigationController!.navigationBar.titleTextAttributes = [ ]
@@ -446,7 +446,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         
         //    if #available(iOS 9.0, *) { self.resultSearchController.loadViewIfNeeded() }
         
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         //navigationController!.navigationBar.barTintColor = UIColor(red: 0.0, green: 0.941, blue: 0.6078, alpha: 0.1)
         
@@ -468,7 +468,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         self.TableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: #selector(MyGamesDemoViewController.RefreshGameData(_:)), for: UIControlEvents.valueChanged)
+        self.refreshControl.addTarget(self, action: #selector(MyGamesDemoViewController.RefreshGameData(_:)), for: UIControl.Event.valueChanged)
         self.TableView.addSubview(refreshControl)
         
         View1.layer.cornerRadius = 10
@@ -541,7 +541,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         */
         // self.TableView.reloadData()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(MyGamesDemoViewController.displayForegroundDetails), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MyGamesDemoViewController.displayForegroundDetails), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         
         if isFun.isEqual(to: "no") {
@@ -1147,7 +1147,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                 
                 self.howtoLBL1.text = "Whew...you made it just in time"
                 self.howtoLBL2.text = "I'm Pixie, let's get started..."
-                View1BTN.setTitle("Let's Go", for: UIControlState())
+                View1BTN.setTitle("Let's Go", for: UIControl.State())
                  segmentControl.selectedIndex = 1
                 
             case 1:
@@ -1158,7 +1158,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                 
                 self.howtoLBL1.text = "Nice Job!"
                 self.howtoLBL2.text = "Now let's try a Quote..."
-                View1BTN.setTitle("Got it", for: UIControlState())
+                View1BTN.setTitle("Got it", for: UIControl.State())
                  segmentControl.selectedIndex = 1
                // self.NoGamesLBL.hidden = true
                 
@@ -1170,7 +1170,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                 
                 self.howtoLBL1.text = "Woo hoo! Almost done."
                 self.howtoLBL2.text = "Check out a Completed Game..."
-                View1BTN.setTitle("Ok", for: UIControlState())
+                View1BTN.setTitle("Ok", for: UIControl.State())
                 
                  self.CreateDemoGamesCompleted2()
                 
@@ -1179,7 +1179,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
             case 3:
                 self.howtoLBL1.text = "Now You're a Pro."
                 self.howtoLBL2.text = "Let's play some real games..."
-                View1BTN.setTitle("Great", for: UIControlState())
+                View1BTN.setTitle("Great", for: UIControl.State())
                  segmentControl.selectedIndex = 1
               //  self.NoGamesLBL.hidden = false
                 
@@ -1315,7 +1315,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         }
     }
     
-    func displayForegroundDetails() {
+    @objc func displayForegroundDetails() {
         
         
         print("APP ENTERED THE FOREGROUND")
@@ -1392,7 +1392,11 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
     
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+        
+        
+        //NSNotification.Name.UIApplication.willEnterForegroundNotification
+        //UIApplication.willEnterForegroundNotification
         
         if let superView = resultSearchController.view.superview
         {
@@ -1506,7 +1510,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
     }
     
     
-    func RefreshGameData(_ sender:AnyObject) {
+    @objc func RefreshGameData(_ sender:AnyObject) {
         print("REFRESHING MY GAMES and removing array data")
         print("adding array data")
         
@@ -1540,7 +1544,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         View4TOP.constant = middleY
         ViewHolderTOP.constant = 0
         */
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.TransitionFlipFromRight, UIViewAnimationOptions.ShowHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.TransitionFlipFromRight, UIView.AnimationOptions.ShowHideTransitionViews]
         
         UIView.transitionFromView(self.View1, toView: self.View2, duration: 0.8, options: animationOptions, completion: nil)
         
@@ -1611,7 +1615,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View2, to: self.View1, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1625,7 +1629,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View2, to: self.View3, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1641,7 +1645,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         subViewHolderTOP.constant = middleY
         ViewHolderTOP.constant = 0
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View3, to: self.View2, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1656,7 +1660,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View3, to: self.View4, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1672,7 +1676,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View4, to: self.View3, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -2009,7 +2013,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
     }
     
     
-    func ShowCommentsClicked(_ sender: UIButton!) {
+    @objc func ShowCommentsClicked(_ sender: UIButton!) {
         GameRowSelected = sender.tag
         print("the game rowselected: \(sender.tag)")
         
@@ -2042,7 +2046,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         
     }
     
-    func pokeAnyClicked(_ sender: UIButton!) {
+    @objc func pokeAnyClicked(_ sender: UIButton!) {
         
         SCLAlertView().showCustomOK(UIImage(named: "howtoIcon.png")!, color: UIColor(red: 0.235294, green: 0.62745, blue: 0.81960, alpha: 1.0), title: "Poking", subTitle: "Poke a player to tell them to 'Hurry Up' and take their turn", duration: nil, completeText: "Ok", style: .custom, colorStyle: 1, colorTextButton: 1)
         
@@ -2122,7 +2126,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         
     }
     
-    func pokeClicked(_ sender: UIButton!) {
+    @objc func pokeClicked(_ sender: UIButton!) {
         
         
         
@@ -2198,7 +2202,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
     }
     
     
-    func TakeTurnClicked(_ sender: UIButton!) {
+    @objc func TakeTurnClicked(_ sender: UIButton!) {
         
         
         
@@ -2440,7 +2444,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         
     }
     
-    func ShowRatings(_ sender: UIButton!) {
+    @objc func ShowRatings(_ sender: UIButton!) {
         
         
         
@@ -2463,7 +2467,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         
     }
     
-    func GameMailClicked2(_ sender: UIButton!) {
+    @objc func GameMailClicked2(_ sender: UIButton!) {
         
         
         JustViewingPlayers = true
@@ -2511,7 +2515,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
     }
     
     
-    func GameMailClicked(_ sender: UIButton!) {
+    @objc func GameMailClicked(_ sender: UIButton!) {
         
         GameRowSelected = sender.tag
         print("the game rowselected: \(sender.tag)")
@@ -2872,7 +2876,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         //cell.contentView2?.layer.cornerRadius = 5
         
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         
         _ = Date()
@@ -3010,7 +3014,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                             
                             
                             
-                            // var darkBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                            // var darkBlur = UIBlurEffect(style: UIBlurEffect.Style.Dark)
                             // 2
                             // var blurView = UIVisualEffectView(effect: darkBlur)
                             // blurView.frame = (cell.Turn1Image?.bounds)!
@@ -3041,7 +3045,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                             //  cell.Turn1Image?.alpha = 0.7
                             cell.Turn1ImageBack?.image = UIImage(named: "QuoteBoxImage.png")!
                             cell.Turn1ImageBack?.isHidden = true
-                            //   var darkBlur = UIBlurEffect(style: UIBlurEffectStyle.Light)
+                            //   var darkBlur = UIBlurEffect(style: UIBlurEffect.Style.Light)
                             // 2
                             //   var blurView = UIVisualEffectView(effect: darkBlur)
                             // blurView.frame = (cell.Turn1Image?.bounds)!
@@ -3079,7 +3083,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                 //cell.Turn1Image?.image = UIImage(named: "QuoteBoxImage.png")!
                 cell.Turn1ImageBack?.image = UIImage(named: "QuoteBoxImage.png")!
                 cell.Turn1ImageBack?.isHidden = true
-                //var darkBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                //var darkBlur = UIBlurEffect(style: UIBlurEffect.Style.Dark)
                 // 2
                 // var blurView = UIVisualEffectView(effect: darkBlur)
                 // blurView.frame = (cell.Turn1Image?.bounds)!
@@ -3111,14 +3115,14 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         switch gametype.GameContent {
         case "E":
             //  cell.contentBTN?.imageView?.image = UIImage(named: "ContentE.png")
-            cell.contentBTN?.setImage(contentImage1, for: UIControlState())
+            cell.contentBTN?.setImage(contentImage1, for: UIControl.State())
             //cell.contentBTN?.layer.cornerRadius = 100
         case "M":
             // cell.contentBTN?.imageView?.image = UIImage(named: "contentM.png")
-            cell.contentBTN?.setImage(contentImage3, for: UIControlState())
+            cell.contentBTN?.setImage(contentImage3, for: UIControl.State())
         case "T":
             //  cell.contentBTN?.imageView?.image = UIImage(named: "ContentT.png")
-            cell.contentBTN?.setImage(contentImage2, for: UIControlState())
+            cell.contentBTN?.setImage(contentImage2, for: UIControl.State())
         default:
             print("no rating available")
             // cell.contentBTN?.imageView?.image = UIImage(named: "ContentE.png")
@@ -3153,7 +3157,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
             if (gametype.GameIsComplete == "no") {
                 
                 /*
-                var darkBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                var darkBlur = UIBlurEffect(style: UIBlurEffect.Style.Dark)
                 // 2
                 var blurView = UIVisualEffectView(effect: darkBlur)
                 blurView.frame = (cell.Turn1Image?.bounds)!
@@ -3173,7 +3177,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                 // println("Edit Shown")
                 
                 // cell.TableImageCTs?.imageView?.image = UIImage(named: "EditButton_white.png")
-                cell.TableImageCTs?.setTitle("Edit", for: UIControlState())
+                cell.TableImageCTs?.setTitle("Edit", for: UIControl.State())
                 cell.TableImageCTs?.addTarget(self, action: #selector(MyGamesDemoViewController.GameMailClicked(_:)), for: .touchUpInside)
                 
                 cell.TableImageCTs?.tag = (indexPath as NSIndexPath).row
@@ -3228,8 +3232,8 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
             
             cell.TakeTurnBTN?.layer.backgroundColor = UIColor(red: 0.572, green: 0.882, blue: 0.949, alpha: 1.0).cgColor
             
-            cell.TakeTurnBTN?.setTitle("View Game", for: UIControlState())
-            cell.TakeTurnBTN?.setTitleColor(UIColor.darkGray, for: UIControlState())
+            cell.TakeTurnBTN?.setTitle("View Game", for: UIControl.State())
+            cell.TakeTurnBTN?.setTitleColor(UIColor.darkGray, for: UIControl.State())
             
             cell.TakeTurnBTN?.addTarget(self, action: #selector(MyGamesDemoViewController.TakeTurnClicked(_:)), for: .touchUpInside)
             
@@ -3253,13 +3257,13 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
             if (gametype.GameCanTakeTurn == "yes") {
                 
                 if gametype.GameUsersTurn == username.description {
-                    cell.TakeTurnBTN?.setTitle("Take Your Turn!", for: UIControlState())
+                    cell.TakeTurnBTN?.setTitle("Take Your Turn!", for: UIControl.State())
                     
                     //cell.TakeTurnBTN?.layer.cornerRadius = 10
                     cell.TakeTurnBTN?.layer.borderWidth = 2
                     cell.TakeTurnBTN?.layer.borderColor = UIColor.white.cgColor
                     cell.TakeTurnBTN?.layer.backgroundColor =  UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0).cgColor
-                    cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControlState())
+                    cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControl.State())
                     cell.currentTurnLBL_who?.textColor = UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0)
                     cell.pokeBTN?.isHidden = false
                     cell.pokeLBL?.isHidden = false
@@ -3269,7 +3273,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                     cell.pokeBTN?.isHidden = true
                     cell.pokeLBL?.isHidden = true
                     
-                    cell.TakeTurnBTN?.setTitle("Take Turn!", for: UIControlState())
+                    cell.TakeTurnBTN?.setTitle("Take Turn!", for: UIControl.State())
                     
                     /*
                     var pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale");
@@ -3285,12 +3289,12 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                     cell.TakeTurnBTN?.layer.borderWidth = 2
                     cell.TakeTurnBTN?.layer.borderColor = UIColor.white.cgColor
                     cell.TakeTurnBTN?.layer.backgroundColor =  UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0).cgColor
-                    cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControlState())
+                    cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControl.State())
                     cell.currentTurnLBL_who?.textColor = UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0)
                     //  cell.lastTurnLBL?.text = gametype.LastTurnUser
                     
                 } else {
-                    cell.TakeTurnBTN?.setTitle("Steal Turn?", for: UIControlState())
+                    cell.TakeTurnBTN?.setTitle("Steal Turn?", for: UIControl.State())
                     
                     //cell.TakeTurnBTN?.layer.cornerRadius = 10
                     cell.TakeTurnBTN?.layer.borderWidth = 2
@@ -3298,7 +3302,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                     // cell.TakeTurnBTN?.layer.backgroundColor =  UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0).CGColor
                     cell.TakeTurnBTN?.layer.backgroundColor =  UIColor.orange.cgColor
                     
-                    cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControlState())
+                    cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControl.State())
                     
                     cell.currentTurnLBL_who?.textColor = UIColor(red: 0.9647, green: 0.34117, blue: 0.42745, alpha: 1.0)
                     // cell.lastTurnLBL?.text = gametype.LastTurnUser
@@ -3379,7 +3383,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                     cell.TakeTurnBTN?.layer.borderColor = UIColor.white.cgColor
                     cell.TakeTurnBTN?.layer.backgroundColor =  UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0).cgColor
                     
-                    cell.TakeTurnBTN?.setTitle("Take Turn!", for: UIControlState())
+                    cell.TakeTurnBTN?.setTitle("Take Turn!", for: UIControl.State())
                     
                     /*
                     var pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "opacity");
@@ -3391,7 +3395,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                     cell.TakeTurnBTN?.layer.addAnimation(pulseAnimation, forKey: nil)
                     */
                     
-                    cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControlState())
+                    cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControl.State())
                     
                     cell.TakeTurnBTN?.addTarget(self, action: #selector(MyGamesDemoViewController.TakeTurnClicked(_:)), for: .touchUpInside)
                     
@@ -3450,9 +3454,9 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                     cell.TakeTurnBTN?.layer.borderColor = UIColor.white.cgColor
                     cell.TakeTurnBTN?.layer.backgroundColor = UIColor(red: 0.929, green: 0.113, blue: 0.145, alpha: 1.0).cgColor
                     
-                    cell.TakeTurnBTN?.setTitle("Please Wait", for: UIControlState())
+                    cell.TakeTurnBTN?.setTitle("Please Wait", for: UIControl.State())
                     
-                    cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControlState())
+                    cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControl.State())
                     
                     cell.TakeTurnBTN?.addTarget(self, action: #selector(MyGamesDemoViewController.TakeTurnClicked(_:)), for: .touchUpInside)
                     
@@ -3520,7 +3524,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
         
         cell.Turn1Image?.image = UIImage(named: "QuoteBoxImage.png")!
-        var darkBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        var darkBlur = UIBlurEffect(style: UIBlurEffect.Style.Dark)
         // 2
         var blurView = UIVisualEffectView(effect: darkBlur)
         //blurView.modalPresentationStyle = .OverFullScreen
@@ -3532,7 +3536,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         //blurView.alpha = 0.5
         // 3
         // cell.Turn1Image?.addSubview(blurView)
-        cell.Turn1Image?.contentMode = UIViewContentMode.ScaleAspectFit
+        cell.Turn1Image?.contentMode = UIView.ContentMode.ScaleAspectFit
         //cell.Turn1View?.addSubview(blurView)
         cell.Turn1Image?.addSubview(visualEffectView)
         */
@@ -3618,11 +3622,11 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
     
     
     func addBlurView(_ imgView: UIImageView) {
-        let blurEffect: UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let blurEffect: UIBlurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
         self.blurEffectView = UIVisualEffectView(effect: blurEffect)
         self.blurEffectView.frame = imgView.bounds
-        //self.blurEffectView.autoresizingMask = UIViewAutoresizing.FlexibleWidth |
-        self.blurEffectView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        //self.blurEffectView.autoresizingMask = UIView.AutoresizingMask.FlexibleWidth |
+        self.blurEffectView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
         imgView.addSubview(blurEffectView)
     }
     
@@ -3630,7 +3634,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
     @IBAction func editTableView(_ sender: AnyObject) {
         
         
-        let darkBlur = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let darkBlur = UIBlurEffect(style: UIBlurEffect.Style.dark)
         // 2
         let blurView = UIVisualEffectView(effect: darkBlur)
         blurView.frame = self.view.bounds
@@ -3641,14 +3645,14 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         if TableView.isEditing{
             TableView.setEditing(false, animated: false)
             // self.view.addSubview(blurView)
-            //editBTN.style = UIBarButtonItemStyle.Plain;
+            //editBTN.style = UIBarButtonItem.Style.Plain;
             //editBTN.title = "Delete Game";
             TableView.reloadData()
         } else {
             //   blurView.removeFromSuperview()
             TableView.setEditing(true, animated: true)
             //editBTN.title = "Done";
-            //editBTN.style = UIBarButtonItemStyle.Done;
+            //editBTN.style = UIBarButtonItem.Style.Done;
             TableView.reloadData()
         }
         
@@ -3658,12 +3662,12 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         SCLAlertView().showCustomOK(UIImage(named: "howtoIcon.png")!, color: UIColor(red: 0.235294, green: 0.62745, blue: 0.81960, alpha: 1.0), title: "Deleted", subTitle: "Well you can't delete games just yet, but nice job.", duration: nil, completeText: "Ok", style: .custom, colorStyle: 1, colorTextButton: 1)
         
         /*
-        if editingStyle == UITableViewCellEditingStyle.Delete {
+        if editingStyle == UITableViewCell.EditingStyle.Delete {
             
             
             print("Game Creator: \(Player1Info[indexPath.row])")
@@ -4128,7 +4132,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
                 
             }
             
-        } else if editingStyle == UITableViewCellEditingStyle.Insert{
+        } else if editingStyle == UITableViewCell.EditingStyle.Insert{
             
             GameNameInfo.append("New Item")
             // GameSearchArray.append()
@@ -5162,7 +5166,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
     
   
     
-    func gamesegmentValueChanged(_ sender: AnyObject?){
+    @objc func gamesegmentValueChanged(_ sender: AnyObject?){
         
         if gameSegment.selectedIndex == 0 {
             /*
@@ -5332,7 +5336,7 @@ class MyGamesDemoViewController: UIViewController, AKPickerViewDelegate, AKPicke
         }
     }
     
-    func segmentValueChanged(_ sender: AnyObject?){
+    @objc func segmentValueChanged(_ sender: AnyObject?){
         
         if segmentControl.selectedIndex == 0 {
             

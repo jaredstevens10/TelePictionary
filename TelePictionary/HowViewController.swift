@@ -40,7 +40,7 @@ class HowViewController: UIViewController {
         self.title = "How To Play"
         
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
         }
         
         

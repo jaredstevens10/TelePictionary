@@ -40,7 +40,7 @@ class MergeVideoViewController: UIViewController {
     func savedPhotosAvailable() -> Bool {
         if UIImagePickerController.isSourceTypeAvailable(.SavedPhotosAlbum) == false {
             let alert = UIAlertController(title: "Not Available", message: "No Saved Album found", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.Cancel, handler: nil))
             presentViewController(alert, animated: true, completion: nil)
             return false
         }
@@ -111,7 +111,7 @@ class MergeVideoViewController: UIViewController {
     
     func videoCompositionInstructionForTrack(track: AVCompositionTrack, asset: AVAsset) -> AVMutableVideoCompositionLayerInstruction {
         let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
-        let assetTrack = asset.tracksWithMediaType(AVMediaTypeVideo)[0] 
+        let assetTrack = asset.tracksWithMediaType(AVMediaType.video)[0] 
         
         let transform = assetTrack.preferredTransform
         let assetInfo = orientationFromTransform(transform)
@@ -121,7 +121,7 @@ class MergeVideoViewController: UIViewController {
             scaleToFitRatio = UIScreen.mainScreen().bounds.width / assetTrack.naturalSize.height
             let scaleFactor = CGAffineTransformMakeScale(scaleToFitRatio, scaleToFitRatio)
             instruction.setTransform(CGAffineTransformConcat(assetTrack.preferredTransform, scaleFactor),
-                atTime: kCMTimeZero)
+                atTime: CMTime.zero)
         } else {
             let scaleFactor = CGAffineTransformMakeScale(scaleToFitRatio, scaleToFitRatio)
             var concat = CGAffineTransformConcat(CGAffineTransformConcat(assetTrack.preferredTransform, scaleFactor), CGAffineTransformMakeTranslation(0, UIScreen.mainScreen().bounds.width / 2))
@@ -132,7 +132,7 @@ class MergeVideoViewController: UIViewController {
                 let centerFix = CGAffineTransformMakeTranslation(assetTrack.naturalSize.width, yFix)
                 concat = CGAffineTransformConcat(CGAffineTransformConcat(fixUpsideDown, centerFix), scaleFactor)
             }
-            instruction.setTransform(concat, atTime: kCMTimeZero)
+            instruction.setTransform(concat, atTime: CMTime.zero)
         }
         
         return instruction
@@ -158,52 +158,52 @@ class MergeVideoViewController: UIViewController {
             parentLayer.addSublayer(Image1Layer)
             
             let mainInstruction: AVMutableVideoCompositionInstruction = AVMutableVideoCompositionInstruction()
-            mainInstruction.timeRange = CMTimeRange(start: kCMTimeZero, end: CMTimeMakeWithSeconds(100, 10))
+        mainInstruction.timeRange = CMTimeRange(start: CMTime.zero, end: CMTimeMakeWithSeconds(100, preferredTimescale: 10))
             
             let gameVideoComposition = AVMutableVideoComposition()
             
             gameVideoComposition.animationTool = AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: Image1Layer, in: parentLayer)
             
-           gameVideoComposition.frameDuration = CMTimeMake(1, 30)
+        gameVideoComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)
            gameVideoComposition.renderScale = 1.0
            gameVideoComposition.renderSize = CGSize(width: 848, height: 480)
            gameVideoComposition.instructions = NSArray(array: [mainInstruction]) as! [AVVideoCompositionInstructionProtocol]
         
             /*
            
-            let firstTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeVideo,
+            let firstTrack = mixComposition.addMutableTrackWithMediaType(AVMediaType.video,
                 preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
 
            // let firstTrack = mixComposition.addMutableTrackWithMediaType(AVMediaT,
               //  preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             
             do {
-            try firstTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, firstAsset.duration),
-                ofTrack: firstAsset.tracksWithMediaType(AVMediaTypeVideo)[0] ,
-                atTime: kCMTimeZero)
+            try firstTrack.insertTimeRange(CMTimeRangeMake(CMTime.zero, firstAsset.duration),
+                ofTrack: firstAsset.tracksWithMediaType(AVMediaType.video)[0] ,
+                atTime: CMTime.zero)
             } catch {
                 
             }
             
-            /*firstTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, firstAsset.duration),
-                ofTrack: firstAsset.tracksWithMediaType(AVMediaTypeVideo)[0] as! AVAssetTrack,
-                atTime: kCMTimeZero,
+            /*firstTrack.insertTimeRange(CMTimeRangeMake(CMTime.zero, firstAsset.duration),
+                ofTrack: firstAsset.tracksWithMediaType(AVMediaType.video)[0] as! AVAssetTrack,
+                atTime: CMTime.zero,
                 error: nil)
             */
 
-            let secondTrack = mixComposition.addMutableTrackWithMediaType(AVMediaTypeVideo,
+            let secondTrack = mixComposition.addMutableTrackWithMediaType(AVMediaType.video,
                 preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             do {
                 
-            try secondTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
-                ofTrack: secondAsset.tracksWithMediaType(AVMediaTypeVideo)[0] ,
+            try secondTrack.insertTimeRange(CMTimeRangeMake(CMTime.zero, secondAsset.duration),
+                ofTrack: secondAsset.tracksWithMediaType(AVMediaType.video)[0] ,
                 atTime: firstAsset.duration)
             } catch {
                 
             }
             
            // let mainInstruction = AVMutableVideoCompositionInstruction()
-          //  mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeAdd(firstAsset.duration, secondAsset.duration))
+          //  mainInstruction.timeRange = CMTimeRangeMake(CMTime.zero, CMTimeAdd(firstAsset.duration, secondAsset.duration))
             
             let firstInstruction = videoCompositionInstructionForTrack(firstTrack, asset: firstAsset)
             firstInstruction.setOpacity(0.0, atTime: firstAsset.duration)
@@ -224,13 +224,13 @@ class MergeVideoViewController: UIViewController {
         /*
         
         if let loadedAudioAsset = audioAsset {
-                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
                 do {
                     
                     /*
-                try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, CMTimeAdd(firstAsset.duration, secondAsset!.duration)),
-                    ofTrack: loadedAudioAsset.tracksWithMediaType(AVMediaTypeAudio)[0] ,
-                    atTime: kCMTimeZero)
+                try audioTrack.insertTimeRange(CMTimeRangeMake(CMTime.zero, CMTimeAdd(firstAsset.duration, secondAsset!.duration)),
+                    ofTrack: loadedAudioAsset.tracksWithMediaType(AVMediaType.audio)[0] ,
+                    atTime: CMTime.zero)
                     */
                     
                 } catch {
@@ -252,7 +252,7 @@ class MergeVideoViewController: UIViewController {
             // 5 - Create Exporter
             let exporter = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality)
             exporter!.outputURL = url
-            exporter!.outputFileType = AVFileTypeQuickTimeMovie
+        exporter!.outputFileType = AVFileType.mov
             exporter!.shouldOptimizeForNetworkUse = true
             //exporter!.videoComposition = mainComposition
             exporter!.videoComposition = gameVideoComposition
@@ -268,7 +268,7 @@ class MergeVideoViewController: UIViewController {
     
     
     func exportDidFinish(_ session: AVAssetExportSession) {
-        if session.status == AVAssetExportSessionStatus.completed {
+        if session.status == AVAssetExportSession.Status.completed {
             let outputURL = session.outputURL
             let library = ALAssetsLibrary()
             
@@ -289,7 +289,7 @@ class MergeVideoViewController: UIViewController {
                         message = "Video saved"
                     }
                     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
                 })
                 /*
                 library.writeVideoAtPath(toSavedPhotosAlbum: outputURL,
@@ -304,7 +304,7 @@ class MergeVideoViewController: UIViewController {
                             message = "Video saved"
                         }
                         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
                       //  self.presentViewController(alert, animated: true, completion: nil)
                 })
                 */
@@ -342,7 +342,7 @@ extension MergeVideoViewController {
                 secondAsset = avAsset
             }
             let alert = UIAlertController(title: "Asset Loaded", message: message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.Cancel, handler: nil))
             presentViewController(alert, animated: true, completion: nil)
         }
     }
@@ -418,7 +418,7 @@ func createVideoFromImage(_ img: CGImage) -> Void {
     
     do {
         
-    let assetWriter = try AVAssetWriter(outputURL: url, fileType: AVFileTypeAppleM4V)
+        let assetWriter = try AVAssetWriter(outputURL: url, fileType: AVFileType.m4v)
         
         //let assetWriter = AVAssetWriter(URL: url, fileType: AVFileTypeAppleM4V, error: &error)
     
@@ -428,7 +428,7 @@ func createVideoFromImage(_ img: CGImage) -> Void {
         AVVideoHeightKey: frameSize.height
     ] as [String : Any]
     
-    let assetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: outputSettings as [String : AnyObject])
+        let assetWriterInput = AVAssetWriterInput(mediaType: AVMediaType.video, outputSettings: outputSettings as [String : AnyObject])
     
     let pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: assetWriterInput, sourcePixelBufferAttributes: nil)
     
@@ -437,7 +437,7 @@ func createVideoFromImage(_ img: CGImage) -> Void {
     }
     
     assetWriter.startWriting()
-    assetWriter.startSession(atSourceTime: kCMTimeZero)
+        assetWriter.startSession(atSourceTime: CMTime.zero)
     
         do {
         
@@ -445,7 +445,7 @@ func createVideoFromImage(_ img: CGImage) -> Void {
         
            
     if pixelBufferAdaptor.assetWriterInput.isReadyForMoreMediaData {
-        let frameTime = CMTimeMakeWithSeconds(0, 30)
+        let frameTime = CMTimeMakeWithSeconds(0, preferredTimescale: 30)
         let pixelBufferAppend = pixelBufferAdaptor.append(buffer, withPresentationTime: frameTime)
         
         if pixelBufferAppend {
@@ -548,7 +548,7 @@ func createVideoFromImage2(img: CGImageRef) -> Void {
         AVVideoHeightKey: frameSize.height
     ]
     
-    let assetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: outputSettings)
+    let assetWriterInput = AVAssetWriterInput(mediaType: AVMediaType.video, outputSettings: outputSettings)
     
     let pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: assetWriterInput, sourcePixelBufferAttributes: nil)
     
@@ -557,7 +557,7 @@ func createVideoFromImage2(img: CGImageRef) -> Void {
     }
     
     assetWriter.startWriting()
-    assetWriter.startSessionAtSourceTime(kCMTimeZero)
+    assetWriter.startSessionAtSourceTime(CMTime.zero)
     
     let buffer:CVPixelBufferRef = pixelBufferFromCGImage(img, frameSize: frameSize)
     

@@ -69,7 +69,7 @@ class WelcomeViewController: UIViewController {
         messageFrame.layer.cornerRadius = 15
         messageFrame.backgroundColor = UIColor(white: 0, alpha: 0.7)
         if indicator {
-            ActivityInd = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+            ActivityInd = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.white)
             ActivityInd.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
             ActivityInd.startAnimating()
             messageFrame.addSubview(ActivityInd)

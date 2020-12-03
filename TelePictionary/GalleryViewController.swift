@@ -43,7 +43,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     
     var interAd: ADInterstitialAd?
     var interAdView = UIView()
-    var closeButton = UIButton(type: UIButtonType.system)
+    var closeButton = UIButton(type: UIButton.ButtonType.system)
     
     var isFun = NSString()
     @IBOutlet weak var swipeIconRIGHT: NSLayoutConstraint!
@@ -484,7 +484,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         
         
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
         }
         
         //self.navigationController!.navigationBar.titleTextAttributes = [ ]
@@ -498,7 +498,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         
         //    if #available(iOS 9.0, *) { self.resultSearchController.loadViewIfNeeded() }
         
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         //navigationController!.navigationBar.barTintColor = UIColor(red: 0.0, green: 0.941, blue: 0.6078, alpha: 0.1)
         
@@ -519,7 +519,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         self.TableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: #selector(GalleryViewController.RefreshGameData(_:)), for: UIControlEvents.valueChanged)
+        self.refreshControl.addTarget(self, action: #selector(GalleryViewController.RefreshGameData(_:)), for: UIControl.Event.valueChanged)
         self.TableView.addSubview(refreshControl)
         
         View1.layer.cornerRadius = 10
@@ -590,7 +590,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         */
         // self.TableView.reloadData()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(GalleryViewController.displayForegroundDetails), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GalleryViewController.displayForegroundDetails), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         
         if isFun.isEqual(to: "no") {
@@ -636,10 +636,10 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         print("User name from Viewdidload - gallery = \(username)")
         
         
-         NotificationCenter.default.addObserver(self, selector: #selector(GalleryViewController.displayForegroundDetails), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GalleryViewController.displayForegroundDetails), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
-    func displayForegroundDetails() {
+    @objc func displayForegroundDetails() {
         print("APP ENTERED THE FOREGROUND")
         
         
@@ -719,7 +719,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         /*
         if let superView = resultSearchController.view.superview
         {
@@ -995,7 +995,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     }
     
     
-    func RefreshGameData(_ sender:AnyObject) {
+    @objc func RefreshGameData(_ sender:AnyObject) {
         print("REFRESHING MY GAMES and removing array data")
         print("adding array data")
         
@@ -1027,7 +1027,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         View4TOP.constant = middleY
         ViewHolderTOP.constant = 0
         */
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View1, to: self.View2, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1044,7 +1044,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View2, to: self.View1, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1058,7 +1058,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View2, to: self.View3, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1074,7 +1074,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         subViewHolderTOP.constant = middleY
         ViewHolderTOP.constant = 0
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View3, to: self.View2, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1089,7 +1089,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View3, to: self.View4, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1105,7 +1105,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View4, to: self.View3, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1629,7 +1629,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     }
     */
     
-    func ShowCommentsClicked(_ sender: UIButton!) {
+    @objc func ShowCommentsClicked(_ sender: UIButton!) {
         GameRowSelected = sender.tag
         print("the game rowselected: \(sender.tag)")
         
@@ -1798,7 +1798,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     }
     
     
-    func TakeTurnClicked(_ sender: UIButton!) {
+    @objc func TakeTurnClicked(_ sender: UIButton!) {
         
         GameRowSelected = sender.tag
         print("the game rowselected: \(sender.tag)")
@@ -2569,12 +2569,12 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         cell.cellViewBG?.layer.borderColor = UIColor.darkGray.cgColor
         cell.cellViewBG?.clipsToBounds = true
         cell.cellViewBG?.layer.masksToBounds = true
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.Turn1ImageW?.constant = (DeviceW / 2) - 2
         cell.heartIMG?.image = UIImage(named: "GreenArrowDrawnSmall.png")!
         //cell.Turn1Image?.image = UIImage(named: "Card_like_2.png")!
-        cell.Turn1Image?.contentMode = UIViewContentMode.scaleAspectFit
-        cell.Turn10Image?.contentMode = UIViewContentMode.scaleAspectFit
+        cell.Turn1Image?.contentMode = UIView.ContentMode.scaleAspectFit
+        cell.Turn10Image?.contentMode = UIView.ContentMode.scaleAspectFit
         //cell.Turn10Image?.image = UIImage(named: "Card_like_3.png")!
         let date = Date()
         
@@ -2683,13 +2683,13 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                 
                 //let URL = NSURL(string: gametype.Turn1URLString)!
                 cell.Turn1Image?.image = boomBox
-                //cell.Turn1Image?.contentMode = UIViewContentMode.ScaleAspectFit
+                //cell.Turn1Image?.contentMode = UIView.ContentMode.ScaleAspectFit
                 
             } else {
                     
                     let URL = Foundation.URL(string: gametype.Turn1URLString)!
                     cell.Turn1Image?.hnk_setImage(from: URL)
-                    cell.Turn1Image?.contentMode = UIViewContentMode.scaleAspectFit
+                    cell.Turn1Image?.contentMode = UIView.ContentMode.scaleAspectFit
         }
             
       //  }
@@ -2774,13 +2774,13 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                 
                 //let URL = NSURL(string: gametype.Turn1URLString)!
                 cell.Turn10Image?.image = boomBox
-                //cell.Turn1Image?.contentMode = UIViewContentMode.ScaleAspectFit
+                //cell.Turn1Image?.contentMode = UIView.ContentMode.ScaleAspectFit
                 
             } else {
                 
                 let URL = Foundation.URL(string: gametype.Turn10URLString)!
                 cell.Turn10Image?.hnk_setImage(from: URL)
-                cell.Turn10Image?.contentMode = UIViewContentMode.scaleAspectFit
+                cell.Turn10Image?.contentMode = UIView.ContentMode.scaleAspectFit
         }
         
       //  }
@@ -2952,11 +2952,11 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     
     
     func addBlurView(_ imgView: UIImageView) {
-        let blurEffect: UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let blurEffect: UIBlurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
         self.blurEffectView = UIVisualEffectView(effect: blurEffect)
         self.blurEffectView.frame = imgView.bounds
-        //self.blurEffectView.autoresizingMask = UIViewAutoresizing.FlexibleWidth |
-        self.blurEffectView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        //self.blurEffectView.autoresizingMask = UIView.AutoresizingMask.FlexibleWidth |
+        self.blurEffectView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
         imgView.addSubview(blurEffectView)
     }
     
@@ -2964,7 +2964,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     @IBAction func editTableView(_ sender: AnyObject) {
         
         
-        let darkBlur = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let darkBlur = UIBlurEffect(style: UIBlurEffect.Style.dark)
         // 2
         let blurView = UIVisualEffectView(effect: darkBlur)
         blurView.frame = self.view.bounds
@@ -2975,22 +2975,22 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         if TableView.isEditing{
             TableView.setEditing(false, animated: false)
             // self.view.addSubview(blurView)
-            //editBTN.style = UIBarButtonItemStyle.Plain;
+            //editBTN.style = UIBarButtonItem.Style.Plain;
             //editBTN.title = "Delete Game";
             TableView.reloadData()
         } else {
             //   blurView.removeFromSuperview()
             TableView.setEditing(true, animated: true)
             //editBTN.title = "Done";
-            //editBTN.style = UIBarButtonItemStyle.Done;
+            //editBTN.style = UIBarButtonItem.Style.Done;
             TableView.reloadData()
         }
         
         
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
             
             
             print("Game Creator: \(Player1Info[(indexPath as NSIndexPath).row])")
@@ -3455,7 +3455,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                 
             }
             
-        } else if editingStyle == UITableViewCellEditingStyle.insert{
+        } else if editingStyle == UITableViewCell.EditingStyle.insert{
             
             GameNameInfo.append("New Item")
             // GameSearchArray.append()
@@ -4586,7 +4586,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     }
 
     
-    func gamesegmentValueChanged(_ sender: AnyObject?){
+    @objc func gamesegmentValueChanged(_ sender: AnyObject?){
     
     if gameSegment.selectedIndex == 0 {
     self.actInd.isHidden = false
@@ -4660,7 +4660,7 @@ class GalleryViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     }
     }
     
-    func segmentValueChanged(_ sender: AnyObject?){
+    @objc func segmentValueChanged(_ sender: AnyObject?){
     
     if segmentControl.selectedIndex == 0 {
     

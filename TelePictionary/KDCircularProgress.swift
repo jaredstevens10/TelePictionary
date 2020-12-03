@@ -129,7 +129,15 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         }
     }
     
+    /*
     @IBInspectable public var glowMode: KDCircularProgressGlowMode = .forward {
+        didSet {
+            progressLayer.glowMode = glowMode
+        }
+    }
+    */
+    
+    public var glowMode: KDCircularProgressGlowMode = .forward {
         didSet {
             progressLayer.glowMode = glowMode
         }

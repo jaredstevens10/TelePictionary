@@ -248,14 +248,14 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         let middleY = middleScreenY - 200
         
         if RecordedMessage {
-            submitBTN.setTitle("Submit Audio", for: UIControlState())
+            submitBTN.setTitle("Submit Audio", for: UIControl.State())
             
             QuoteBoxtxt.text = "(Audio Clip)"
             QuoteBoxtxt.textColor = UIColor.lightGray
             QuoteBoxtxt.textAlignment = .center
             
         } else {
-              submitBTN.setTitle("Submit Quote", for: UIControlState())
+              submitBTN.setTitle("Submit Quote", for: UIControl.State())
         }
         
         
@@ -283,7 +283,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
                 self.QuoteBoxtxt.text = "(Audio Clip)"
                 self.QuoteBoxtxt.textColor = UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0)
                 //UIColor.greenColor()
-                self.submitBTN.setTitle("Submit Audio", for: UIControlState())
+                self.submitBTN.setTitle("Submit Audio", for: UIControl.State())
 
                 self.RecordedMessage = true
                 
@@ -293,7 +293,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
                 self.QuoteBoxtxt.textColor = UIColor.lightGray
                 self.QuoteBoxtxt.textAlignment = .center
                 self.RecordedMessage = false
-                self.submitBTN.setTitle("Submit Quote", for: UIControlState())
+                self.submitBTN.setTitle("Submit Quote", for: UIControl.State())
             }
             
                     
@@ -351,7 +351,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
                         self.QuoteBoxtxt.text = "(Audio Clip)"
                         self.QuoteBoxtxt.textColor = UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0)
                         //UIColor.greenColor()
-                        self.submitBTN.setTitle("Submit Audio", for: UIControlState())
+                        self.submitBTN.setTitle("Submit Audio", for: UIControl.State())
                         self.RecordedMessage = true
                         
                         //self.QuoteBoxtxt.text = "(Audio Clip)"
@@ -380,7 +380,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
                             
                         theAlert2.addButton("Later", action: {
                             
-                            self.submitBTN.setTitle("Submit Quote", for: UIControlState())
+                            self.submitBTN.setTitle("Submit Quote", for: UIControl.State())
                             
                             self.RecordedMessage = false
                             CheckReturn = false
@@ -389,7 +389,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
                             self.QuoteBoxtxt.textColor = UIColor.lightGray
                             self.QuoteBoxtxt.textAlignment = .center
                             self.RecordedMessage = false
-                            self.submitBTN.setTitle("Submit Quote", for: UIControlState())
+                            self.submitBTN.setTitle("Submit Quote", for: UIControl.State())
                             
                         })
                         
@@ -558,7 +558,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
                         self.QuoteBoxtxt.text = "(Audio Clip)"
                         self.QuoteBoxtxt.textColor = UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0)
                                 //UIColor.greenColor()
-                        self.submitBTN.setTitle("Submit Audio", for: UIControlState())
+                        self.submitBTN.setTitle("Submit Audio", for: UIControl.State())
                         
                         self.RecordedMessage = true
                         
@@ -618,7 +618,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
                             
                             theAlert2.addButton("No", action: {
                                 
-                                self.submitBTN.setTitle("Submit Quote", for: UIControlState())
+                                self.submitBTN.setTitle("Submit Quote", for: UIControl.State())
                                 
                                 self.RecordedMessage = false
                                 CheckReturn = false
@@ -627,7 +627,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
                                 self.QuoteBoxtxt.textColor = UIColor.lightGray
                                 self.QuoteBoxtxt.textAlignment = .center
                                 self.RecordedMessage = false
-                                self.submitBTN.setTitle("Submit Quote", for: UIControlState())
+                                self.submitBTN.setTitle("Submit Quote", for: UIControl.State())
                                 
                             })
                             
@@ -844,9 +844,9 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         
         
         if RecordedMessage {
-            submitBTN.setTitle("Submit Audio", for: UIControlState())
+            submitBTN.setTitle("Submit Audio", for: UIControl.State())
         } else {
-            submitBTN.setTitle("Submit Quote", for: UIControlState())
+            submitBTN.setTitle("Submit Quote", for: UIControl.State())
         }
         
         let DeviceH = self.view.frame.height
@@ -877,9 +877,9 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
     @IBAction func HideRecordView(_ sender: AnyObject) {
         
         if RecordedMessage {
-            submitBTN.setTitle("Submit Audio", for: UIControlState())
+            submitBTN.setTitle("Submit Audio", for: UIControl.State())
         } else {
-            submitBTN.setTitle("Submit Quote", for: UIControlState())
+            submitBTN.setTitle("Submit Quote", for: UIControl.State())
         }
         
         
@@ -966,7 +966,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
             UseImageURL = "no"
             //Image64Data = "This is your Demo Quote"
             ImagePic.image = UIImage(named: "CharacterPirate.png")!
-            ImagePic.contentMode = UIViewContentMode.scaleAspectFit
+            ImagePic.contentMode = UIView.ContentMode.scaleAspectFit
             TheImageURL = "NA"
             
             ImagePic.layer.cornerRadius = 0
@@ -1008,7 +1008,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         
         ImagePic.image = image
             
-        ImagePic.contentMode = UIViewContentMode.scaleAspectFit
+        ImagePic.contentMode = UIView.ContentMode.scaleAspectFit
             
         ImagePic.layer.cornerRadius = 0
         
@@ -1042,7 +1042,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
             let url = URL(string: TheImageURL2 as String)
             let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
             ImagePic.image = UIImage(data: data!)
-            ImagePic.contentMode = UIViewContentMode.scaleAspectFit
+            ImagePic.contentMode = UIView.ContentMode.scaleAspectFit
             
         }
             
@@ -1251,9 +1251,9 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         
         print("Image Turn Number: \(TurnNumber), New Turn is: \(NewTurn), IsComplete is: \(IsCompleteInfo)")
         
-        NotificationCenter.default.addObserver(self, selector: #selector(QuoteViewController.keyboardWasShown(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(QuoteViewController.keyboardWasShown(_:)), name:UIResponder.keyboardWillShowNotification, object: nil);
         
-        NotificationCenter.default.addObserver(self, selector: #selector(QuoteViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(QuoteViewController.keyboardWillHide(_:)), name:UIResponder.keyboardWillHideNotification, object: nil);
         
         doneBTN.layer.cornerRadius = 10
         
@@ -1293,9 +1293,10 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         NotificationCenter.default.post(name: Notification.Name(rawValue: "StopTimerNotification"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(QuoteViewController.YTCompleteTrim(_:)), name: NSNotification.Name(rawValue: "YTTrim"), object: nil);
-         NotificationCenter.default.addObserver(self, selector: #selector(QuoteViewController.HandleAlertMessageQVC(_:)), name: NSNotification.Name(rawValue: "HandleAlertMessageQVC"),  object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(QuoteViewController.displayForegroundDetails), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(QuoteViewController.HandleAlertMessageQVC(_:)), name: NSNotification.Name(rawValue: "HandleAlertMessageQVC"),  object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(QuoteViewController.displayForegroundDetails), name: UIApplication.willEnterForegroundNotification, object: nil)
        
     }
     
@@ -1312,7 +1313,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
     }
 */
     
-    func YTCompleteTrim(_ notification:Notification){
+    @objc func YTCompleteTrim(_ notification:Notification){
         
         let resultdict = (notification as NSNotification).userInfo
             
@@ -1394,14 +1395,14 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
     }
     
     
-    func keyboardWasShown(_ notification: Notification) {
+    @objc func keyboardWasShown(_ notification: Notification) {
         
         submitBTN.isHidden = true
         
         var info = (notification as NSNotification).userInfo!
         
         
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
         
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
@@ -1428,7 +1429,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
     }
     
     
-    func keyboardWillHide(_ notification: Notification) {
+    @objc func keyboardWillHide(_ notification: Notification) {
         submitBTN.isHidden = false
         
        // var info = notification.userInfo!
@@ -1994,7 +1995,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
            
    // }
     
-    func DismissKeyboard(){
+    @objc func DismissKeyboard(){
         view.endEditing(true)
     }
     
@@ -2101,7 +2102,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         */
         
     }
-    func updateAudioMeter(_ timer:Timer) {
+    @objc func updateAudioMeter(_ timer:Timer) {
         
         
         if recorder.isRecording {
@@ -2136,7 +2137,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         }
     }
     
-    func updateMusicMeter(_ timer:Timer) {
+    @objc func updateMusicMeter(_ timer:Timer) {
         
         
       //  if recorder.recording {
@@ -2199,7 +2200,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         
         if recorder == nil {
             print("recording. recorder nil")
-            recordButton.setTitle("Pause", for:UIControlState())
+            recordButton.setTitle("Pause", for:UIControl.State())
             playButton.isEnabled = false
             stopButton.isEnabled = true
             recordWithPermission(true)
@@ -2209,11 +2210,11 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         if recorder != nil && recorder.isRecording {
             print("pausing")
             recorder.pause()
-            recordButton.setTitle("Continue", for:UIControlState())
+            recordButton.setTitle("Continue", for:UIControl.State())
             
         } else {
             print("recording")
-            recordButton.setTitle("Pause", for:UIControlState())
+            recordButton.setTitle("Pause", for:UIControl.State())
             playButton.isEnabled = false
             stopButton.isEnabled = true
             //            recorder.record()
@@ -2232,7 +2233,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         statusLabel.text = timeCountRecord.description
         statusLabel.textColor = UIColor.black
         
-        recordButton.setTitle("Record", for:UIControlState())
+        recordButton.setTitle("Record", for:UIControl.State())
         let session = AVAudioSession.sharedInstance()
         do {
             try session.setActive(false)
@@ -2257,7 +2258,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         statusLabel.text = timeCountRecord.description
         statusLabel.textColor = UIColor.black
         
-        recordButton.setTitle("Record", for:UIControlState())
+        recordButton.setTitle("Record", for:UIControl.State())
         let session = AVAudioSession.sharedInstance()
         do {
             try session.setActive(false)
@@ -2374,7 +2375,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         let session:AVAudioSession = AVAudioSession.sharedInstance()
         
         do {
-            try session.setCategory(AVAudioSessionCategoryPlayback)
+            try session.setCategory(AVAudioSession.Category.playback)
         } catch let error as NSError {
             print("could not set session category")
             print(error.localizedDescription)
@@ -2390,7 +2391,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
     func setSessionPlayAndRecord() {
         let session = AVAudioSession.sharedInstance()
         do {
-            try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try session.setCategory(AVAudioSession.Category.playAndRecord)
         } catch let error as NSError {
             print("could not set session category")
             print(error.localizedDescription)
@@ -2484,37 +2485,37 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         
         NotificationCenter.default.addObserver(self,
             selector:#selector(QuoteViewController.background(_:)),
-            name:NSNotification.Name.UIApplicationWillResignActive,
+            name: UIApplication.willResignActiveNotification,
             object:nil)
         
         NotificationCenter.default.addObserver(self,
             selector:#selector(QuoteViewController.foreground(_:)),
-            name:NSNotification.Name.UIApplicationWillEnterForeground,
+            name: UIApplication.willEnterForegroundNotification,
             object:nil)
         
         NotificationCenter.default.addObserver(self,
             selector:#selector(QuoteViewController.routeChange(_:)),
-            name:NSNotification.Name.AVAudioSessionRouteChange,
+            name: AVAudioSession.routeChangeNotification,
             object:nil)
     }
     
-    func background(_ notification:Notification) {
+    @objc func background(_ notification:Notification) {
         print("background")
     }
     
-    func foreground(_ notification:Notification) {
+    @objc func foreground(_ notification:Notification) {
         print("foreground")
     }
     
     
-    func routeChange(_ notification:Notification) {
+    @objc func routeChange(_ notification:Notification) {
         print("routeChange \((notification as NSNotification).userInfo)")
         
         if let userInfo = (notification as NSNotification).userInfo {
             //print("userInfo \(userInfo)")
             if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt {
                 //print("reason \(reason)")
-                switch AVAudioSessionRouteChangeReason(rawValue: reason)! {
+                switch AVAudioSession.RouteChangeReason(rawValue: reason)! {
                 case AVAudioSessionRouteChangeReason.newDeviceAvailable:
                     print("NewDeviceAvailable")
                     print("did you plug in headphones?")
@@ -2548,7 +2549,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         let currentRoute = AVAudioSession.sharedInstance().currentRoute
         if currentRoute.outputs.count > 0 {
             for description in currentRoute.outputs {
-                if description.portType == AVAudioSessionPortHeadphones {
+                if description.portType == AVAudioSession.Port.headphones {
                     print("headphones are plugged in")
                     break
                 } else {
@@ -2562,7 +2563,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
     
     
     
-    func musicPlayerStateChanged(_ notification: Notification){
+    @objc func musicPlayerStateChanged(_ notification: Notification){
         
         print("Player State Changed")
         
@@ -2602,7 +2603,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         }
     }
     
-    func nowPlayingItemIsChanged(_ notification: Notification){
+    @objc func nowPlayingItemIsChanged(_ notification: Notification){
         
         print("Playing Item Is Changed")
         
@@ -2618,7 +2619,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         
     }
     
-    func volumeIsChanged(_ notification: Notification){
+    @objc func volumeIsChanged(_ notification: Notification){
         print("Volume Is Changed")
         /* The userInfo dictionary of this notification is normally empty */
     }
@@ -2643,7 +2644,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
             
             /* Instantiate the music player */
     
-            self.myMusicPlayer = MPMusicPlayerController()
+        self.myMusicPlayer = MPMusicPlayerController.applicationMusicPlayer
             
             let aMediaItem = mediaItemCollection.items[0] as MPMediaItem
             
@@ -3273,7 +3274,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         }
         
         let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A)
-        exporter!.outputFileType = AVFileTypeAppleM4A
+        exporter!.outputFileType = AVFileType.m4a
         exporter!.outputURL = trimmedSoundFileURL
         
         
@@ -3294,7 +3295,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         let stopTime = StopTrim
         
         
-        let exportTimeRange = CMTimeRangeFromTimeToTime(startTime, stopTime)
+        let exportTimeRange = CMTimeRangeFromTimeToTime(start: startTime, end: stopTime)
         exporter!.timeRange = exportTimeRange
         
         
@@ -3388,13 +3389,13 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
     }
 
     
-    func rangeSliderValueChanged(_ rangeSlider: RangeSlider) {
+    @objc func rangeSliderValueChanged(_ rangeSlider: RangeSlider) {
         
-        StartTrim = CMTimeMake(Int64((rangeSlider.lowerValue * SongLength)), 1)
+        StartTrim = CMTimeMake(value: Int64((rangeSlider.lowerValue * SongLength)), timescale: 1)
         print("Start Trim Time = \(StartTrim)")
         
        
-        StopTrim = CMTimeMake(Int64((rangeSlider.upperValue * SongLength)), 1)
+        StopTrim = CMTimeMake(value: Int64((rangeSlider.upperValue * SongLength)), timescale: 1)
         
         let Starttemp =  Double(rangeSlider.lowerValue * SongLength)
         
@@ -3520,7 +3521,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
             print("Fething Products");
         }else{
             print("can't make purchases");
-            self.submitBTN.setTitle("Submit Quote", for: UIControlState())
+            self.submitBTN.setTitle("Submit Quote", for: UIControl.State())
             self.RecordedMessage = false
         }
         
@@ -3551,7 +3552,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
             }
         } else {
             print("nothing")
-            self.submitBTN.setTitle("Submit Quote", for: UIControlState())
+            self.submitBTN.setTitle("Submit Quote", for: UIControl.State())
             self.RecordedMessage = false
         }
     }
@@ -3559,7 +3560,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
         print("Error Fetching product information");
-        self.submitBTN.setTitle("Submit Quote", for: UIControlState())
+        self.submitBTN.setTitle("Submit Quote", for: UIControl.State())
          self.RecordedMessage = false
     }
     
@@ -3587,7 +3588,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
                     self.QuoteBoxtxt.text = "(Audio Clip)"
                     self.QuoteBoxtxt.textColor = UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0)
                     //UIColor.greenColor()
-                    self.submitBTN.setTitle("Submit Audio", for: UIControlState())
+                    self.submitBTN.setTitle("Submit Audio", for: UIControl.State())
 
                     //PerformSubmitButton(Quote)
                     
@@ -3595,7 +3596,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
                     break;
                 case .failed:
                     print("Purchased Failed");
-                    self.submitBTN.setTitle("Submit Quote", for: UIControlState())
+                    self.submitBTN.setTitle("Submit Quote", for: UIControl.State())
                     self.RecordedMessage = false
                     
                     
@@ -3606,7 +3607,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
                         self.RecordedMessage = false
                     }
                     
-                    self.submitBTN.setTitle("Submit Quote", for: UIControlState())
+                    self.submitBTN.setTitle("Submit Quote", for: UIControl.State())
 
                     
                     SKPaymentQueue.default().finishTransaction(transaction as! SKPaymentTransaction)
@@ -3632,7 +3633,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
                     self.QuoteBoxtxt.text = "(Audio Clip)"
                     self.QuoteBoxtxt.textColor = UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0)
                     //UIColor.greenColor()
-                    self.submitBTN.setTitle("Submit Audio", for: UIControlState())
+                    self.submitBTN.setTitle("Submit Audio", for: UIControl.State())
 
                 default:
                     break;
@@ -3697,9 +3698,9 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         }
        
         
-        StartTrim = CMTimeMake(Int64((rangeSlider1.lowerValue * SongLength)), 1)
+        StartTrim = CMTimeMake(value: Int64((rangeSlider1.lowerValue * SongLength)), timescale: 1)
 
-        StopTrim = CMTimeMake(Int64((rangeSlider1.upperValue * SongLength)), 1)
+        StopTrim = CMTimeMake(value: Int64((rangeSlider1.upperValue * SongLength)), timescale: 1)
         
         UIView.animate(withDuration: 1.0, animations: { () -> Void in
     
@@ -3803,7 +3804,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
     
     
     
-    func HandleAlertMessageQVC(_ notification:Notification)  {
+   @objc func HandleAlertMessageQVC(_ notification:Notification)  {
         
         print("Did Receive Remote Notification While In Game")
         
@@ -3940,7 +3941,7 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
     }
     
     
-    func displayForegroundDetails() {
+    @objc func displayForegroundDetails() {
         print("APP ENTERED THE FOREGROUND")
         
         
@@ -4039,11 +4040,11 @@ class QuoteViewController: UIViewController, MPMediaPickerControllerDelegate, AV
         shadow.shadowOffset = CGSize(width: 0,height: 1)
         // let textColorShadow = UIColor.whiteColor()
         
-        var textFontAttributes: [String : AnyObject]?
+        var textFontAttributes: [NSAttributedString.Key : AnyObject]?
         
         
         if let actualFont = font {
-            textFontAttributes = [NSFontAttributeName: actualFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: textStyle]
+            textFontAttributes = [NSAttributedString.Key.font: actualFont, NSAttributedString.Key.foregroundColor: textColor, NSAttributedString.Key.paragraphStyle: textStyle]
             
         }
         
@@ -4086,7 +4087,7 @@ extension QuoteViewController : AVAudioRecorderDelegate {
             print("finished recording \(flag)")
             stopButton.isEnabled = false
             playButton.isEnabled = true
-            recordButton.setTitle("Record", for:UIControlState())
+            recordButton.setTitle("Record", for:UIControl.State())
             
             
             /*

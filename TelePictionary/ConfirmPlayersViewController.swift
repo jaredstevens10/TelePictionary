@@ -17,7 +17,7 @@ import GameKit
 class ConfirmPlayersViewController: UIViewController, ABPeoplePickerNavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate, UIActionSheetDelegate, UIAlertViewDelegate, FBSDKAppInviteDialogDelegate, UIPopoverPresentationControllerDelegate, GroupPickerViewControllerDelegate, RepeatFriendsViewControllerDelegate, FBFriendsViewControllerDelegate, GKGameCenterControllerDelegate {
     
     var IsPlayerLoggedInGC = Bool()
-    var localPlayer = GKLocalPlayer.localPlayer()
+    var localPlayer = GKLocalPlayer.local
     var GAMECENTERLOGGEDIN = Bool()
     var GCplayer = NSString()
     var GCplayerid = NSString()
@@ -60,7 +60,7 @@ class ConfirmPlayersViewController: UIViewController, ABPeoplePickerNavigationCo
     
     var dict = NSDictionary()
     
-   // var localPlayer = GKLocalPlayer.localPlayer()
+   // var localPlayer = GKLocalPlayer.local
     
     @IBOutlet weak var picPreview: UIView!
     
@@ -582,7 +582,7 @@ class ConfirmPlayersViewController: UIViewController, ABPeoplePickerNavigationCo
         TableView.dataSource = self
         TableView.delegate = self
         
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         
         let AlreadySeenHowTo = prefs.bool(forKey: "DidShowHowTo_SelectPlayers")
@@ -690,7 +690,7 @@ startBTN.isHidden = true
         
         self.View2TOP.constant = middleY
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.theView, to: self.theView2, duration: 0.8, options: animationOptions, completion: nil)
         
@@ -717,7 +717,7 @@ startBTN.isHidden = true
         print("Showing How To View")
         if !ViewShowing {
             
-             let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+             let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
             
              UIView.transition(from: self.theView2, to: self.theView, duration: 0.8, options: animationOptions, completion: nil)
             
@@ -1102,7 +1102,7 @@ startBTN.isHidden = true
         
         let cell = TableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath) as! BasicCell
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         cell.backgroundColor = UIColor.clear
         
@@ -1345,7 +1345,7 @@ startBTN.isHidden = true
         print("New numbers INt Array = \(NewGamePlayers.description)")
         
     }
-    func ContactsClicked(_ sender: UIButton!) {
+    @objc func ContactsClicked(_ sender: UIButton!) {
         print("the Contacts tag: \(sender.tag)")
         
         replaceRow = sender.tag
@@ -1356,7 +1356,7 @@ startBTN.isHidden = true
     
 
         
-        func FacebookClicked(_ sender: UIButton!) {
+    @objc func FacebookClicked(_ sender: UIButton!) {
             replaceRow = sender.tag
             
             print("replace row selected: \(replaceRow)")
@@ -1448,7 +1448,7 @@ func getFBUserData() -> NSDictionary {
 
     }
     
-    func PreviousFriendsClicked(_ sender: UIButton!) {
+    @objc func PreviousFriendsClicked(_ sender: UIButton!) {
         
        
         replaceRow = sender.tag
@@ -1685,27 +1685,27 @@ func getFBUserData() -> NSDictionary {
         
         if TableView.isEditing{
             TableView.setEditing(false, animated: false)
-            editBTN.style = UIBarButtonItemStyle.plain;
+            editBTN.style = UIBarButtonItem.Style.plain;
             editBTN.title = "Edit";
             TableView.reloadData()
         } else {
             TableView.setEditing(true, animated: true)
             editBTN.title = "Done";
-            editBTN.style = UIBarButtonItemStyle.done;
+            editBTN.style = UIBarButtonItem.Style.done;
             TableView.reloadData()
         }
         
         
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if (indexPath as NSIndexPath).row == 0 {
             
         } else {
         
         
-        if editingStyle == UITableViewCellEditingStyle.delete {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
             
             if DidSelectGroup {
                 
@@ -1717,7 +1717,7 @@ func getFBUserData() -> NSDictionary {
             self.editTableView(editBTN)
             TableView.reloadData()
             }
-        } else if editingStyle == UITableViewCellEditingStyle.insert{
+        } else if editingStyle == UITableViewCell.EditingStyle.insert{
             //Friends.append("New Item")
             //NameTable.append("New Item")
             if DidSelectGroup {
@@ -2687,7 +2687,7 @@ func getFBUserData() -> NSDictionary {
     /*
     func GameLogin () -> [NSString] {
         println("login called")
-        //localPlayer = GKLocalPlayer.localPlayer()
+        //localPlayer = GKLocalPlayer.local
         
         //var FriendList = [NSString]()
         
@@ -2823,8 +2823,8 @@ func getFBUserData() -> NSDictionary {
                         
                         
                         //self.player = localPlayer.displayName
-                        self.GCplayerid = self.localPlayer.playerID! as NSString
-                        self.GCplayer = self.localPlayer.alias! as NSString
+                        self.GCplayerid = self.localPlayer.playerID as NSString
+                        self.GCplayer = self.localPlayer.alias as NSString
                         
                         print("player: \(self.GCplayer)")
                         print("playerid: \(self.GCplayerid)")
@@ -3075,11 +3075,11 @@ extension ConfirmPlayersViewController {
         shadow.shadowOffset = CGSize(width: 0,height: 1)
         // let textColorShadow = UIColor.whiteColor()
         
-        var textFontAttributes: [String : AnyObject]?
+        var textFontAttributes: [NSAttributedString.Key : Any]?
         
         
         if let actualFont = font {
-            textFontAttributes = [NSFontAttributeName: actualFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: textStyle]
+            textFontAttributes = [NSAttributedString.Key.font: actualFont, NSAttributedString.Key.foregroundColor: textColor, NSAttributedString.Key.paragraphStyle: textStyle]
             
         }
         

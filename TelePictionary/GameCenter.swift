@@ -28,7 +28,7 @@ import GameKit
 
 func LogIntoGameCenterNew() -> Bool {
     
-    var localPlayer = GKLocalPlayer.localPlayer()
+    var localPlayer = GKLocalPlayer.local
     
     print("Logging into game center")
     var gameCenterEnabled2 = Bool()
@@ -78,8 +78,8 @@ func LogIntoGameCenterNew() -> Bool {
                     UserDefaults.standard.set(true, forKey: "GameCenterEnabled")
                     // self.PlayerIsLoggedInToGameCenter = true
                     
-                    var playerid = localPlayer.playerID!
-                    var player = localPlayer.alias!
+                    var playerid = localPlayer.playerID
+                    var player = localPlayer.alias
                     
                    
                     
@@ -317,7 +317,7 @@ func SearchForMemberNew (_ PLAYER: String, PlayerID: String, TokenNew: String) {
                 // View1TOPP.constant = 0
                 // View2TOP.constant = 0
                 
-               // let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.TransitionFlipFromRight, UIViewAnimationOptions.ShowHideTransitionViews]
+               // let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.TransitionFlipFromRight, UIView.AnimationOptions.ShowHideTransitionViews]
                 
               //  UIView.transitionFromView(self.ViewLoad1, toView: self.ViewLoad2, duration: 0.8, options: animationOptions, completion: nil)
                 
@@ -770,7 +770,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                             delegate!.easyGameCenterAuthentified?()
                             
                         } else {
-                            GKLocalPlayer.localPlayer().authenticateHandler = {
+                            GKLocalPlayer.local.authenticateHandler = {
                                 (gameCenterVC:UIViewController?, error:NSError?) -> Void in
                                 /* If got error / Or player not set value for login */
                                 if error != nil {
@@ -970,14 +970,14 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     - returns: Bool is identified
     
     */
-    class func isPlayerIdentifiedToGameCenter() -> Bool { return GKLocalPlayer.localPlayer().authenticated }
+    class func isPlayerIdentifiedToGameCenter() -> Bool { return GKLocalPlayer.local.authenticated }
     /**
     Get local player (GKLocalPlayer)
     
     - returns: Bool True is identified
     
     */
-    class func getLocalPlayer() -> GKLocalPlayer { return GKLocalPlayer.localPlayer() }
+    class func getLocalPlayer() -> GKLocalPlayer { return GKLocalPlayer.local }
     /**
     Get local player Information (playerID,alias,profilPhoto)
     
@@ -1921,7 +1921,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
             /* iOS 8 */
             if ( objc_getClass("UIAlertController") != nil ) {
                 
-                var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.Alert)
                 
                 delegateUIVC!.presentViewController(alert, animated: true, completion: nil)
                 

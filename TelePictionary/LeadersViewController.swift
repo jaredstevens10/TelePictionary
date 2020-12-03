@@ -33,7 +33,7 @@ class LeadersViewController: UIViewController {
         self.title = "Leaderboard"
         
         if let font = UIFont(name: "ChalkboardSE-Regular", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
         }
         
         

@@ -59,7 +59,7 @@ class TrendingViewController: UIViewController, UICollectionViewDelegateFlowLayo
         super.viewDidLoad()
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: #selector(TrendingViewController.RefreshCommentData(_:)), for: UIControlEvents.valueChanged)
+        self.refreshControl.addTarget(self, action: #selector(TrendingViewController.RefreshCommentData(_:)), for: UIControl.Event.valueChanged)
         self.collectionView!.addSubview(refreshControl)
         
         self.title = "Following"
@@ -67,7 +67,7 @@ class TrendingViewController: UIViewController, UICollectionViewDelegateFlowLayo
         navigationController!.navigationBar.barTintColor = UIColor(red: 0.2352, green: 0.62745, blue: 0.8196, alpha: 1.0)
         
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
         }
         
         if self.revealViewController() != nil {
@@ -126,7 +126,7 @@ class TrendingViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 
                 // tabBarController?.selectedIndex = 2
                 
-                //  UIView.transitionFromView(fromView!, toView: toView, duration: 0.325, options: UIViewAnimationOptions.CurveEaseInOut, completion: nil)
+                //  UIView.transitionFromView(fromView!, toView: toView, duration: 0.325, options: UIView.AnimationOptions.CurveEaseInOut, completion: nil)
                 
                 
             } else {
@@ -310,7 +310,7 @@ class TrendingViewController: UIViewController, UICollectionViewDelegateFlowLayo
     
     }
     
-    func RefreshCommentData(_ sender:AnyObject) {
+    @objc func RefreshCommentData(_ sender:AnyObject) {
         print("removing array data")
         //Photos.removeAll()
         //LCountArray.removeAll()
@@ -448,7 +448,7 @@ class TrendingViewController: UIViewController, UICollectionViewDelegateFlowLayo
         self.performSegue(withIdentifier: "showImage", sender: self)
     }
     
-    func PlayAudioClicked(_ sender: UIButton!) {
+    @objc func PlayAudioClicked(_ sender: UIButton!) {
         
         
         let RowSelected = sender.tag
@@ -610,7 +610,7 @@ class TrendingViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 cell.TurnImage?.image = tempI
                 //let URL = Foundation.URL(string: MyTurnData.URL)!
                 //cell.TurnImage?.h .hnk_setImage(from: URL)
-                cell.TurnImage?.contentMode = UIViewContentMode.scaleAspectFit
+                cell.TurnImage?.contentMode = UIView.ContentMode.scaleAspectFit
                 
             } else  {
                 
@@ -622,7 +622,7 @@ class TrendingViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 
                 let URL = Foundation.URL(string: MyTurnData.URL)!
                 cell.TurnImage?.hnk_setImage(from: URL)
-                cell.TurnImage?.contentMode = UIViewContentMode.scaleAspectFit
+                cell.TurnImage?.contentMode = UIView.ContentMode.scaleAspectFit
                 
             }
             
@@ -637,7 +637,7 @@ class TrendingViewController: UIViewController, UICollectionViewDelegateFlowLayo
                 let URL = Foundation.URL(string: MyTurnData.URL)!
                 //cell.TurnImage?.hnk_setImage
                 cell.TurnImage?.hnk_setImage(from: URL)
-                cell.TurnImage?.contentMode = UIViewContentMode.scaleAspectFit
+                cell.TurnImage?.contentMode = UIView.ContentMode.scaleAspectFit
                 
             }
  
@@ -646,7 +646,7 @@ class TrendingViewController: UIViewController, UICollectionViewDelegateFlowLayo
             } else {
                 
                 cell.TurnImage?.image = UIImage(named: "blurry3.png")
-                cell.TurnImage?.contentMode = UIViewContentMode.scaleAspectFit
+                cell.TurnImage?.contentMode = UIView.ContentMode.scaleAspectFit
             }
         
             

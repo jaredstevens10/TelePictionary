@@ -113,7 +113,7 @@ class MyTurnsViewController: UIViewController, UICollectionViewDelegateFlowLayou
 
         IsMyTurns = true
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: #selector(MyTurnsViewController.RefreshCommentData(_:)), for: UIControlEvents.valueChanged)
+        self.refreshControl.addTarget(self, action: #selector(MyTurnsViewController.RefreshCommentData(_:)), for: UIControl.Event.valueChanged)
         self.collectionView!.addSubview(refreshControl)
         
         
@@ -123,7 +123,7 @@ class MyTurnsViewController: UIViewController, UICollectionViewDelegateFlowLayou
         self.title = "My Turns"
         
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
         }
         
         
@@ -204,7 +204,7 @@ class MyTurnsViewController: UIViewController, UICollectionViewDelegateFlowLayou
 */
     }
     
-    func RefreshCommentData(_ sender:AnyObject) {
+    @objc func RefreshCommentData(_ sender:AnyObject) {
         print("removing array data")
         //Photos.removeAll()
         //LCountArray.removeAll()
@@ -272,7 +272,7 @@ class MyTurnsViewController: UIViewController, UICollectionViewDelegateFlowLayou
                 
                // tabBarController?.selectedIndex = 2
                 
-                //  UIView.transitionFromView(fromView!, toView: toView, duration: 0.325, options: UIViewAnimationOptions.CurveEaseInOut, completion: nil)
+                //  UIView.transitionFromView(fromView!, toView: toView, duration: 0.325, options: UIView.AnimationOptions.CurveEaseInOut, completion: nil)
                 
                 
             } else {
@@ -452,7 +452,7 @@ class MyTurnsViewController: UIViewController, UICollectionViewDelegateFlowLayou
         
     }
     
-    func PlayAudioClicked(_ sender: UIButton!) {
+    @objc func PlayAudioClicked(_ sender: UIButton!) {
         
         
         let RowSelected = sender.tag
@@ -489,7 +489,7 @@ class MyTurnsViewController: UIViewController, UICollectionViewDelegateFlowLayou
         //   })
     }
 
-    func TurnViewStatusClickedMe(_ sender: UIButton!) {
+    @objc func TurnViewStatusClickedMe(_ sender: UIButton!) {
         let RowSelected = sender.tag
         
         let MyTurnData = TurnStruc[RowSelected]
@@ -529,7 +529,7 @@ class MyTurnsViewController: UIViewController, UICollectionViewDelegateFlowLayou
 
     }
     
-    func TurnViewStatusClickedBestFriends(_ sender: UIButton!) {
+    @objc func TurnViewStatusClickedBestFriends(_ sender: UIButton!) {
           let RowSelected = sender.tag
         let MyTurnData = TurnStruc[RowSelected]
 
@@ -561,7 +561,7 @@ class MyTurnsViewController: UIViewController, UICollectionViewDelegateFlowLayou
         self.collectionView?.reloadData()
 
     }
-    func TurnViewStatusClickedFriends(_ sender: UIButton!) {
+    @objc func TurnViewStatusClickedFriends(_ sender: UIButton!) {
         
           let RowSelected = sender.tag
         
@@ -602,7 +602,7 @@ class MyTurnsViewController: UIViewController, UICollectionViewDelegateFlowLayou
 
     }
 
-    func TurnViewStatusClickedPublic(_ sender: UIButton!) {
+    @objc func TurnViewStatusClickedPublic(_ sender: UIButton!) {
         
         let RowSelected = sender.tag
         

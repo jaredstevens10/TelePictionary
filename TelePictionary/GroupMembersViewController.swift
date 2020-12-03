@@ -95,7 +95,7 @@ class GroupMembersViewController: UIViewController, ABPeoplePickerNavigationCont
             
             
             
-             self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+             self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
             
             self.TableView.backgroundColor = UIColor.clear
 
@@ -404,7 +404,7 @@ class GroupMembersViewController: UIViewController, ABPeoplePickerNavigationCont
         }
         
         
-        func ContactsClicked(_ sender: UIButton!) {
+    @objc func ContactsClicked(_ sender: UIButton!) {
             print("the Contacts tag: \(sender.tag)")
             
             replaceRow = sender.tag
@@ -451,7 +451,7 @@ class GroupMembersViewController: UIViewController, ABPeoplePickerNavigationCont
 
     }
     
-    func GameCenterClicked(_ sender: UIButton!) {
+    @objc func GameCenterClicked(_ sender: UIButton!) {
       //  EasyGameCenter.findMatchWithMinPlayers(2, maxPlayers: 2)
         
         
@@ -680,7 +680,7 @@ class GroupMembersViewController: UIViewController, ABPeoplePickerNavigationCont
         }
         
         
-    func PreviousFriendsClicked(_ sender: UIButton!) {
+    @objc func PreviousFriendsClicked(_ sender: UIButton!) {
         
         replaceRow = sender.tag
         print("the gamecenter tag: \(sender.tag)")
@@ -807,18 +807,18 @@ print("Current Number = \(CurNum)")
             
             if TableView.isEditing{
                 TableView.setEditing(false, animated: false)
-                //EditBTN.style = UIBarButtonItemStyle.Plain;
-                EditBTN.setTitle("Edit", for: UIControlState())
+                //EditBTN.style = UIBarButtonItem.Style.Plain;
+                EditBTN.setTitle("Edit", for: UIControl.State())
                 
                 
                 
                 TableView.reloadData()
             } else {
                 TableView.setEditing(true, animated: true)
-                EditBTN.setTitle("Done", for: UIControlState())
+                EditBTN.setTitle("Done", for: UIControl.State())
                 
                 
-                //EditBTN.style = UIBarButtonItemStyle.Done;
+                //EditBTN.style = UIBarButtonItem.Style.Done;
                 TableView.reloadData()
             }
             
@@ -826,7 +826,7 @@ print("Current Number = \(CurNum)")
         }
         
         
-        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             
             
             if (indexPath as NSIndexPath).row == 0 {
@@ -909,13 +909,13 @@ print("Current Number = \(CurNum)")
                 }
             }
             /*
-            if editingStyle == UITableViewCellEditingStyle.Delete {
+            if editingStyle == UITableViewCell.EditingStyle.Delete {
             Friends.removeAtIndex(indexPath.row);
             //   EmailInfo.removeAtIndex(indexPath.row);
             //   NameInfo.removeAtIndex(indexPath.row)
             self.editTableView(EditBTN)
             TableView.reloadData()
-            } else if editingStyle == UITableViewCellEditingStyle.Insert{
+            } else if editingStyle == UITableViewCell.EditingStyle.Insert{
             //  Friends.append();
             //   EmailInfo.append("New Item");
             //   NameInfo.append("New Name");
@@ -967,7 +967,7 @@ print("Current Number = \(CurNum)")
             
             let cell = TableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath) as! BasicCell
             
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             cell.backgroundColor = UIColor.clear
            // cell.cellViewBG?.layer.cornerRadius = 10

@@ -63,6 +63,7 @@ class GameViewController: UIViewController, QuoteViewControllerDelegate, ImageVi
     @IBOutlet var LoadingLBL: UILabel!
     
     @IBAction func unwindToRed(_ unwindSegue: UIStoryboardSegue) {
+        print("Unwind to Red pushed")
         if let blueViewController = unwindSegue.source as? QuoteViewController {
             print("Coming from Quote")
             self.dismiss(animated: true, completion: nil)
@@ -86,7 +87,7 @@ class GameViewController: UIViewController, QuoteViewControllerDelegate, ImageVi
     
     
 
-    func HandleAlertMessageGC(_ notification:Notification) {
+    @objc func HandleAlertMessageGC(_ notification:Notification) {
         
         print("Did Receive Remote Notification While In Game Controller")
         
@@ -275,7 +276,7 @@ class GameViewController: UIViewController, QuoteViewControllerDelegate, ImageVi
     }
     
     
-    func DismissVC(_ notification: Notification){
+    @objc func DismissVC(_ notification: Notification){
         IsUnwinding = true
         
         dismissVC = true
@@ -289,7 +290,7 @@ class GameViewController: UIViewController, QuoteViewControllerDelegate, ImageVi
       //  self.dismissViewControllerAnimated(false, completion: nil)
     }
 
-    func increaseProgress(_ notification: Notification){
+    @objc func increaseProgress(_ notification: Notification){
         
         let resultdict = (notification as NSNotification).userInfo as! NSDictionary
         print("Result Dict Progress: \(resultdict)")
@@ -308,7 +309,7 @@ class GameViewController: UIViewController, QuoteViewControllerDelegate, ImageVi
     }
     
     
-    func StopTimerNotification(_ notification: Notification) {
+    @objc func StopTimerNotification(_ notification: Notification) {
         print("adding to progress bar")
         if currentCount != maxCount {
            // currentCount += 1
@@ -750,7 +751,7 @@ class GameViewController: UIViewController, QuoteViewControllerDelegate, ImageVi
         messageFrame.layer.cornerRadius = 15
         messageFrame.backgroundColor = UIColor(white: 0, alpha: 0.7)
         if indicator {
-            ActivityInd = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+            ActivityInd = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorView.Style.White)
             ActivityInd.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
             ActivityInd.startAnimating()
             messageFrame.addSubview(ActivityInd)

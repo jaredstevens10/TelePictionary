@@ -111,7 +111,7 @@ class MostFailsViewController: UIViewController, UITableViewDataSource, UITableV
             super.viewDidLoad()
             self.refreshControl = UIRefreshControl()
             
-            self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+            self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
             
             self.TableView.backgroundColor = UIColor.clear
             
@@ -123,7 +123,7 @@ class MostFailsViewController: UIViewController, UITableViewDataSource, UITableV
             self.title = "Most Fails"
             
             if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-                self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+                self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
             }
             
             
@@ -153,7 +153,7 @@ class MostFailsViewController: UIViewController, UITableViewDataSource, UITableV
                 menuButtonRight.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             }
             
-            self.refreshControl.addTarget(self, action: #selector(MostFailsViewController.RefreshCommentData(_:)), for: UIControlEvents.valueChanged)
+            self.refreshControl.addTarget(self, action: #selector(MostFailsViewController.RefreshCommentData(_:)), for: UIControl.Event.valueChanged)
             self.TableView.addSubview(refreshControl)
             //self.TableView.reloadData()
             
@@ -276,7 +276,7 @@ class MostFailsViewController: UIViewController, UITableViewDataSource, UITableV
             
         }
     
-    func RefreshCommentData(_ sender:AnyObject) {
+    @objc func RefreshCommentData(_ sender:AnyObject) {
         print("removing array data")
         LNamesArray.removeAll()
         LCountArray.removeAll()
@@ -336,7 +336,7 @@ class MostFailsViewController: UIViewController, UITableViewDataSource, UITableV
             
             let cell = TableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath) as! BasicCell
             
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             cell.backgroundColor = UIColor.clear
             // cell.cellViewBG?.layer.cornerRadius = 10
@@ -370,10 +370,10 @@ class MostFailsViewController: UIViewController, UITableViewDataSource, UITableV
                 cell.contentBTN?.isHidden = false
                 //cell.contentBTN?.imageView?.image = UIImage(named: "YouIcon.png")
                 
-                cell.contentBTN?.setImage(UIImage(named: "YouIcon.png"), for: UIControlState())
+                cell.contentBTN?.setImage(UIImage(named: "YouIcon.png"), for: UIControl.State())
             } else if FriendIDInfo.contains(infotype.userid as NSString) {
                 cell.contentBTN?.isHidden = false
-                cell.contentBTN?.setImage(UIImage(named: "FriendsIcon2.png"), for: UIControlState())
+                cell.contentBTN?.setImage(UIImage(named: "FriendsIcon2.png"), for: UIControl.State())
                 // cell.contentBTN?.imageView?.image = UIImage(named: "FriendsIcon2.png")
             } else {
                 cell.contentBTN?.isHidden = true

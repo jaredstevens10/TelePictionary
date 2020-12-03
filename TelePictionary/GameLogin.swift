@@ -14,7 +14,7 @@ import GameKit
 func GameCenterLogin () -> (NSString, NSString) {
     println("login called")
    
-    var localPlayer = GKLocalPlayer.localPlayer()
+    var localPlayer = GKLocalPlayer.local
     
     localPlayer.authenticateHandler = {(ViewController: UIViewController!, error: NSError!) -> Void in
         if ((ViewController) != nil) {

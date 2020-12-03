@@ -151,9 +151,9 @@ class LevelInfoViewController: UIViewController, UIImagePickerControllerDelegate
             let smallImage = ProfileImage.image!.resize(0.5)
             
             
-            let imageData = UIImageJPEGRepresentation(smallImage, 1.0)
-            
-            ProfileImageFinal = imageData!.base64EncodedString(options: []) as NSString
+            //let imageData = UIImageJPEGRepresentation(smallImage, 1.0)
+            let imageData = smallImage.jpegData(compressionQuality: 1.0)!
+            ProfileImageFinal = imageData.base64EncodedString(options: []) as NSString
             
             
             let ProfileUpdated = UpdateUserProfile()
@@ -198,8 +198,8 @@ class LevelInfoViewController: UIViewController, UIImagePickerControllerDelegate
     }
     
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage //2
         
         WasUpdated = true
         
@@ -239,7 +239,7 @@ class LevelInfoViewController: UIViewController, UIImagePickerControllerDelegate
         
         if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
             picker.allowsEditing = false
-            picker.sourceType = UIImagePickerControllerSourceType.camera
+            picker.sourceType = UIImagePickerController.SourceType.camera
             picker.cameraCaptureMode = .photo
             present(picker, animated: true, completion: nil)
             // mainImageView.image =
@@ -688,8 +688,8 @@ class LevelInfoViewController: UIViewController, UIImagePickerControllerDelegate
         
         
         
-        var post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
-        
+        //var post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
+        var post = post_old.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
         
         
         //post = ("\(post)&ImageData=\(ProfileImageFinal)")
@@ -710,7 +710,7 @@ class LevelInfoViewController: UIViewController, UIImagePickerControllerDelegate
         
         let url:URL = URL(string: "http://\(ServerInfo.sharedInstance)/Apps/TelePictionary/UpdateUserProfile.php")!
         
-        let postData:Data = post.data(using: String.Encoding.ascii)!
+        let postData:Data = post!.data(using: String.Encoding.ascii)!
         
         // var postData:NSData = post.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         

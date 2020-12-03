@@ -48,7 +48,7 @@ class GroupPickerViewController: UIViewController, UITableViewDataSource, UITabl
         self.TableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")        
         TableView.dataSource = self
         TableView.delegate = self
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none        // Do any additional setup after loading the view.
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none        // Do any additional setup after loading the view.
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -334,27 +334,27 @@ class GroupPickerViewController: UIViewController, UITableViewDataSource, UITabl
         
         if TableView.editing{
             TableView.setEditing(false, animated: false)
-            editBTN.style = UIBarButtonItemStyle.Plain;
+            editBTN.style = UIBarButtonItem.Style.Plain;
             editBTN.title = "Edit";
             TableView.reloadData()
         } else {
             TableView.setEditing(true, animated: true)
             editBTN.title = "Done";
-            editBTN.style = UIBarButtonItemStyle.Done;
+            editBTN.style = UIBarButtonItem.Style.Done;
             TableView.reloadData()
         }
         
         
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.Delete {
             NameTable.removeAtIndex(indexPath.row)
             // EmailInfo.removeAtIndex(indexPath.row);
             //  NameInfo.removeAtIndex(indexPath.row)
             self.editTableView(editBTN)
             TableView.reloadData()
-        } else if editingStyle == UITableViewCellEditingStyle.Insert{
+        } else if editingStyle == UITableViewCell.EditingStyle.Insert{
             //Friends.append("New Item")
             NameTable.append("New Item")
             // EmailInfo.append("New Item");

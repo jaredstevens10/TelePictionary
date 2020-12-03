@@ -68,7 +68,7 @@ class FriendPickerViewController: UIViewController, ABPeoplePickerNavigationCont
         numPlayers = 1
         
         TableView.allowsMultipleSelection = true
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
       
         
         GameLBL.text = "Game Players : \(numPlayers)"
@@ -550,27 +550,27 @@ class FriendPickerViewController: UIViewController, ABPeoplePickerNavigationCont
         
         if TableView.isEditing{
             TableView.setEditing(false, animated: false)
-            editBTN.style = UIBarButtonItemStyle.plain;
+            editBTN.style = UIBarButtonItem.Style.plain;
             editBTN.title = "Edit";
             TableView.reloadData()
         } else {
             TableView.setEditing(true, animated: true)
             editBTN.title = "Done";
-            editBTN.style = UIBarButtonItemStyle.done;
+            editBTN.style = UIBarButtonItem.Style.done;
             TableView.reloadData()
         }
         
         
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
             NameTable.remove(at: (indexPath as NSIndexPath).row)
            // EmailInfo.removeAtIndex(indexPath.row);
           //  NameInfo.removeAtIndex(indexPath.row)
             self.editTableView(editBTN)
             TableView.reloadData()
-        } else if editingStyle == UITableViewCellEditingStyle.insert{
+        } else if editingStyle == UITableViewCell.EditingStyle.insert{
             //Friends.append("New Item")
             NameTable.append("New Item")
            // EmailInfo.append("New Item");

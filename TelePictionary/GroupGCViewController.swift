@@ -74,7 +74,7 @@
             self.TableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
             TableView.dataSource = self
             TableView.delegate = self
-            self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none        // Do any additional setup after loading the view.
+            self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none        // Do any additional setup after loading the view.
             
             
             let prefs:UserDefaults = UserDefaults.standard

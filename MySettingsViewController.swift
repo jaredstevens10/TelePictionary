@@ -36,8 +36,8 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
 
     
     var closeOtherNodes: Bool!;
-    var insertRowAnimation: UITableViewRowAnimation!;
-    var deleteRowAnimation: UITableViewRowAnimation!;
+    var insertRowAnimation: UITableView.RowAnimation!;
+    var deleteRowAnimation: UITableView.RowAnimation!;
     
     var allNodes : [YUTableViewNode]!;
     
@@ -164,11 +164,11 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
         
         //dobPicker.setDate(NSDate(), animated: true)
         dobPicker.maximumDate = Date()
-        dobPicker.datePickerMode = UIDatePickerMode.date
+        dobPicker.datePickerMode = UIDatePicker.Mode.date
         pickerDoneButton.layer.cornerRadius = 5
         pickerDoneButton.layer.borderWidth = 1
         pickerDoneButton.layer.borderColor = UIColor.white.cgColor
-        pickerDoneButton.addTarget(self, action: #selector(MySettingsViewController.dismissPicker), for: UIControlEvents.touchUpInside)
+        pickerDoneButton.addTarget(self, action: #selector(MySettingsViewController.dismissPicker), for: UIControl.Event.touchUpInside)
         
          picker.delegate = self
         
@@ -182,7 +182,7 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
        // GameAudioSwitch.isR
         
         
-        GameAudioSwitch.addTarget(self, action: #selector(MySettingsViewController.stateChanged(_:)), for: UIControlEvents.valueChanged)
+        GameAudioSwitch.addTarget(self, action: #selector(MySettingsViewController.stateChanged(_:)), for: UIControl.Event.valueChanged)
         
         self.title = "My Settings"
         
@@ -197,7 +197,7 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
             closeBTN.isHidden = true
         
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
         }
         
         
@@ -240,7 +240,7 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
         // scrollView.bounces = false
         
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.autoresizingMask = UIViewAutoresizing.flexibleHeight
+        scrollView.autoresizingMask = UIView.AutoresizingMask.flexibleHeight
         
   
     }
@@ -260,7 +260,7 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
     }
 */
 
-    func stateChanged(_ switchState: UISwitch) {
+    @objc func stateChanged(_ switchState: UISwitch) {
         if GameAudioSwitch.isOn {
             
             MuteAudio = true
@@ -490,7 +490,8 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
                 let smallImage = ProfileImage.image!.resize(0.8)
                 
                 
-                let imageData = UIImageJPEGRepresentation(smallImage, 1.0)
+                //let imageData = UIImageJPEGRepresentation(smallImage, 1.0)
+                let imageData = smallImage.jpegData(compressionQuality: 1.0)
                 
                 ProfileImageFinal = imageData!.base64EncodedString(options: [])
                 
@@ -699,8 +700,12 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
         
         
         
-        var post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
-        
+        //var post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
+        //var post = post_old.stringByAddingPercentEncodingWithAllowedCharacters(using: String.Encoding.utf8)!
+        var post = post_old.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
+        //var post = String(UTF8String: post_old.cStringUsingEncoding(NSUTF8StringEncoding))!
+        //var post = String(UTF8String: post_old.cStringUsingEncoding(NSUTF8StringEncoding))!
+        //let str = String(UTF8String: strToDecode.cStringUsingEncoding(​NSUTF8StringEncoding))
         
         
         //post = ("\(post)&ImageData=\(ProfileImageFinal)")
@@ -721,7 +726,8 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
         
         let url:URL = URL(string: "http://\(ServerInfo.sharedInstance)/Apps/TelePictionary/UpdateUserProfile.php")!
         
-        let postData:Data = post.data(using: String.Encoding.ascii)!
+        //let postData:Data = post?.data(using: String.Encoding.ascii)! ?? <#default value#>
+        let postData:Data = (post?.data(using: String.Encoding.ascii))!
         
         // var postData:NSData = post.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         
@@ -882,7 +888,7 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     
-    func DismissKeyboard(){
+    @objc func DismissKeyboard(){
         
         view.endEditing(true)
     }
@@ -983,8 +989,8 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage //2
         
         ShowingProfileView = true
         
@@ -1056,7 +1062,7 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
         
         if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
             picker.allowsEditing = false
-            picker.sourceType = UIImagePickerControllerSourceType.camera
+            picker.sourceType = UIImagePickerController.SourceType.camera
             picker.cameraCaptureMode = .photo
             present(picker, animated: true, completion: nil)
             // mainImageView.image =
@@ -1168,7 +1174,7 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
         
     }
     
-    func dismissPicker ()
+    @objc func dismissPicker ()
     {
         
         if EditingDOB {
@@ -1194,7 +1200,7 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
                 print("UserDOb formater two = \(self.UserDOB)")
                 
                 self.dobTXT.text = dateFormatter.string(from: self.dobPicker.date)
-                // self.selectedDate.setTitle(dateFormatter.stringFromDate(self.picker.date), forState: UIControlState.Normal)
+                // self.selectedDate.setTitle(dateFormatter.stringFromDate(self.picker.date), forState: UIControl.State.Normal)
                 
                 
             })
@@ -1232,7 +1238,7 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
         }
     }
 
-    func setTableViewSettings (closeOtherNodes: Bool, insertAnimation: UITableViewRowAnimation, deleteAnimation: UITableViewRowAnimation) {
+    func setTableViewSettings (closeOtherNodes: Bool, insertAnimation: UITableView.RowAnimation, deleteAnimation: UITableView.RowAnimation) {
         self.closeOtherNodes = closeOtherNodes;
         self.insertRowAnimation = insertAnimation;
         self.deleteRowAnimation = deleteAnimation;
@@ -1415,7 +1421,7 @@ class MySettingsViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     
-    func SwitchChanged(_ sender: UISwitch!) {
+    @objc func SwitchChanged(_ sender: UISwitch!) {
         let Row = sender.tag
         print("the Switch row selected: \(sender.tag)")
         var switchState = String()
@@ -1576,7 +1582,7 @@ extension MySettingsViewController: YUTableViewDelegate {
             
             //var indexPatt =
             customCell.backgroundColor = UIColor.clear
-            customCell.selectionStyle = UITableViewCellSelectionStyle.none
+            customCell.selectionStyle = UITableViewCell.SelectionStyle.none
             customCell.setLabel(cellDic["label"]!, andImage: cellDic["img"]!);
             customCell.mySwitch?.tag = (indexPath as NSIndexPath).row
             customCell.mySwitch?.addTarget(self, action: #selector(MySettingsViewController.SwitchChanged(_:)), for: .touchUpInside)
@@ -1590,7 +1596,7 @@ extension MySettingsViewController: YUTableViewDelegate {
             //  customCell.label!.font = UIFont.NewFonts.MenuFont
             
             //   customCell.label!.textColor = UIColor.NewColors.menuTextColor
-            //customCell.selectionStyle = UITableViewCellSelectionStyle.None
+            //customCell.selectionStyle = UITableViewCell.SelectionStyle.None
             
             // switch cellDic["label"] as! String {
             switch cellDic["label"]! as String  {
@@ -1603,7 +1609,7 @@ extension MySettingsViewController: YUTableViewDelegate {
         } else if let cell = cell as? BasicCell, let cellDic = node.data as? [String:String] {
             
             cell.backgroundColor = UIColor.clear
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             //  cell.titleLBL?.text =
             cell.setLabel(cellDic["label"]!, andImage: cellDic["img"]!);
             cell.titleIMG.image = UIImage(named: cellDic["img"]!)
@@ -1639,7 +1645,7 @@ extension MySettingsViewController: YUTableViewDelegate {
             
         } else {
             cell.backgroundColor = UIColor.clear
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.textLabel!.text = node.data as? String;
             //cell.textLabel!.font = UIFont.NewFonts.MenuFont
             
@@ -1655,7 +1661,7 @@ extension MySettingsViewController: YUTableViewDelegate {
         
         if let customCell = cell as? CustomTableViewCell, let cellDic = node.data as? [String:String] {
             customCell.backgroundColor = UIColor.clear
-            customCell.selectionStyle = UITableViewCellSelectionStyle.none
+            customCell.selectionStyle = UITableViewCell.SelectionStyle.none
             customCell.setLabel(cellDic["label"]!, andImage: cellDic["img"]!);
             customCell.mySwitch?.tag = (indexPath as NSIndexPath).row
             customCell.mySwitch?.addTarget(self, action: #selector(MySettingsViewController.SwitchChanged(_:)), for: .touchUpInside)
@@ -1669,7 +1675,7 @@ extension MySettingsViewController: YUTableViewDelegate {
           //  customCell.label!.font = UIFont.NewFonts.MenuFont
             
          //   customCell.label!.textColor = UIColor.NewColors.menuTextColor
-            //customCell.selectionStyle = UITableViewCellSelectionStyle.None
+            //customCell.selectionStyle = UITableViewCell.SelectionStyle.None
  
            // switch cellDic["label"] as! String {
             switch cellDic["label"]! as String  {
@@ -1682,7 +1688,7 @@ extension MySettingsViewController: YUTableViewDelegate {
         } else if let cell = cell as? BasicCell, let cellDic = node.data as? [String:String] {
             
             cell.backgroundColor = UIColor.clear
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             //  cell.titleLBL?.text =
             cell.setLabel(cellDic["label"]!, andImage: cellDic["img"]!);
             cell.titleIMG.image = UIImage(named: cellDic["img"]!)
@@ -1718,7 +1724,7 @@ extension MySettingsViewController: YUTableViewDelegate {
             
         } else {
             cell.backgroundColor = UIColor.clear
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.textLabel!.text = node.data as? String;
             //cell.textLabel!.font = UIFont.NewFonts.MenuFont
             
@@ -1894,7 +1900,7 @@ scrollView.contentSize = containerView.bounds.size
 // scrollView.bounces = false
 
 scrollView.showsHorizontalScrollIndicator = false
-scrollView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
+scrollView.autoresizingMask = UIView.AutoresizingMask.FlexibleHeight
 
 // Do any additional setup after loading the view.
 }
@@ -2089,12 +2095,12 @@ func setContentsOfCell(cell: UITableViewCell, node: YUTableViewNode, indexPath: 
 
 if let customCell = cell as? CustomTableViewCell, let cellDic = node.data as? [String:String] {
 customCell.backgroundColor = UIColor.clearColor()
-customCell.selectionStyle = UITableViewCellSelectionStyle.None
+customCell.selectionStyle = UITableViewCell.SelectionStyle.None
 customCell.setLabel(cellDic["label"]!, andImage: cellDic["img"]!);
 customCell.label!.font = UIFont.NewFonts.MenuFont
 
 customCell.label!.textColor = UIColor.NewColors.menuTextColor
-//customCell.selectionStyle = UITableViewCellSelectionStyle.None
+//customCell.selectionStyle = UITableViewCell.SelectionStyle.None
 
 switch node.data["label"] as! String {
 
@@ -2107,7 +2113,7 @@ break
 } else if let cell = cell as? BasicCell, let cellDic = node.data as? [String:String] {
 
 cell.backgroundColor = UIColor.clearColor()
-cell.selectionStyle = UITableViewCellSelectionStyle.None
+cell.selectionStyle = UITableViewCell.SelectionStyle.None
 //  cell.titleLBL?.text =
 cell.setLabel(cellDic["label"]!, andImage: cellDic["img"]!);
 
@@ -2136,7 +2142,7 @@ cell.nextArrowIMG.hidden = false
 
 } else {
 cell.backgroundColor = UIColor.clearColor()
-cell.selectionStyle = UITableViewCellSelectionStyle.None
+cell.selectionStyle = UITableViewCell.SelectionStyle.None
 cell.textLabel!.text = node.data as? String;
 //cell.textLabel!.font = UIFont.NewFonts.MenuFont
 

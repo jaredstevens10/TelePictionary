@@ -52,7 +52,7 @@ class ContactViewController: UIViewController, UINavigationControllerDelegate {
         self.title = "Contact Us"
         
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
         }
         
         
@@ -90,9 +90,9 @@ class ContactViewController: UIViewController, UINavigationControllerDelegate {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ContactViewController.keyboardWasShown(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(ContactViewController.keyboardWasShown(_:)), name: UIResponder.keyboardWillShowNotification, object: nil);
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ContactViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(ContactViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil);
         
         DoneBTN.layer.cornerRadius = 10
     }
@@ -101,14 +101,14 @@ class ContactViewController: UIViewController, UINavigationControllerDelegate {
     deinit {
         NotificationCenter.default.removeObserver(self);
     }
-    func keyboardWasShown(_ notification: Notification) {
+    @objc func keyboardWasShown(_ notification: Notification) {
         
         issueLBL.isHidden = true
         
         var info = (notification as NSNotification).userInfo!
         
         
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
         
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
@@ -136,13 +136,13 @@ class ContactViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     
-    func keyboardWillHide(_ notification: Notification) {
+    @objc func keyboardWillHide(_ notification: Notification) {
     issueLBL.isHidden = false
     
     var info = (notification as NSNotification).userInfo!
     
     
-    var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+    var keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
     
     
     UIView.animate(withDuration: 0.3, animations: { () -> Void in
@@ -167,7 +167,7 @@ class ContactViewController: UIViewController, UINavigationControllerDelegate {
     
     }
     
-    func DismissKeyboard(){
+    @objc func DismissKeyboard(){
         
         /*
         if GameTitleTXT.text.isEmpty {

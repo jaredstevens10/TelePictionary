@@ -121,7 +121,7 @@ class MenuViewController: UIViewController, UIScrollViewDelegate, UINavigationCo
         pulse.duration = 2
         pulse.fromValue = 0.5
         pulse.toValue = 1
-        pulse.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        pulse.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         pulse.autoreverses = true
         pulse.repeatCount = FLT_MAX
         
@@ -137,43 +137,43 @@ pixieBTN.layer.add(pulse, forKey: nil)
         userLevel = prefs.integer(forKey: "USERLEVEL")
         userTokens = prefs.integer(forKey: "USERTOKENS")
         userLevelPoints = prefs.integer(forKey: "USERLEVELPOINTS")
-    tokensBTN.setTitle(userTokens.description, for: UIControlState())
+    tokensBTN.setTitle(userTokens.description, for: UIControl.State())
         
         print("UserLevel = \(userLevel)")
         
         switch userLevel {
         case 1:
-            pixieBTN.setImage(Char1, for: UIControlState())
+            pixieBTN.setImage(Char1, for: UIControl.State())
             nextTier = 200
         case 2:
-            pixieBTN.setImage(Char2, for: UIControlState())
+            pixieBTN.setImage(Char2, for: UIControl.State())
             nextTier = 300
         case 3:
-            pixieBTN.setImage(Char3, for: UIControlState())
+            pixieBTN.setImage(Char3, for: UIControl.State())
             nextTier = 400
         case 4:
-            pixieBTN.setImage(Char4, for: UIControlState())
+            pixieBTN.setImage(Char4, for: UIControl.State())
             nextTier = 500
         case 5:
-           pixieBTN.setImage(Char5, for: UIControlState())
+           pixieBTN.setImage(Char5, for: UIControl.State())
            nextTier = 600
         case 6:
-            pixieBTN.setImage(Char5, for: UIControlState())
+            pixieBTN.setImage(Char5, for: UIControl.State())
             nextTier = 700
         case 7:
-            pixieBTN.setImage(Char5, for: UIControlState())
+            pixieBTN.setImage(Char5, for: UIControl.State())
             nextTier = 800
         case 8:
-            pixieBTN.setImage(Char5, for: UIControlState())
+            pixieBTN.setImage(Char5, for: UIControl.State())
             nextTier = 900
         case 9:
-            pixieBTN.setImage(Char5, for: UIControlState())
+            pixieBTN.setImage(Char5, for: UIControl.State())
             nextTier = 1000
         case 10:
-            pixieBTN.setImage(Char6, for: UIControlState())
+            pixieBTN.setImage(Char6, for: UIControl.State())
              nextTier = 1100
         default:
-            pixieBTN.setImage(Char1, for: UIControlState())
+            pixieBTN.setImage(Char1, for: UIControl.State())
         }
         
     }
@@ -184,52 +184,52 @@ pixieBTN.layer.add(pulse, forKey: nil)
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
-    func updatePixie(_ notification:Notification) {
+    @objc func updatePixie(_ notification:Notification) {
         print("Updating Pixie")
         
         userLevel = prefs.integer(forKey: "USERLEVEL")
         userTokens = prefs.integer(forKey: "USERTOKENS")
         userLevelPoints = prefs.integer(forKey: "USERLEVELPOINTS")
-        tokensBTN.setTitle(userTokens.description, for: UIControlState())
+        tokensBTN.setTitle(userTokens.description, for: UIControl.State())
 
         print("UserLevel = \(userLevel)")
         
         switch userLevel {
         case 1:
-            pixieBTN.setImage(Char1, for: UIControlState())
+            pixieBTN.setImage(Char1, for: UIControl.State())
             nextTier = 200
         case 2:
-            pixieBTN.setImage(Char2, for: UIControlState())
+            pixieBTN.setImage(Char2, for: UIControl.State())
             nextTier = 300
         case 3:
-            pixieBTN.setImage(Char3, for: UIControlState())
+            pixieBTN.setImage(Char3, for: UIControl.State())
             nextTier = 400
         case 4:
-            pixieBTN.setImage(Char4, for: UIControlState())
+            pixieBTN.setImage(Char4, for: UIControl.State())
             nextTier = 500
         case 5:
-            pixieBTN.setImage(Char5, for: UIControlState())
+            pixieBTN.setImage(Char5, for: UIControl.State())
             nextTier = 600
         case 6:
-            pixieBTN.setImage(Char5, for: UIControlState())
+            pixieBTN.setImage(Char5, for: UIControl.State())
             nextTier = 700
         case 7:
-            pixieBTN.setImage(Char5, for: UIControlState())
+            pixieBTN.setImage(Char5, for: UIControl.State())
             nextTier = 800
         case 8:
-            pixieBTN.setImage(Char5, for: UIControlState())
+            pixieBTN.setImage(Char5, for: UIControl.State())
             nextTier = 900
         case 9:
-            pixieBTN.setImage(Char5, for: UIControlState())
+            pixieBTN.setImage(Char5, for: UIControl.State())
             nextTier = 1000
         case 10:
-            pixieBTN.setImage(Char6, for: UIControlState())
+            pixieBTN.setImage(Char6, for: UIControl.State())
             nextTier = 1100
         default:
-            pixieBTN.setImage(Char1, for: UIControlState())
+            pixieBTN.setImage(Char1, for: UIControl.State())
         }
 
         
@@ -261,7 +261,7 @@ nextUpgradeLBL.text = "\(upgradePoints) Points To Next Level Up"
         userLevel = prefs.integer(forKey: "USERLEVEL")
         userTokens = prefs.integer(forKey: "USERTOKENS")
         userLevelPoints = prefs.integer(forKey: "USERLEVELPOINTS")
-        tokensBTN.setTitle(userTokens.description, for: UIControlState())
+        tokensBTN.setTitle(userTokens.description, for: UIControl.State())
         
         levelpointsLBL.text = "Points: \(userLevelPoints.description)"
         
@@ -280,7 +280,7 @@ nextUpgradeLBL.text = "\(upgradePoints) Points To Next Level Up"
 
 
     }
-    func updateLevel() {
+    @objc func updateLevel() {
         
         
         

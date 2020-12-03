@@ -15,7 +15,7 @@ class ProgressHUD: UIVisualEffectView {
             label.text = text
         }
     }
-    let activityIndictor: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+    let activityIndictor: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
    
     let label: UILabel = UILabel()
     let blurEffect = UIBlurEffect(style: .light)
@@ -116,7 +116,7 @@ class ProgressHUD2: UIVisualEffectView {
             label.text = text
         }
     }
-    let activityIndictor: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+    let activityIndictor: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
     
     let label: UILabel = UILabel()
     let blurEffect = UIBlurEffect(style: .light)
@@ -220,7 +220,7 @@ class ProgressHUDHow: UIVisualEffectView {
             label.text = text
         }
     }
-    let activityIndictor: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+    let activityIndictor: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
     
     let label: UILabel = UILabel()
     let blurEffect = UIBlurEffect(style: .light)
@@ -332,7 +332,7 @@ class PixieHowTo: UIVisualEffectView {
         }
     }
     
-    let activityIndictor: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+    let activityIndictor: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
     
     let label: UILabel = UILabel()
     let theImageView: UIImageView = UIImageView()
@@ -369,11 +369,11 @@ class PixieHowTo: UIVisualEffectView {
     func setup() {
         
         
-        let button   = UIButton(type: UIButtonType.system) as UIButton
+        let button   = UIButton(type: UIButton.ButtonType.system) as UIButton
         button.frame = CGRect(x: 50, y: 80, width: 15, height: 15)
         button.backgroundColor = UIColor.black
-        button.setTitle("Ok", for: UIControlState())
-        button.addTarget(self, action: #selector(PixieHowTo.buttonAction(_:)), for: UIControlEvents.touchUpInside)
+        button.setTitle("Ok", for: UIControl.State())
+        button.addTarget(self, action: #selector(PixieHowTo.buttonAction(_:)), for: UIControl.Event.touchUpInside)
 
         
         // contentView.addSubview(vibrancyView)
@@ -442,7 +442,7 @@ class PixieHowTo: UIVisualEffectView {
         }
     }
     
-    func buttonAction(_ sender:UIButton!)
+    @objc func buttonAction(_ sender:UIButton!)
     {
         self.isHidden = true
     }

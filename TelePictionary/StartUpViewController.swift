@@ -164,10 +164,10 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
         VolumeMute = prefs.bool(forKey: "MuteGameAudio")
         
         
-         NotificationCenter.default.addObserver(self, selector: #selector(StartUpViewController.displayForegroundDetailsStart), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(StartUpViewController.displayForegroundDetailsStart), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(StartUpViewController.displayBackgroundDetails), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(StartUpViewController.displayBackgroundDetails), name: UIApplication.didEnterBackgroundNotification, object: nil)
         
         //SWIFT 3 ERROR
      //   NotificationCenter.default.addObserver(self, selector: "displayRemoteNotificationKeyDetails", name: NSNotification.Name.remoteNotification, object: nil)
@@ -175,7 +175,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
         
        
         
-        NotificationCenter.default.addObserver(self, selector: #selector(StartUpViewController.displayLaunchDetails), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(StartUpViewController.displayLaunchDetails), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         
         
@@ -228,7 +228,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
        // PlayBackgroundMusic()
     }
     
-    func displayForegroundDetailsStart() {
+    @objc func displayForegroundDetailsStart() {
         print("APP ENTERED THE FOREGROUND FROM THE STARTUP VC")
        
 
@@ -305,7 +305,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                         
                         DispatchQueue.main.asyncAfter(deadline: dispatchTimeLoad, execute: {
                             
-                            let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+                            let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
                             
                             //  dispatch_after(dispatchTimeLoad, dispatch_get_main_queue(), {
                             UIView.transition(from: self.viewCS, to: self.viewPQ, duration: 0.8, options: animationOptions, completion: nil)
@@ -365,7 +365,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
         print("REMOTE NOTIFICATION KEY DETAILS")
     }
     
-    func displayBackgroundDetails () {
+    @objc func displayBackgroundDetails () {
         print("APP ENTERED THE BACKGROUND")
     }
     
@@ -419,7 +419,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
    
 */
     
-    func displayLaunchDetails() {
+    @objc func displayLaunchDetails() {
         
         //var window: UIWindow?
         /*
@@ -588,7 +588,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                         let theAlert =  SCLAlertView()
                         theAlert.addButton("Settings", action: {
                             
-                            let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
+                            let settingsUrl = URL(string: UIApplication.openSettingsURLString)
                             //   let settingsUrl = NSURL(string: UIAppli)
                             if let url = settingsUrl {
                                 UIApplication.shared.openURL(url)
@@ -612,7 +612,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                     let alertController = UIAlertController (title: "Notifications", message: "Looks like your Push Notifications are turned off, turn them on for a better game experience", preferredStyle: .Alert)
                     
                     let settingsAction = UIAlertAction(title: "Settings", style: .Default) { (_) -> Void in
-                    let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+                    let settingsUrl = NSURL(string: UIApplication.openSettingsURLString)
                     //   let settingsUrl = NSURL(string: UIAppli)
                     if let url = settingsUrl {
                     UIApplication.sharedApplication().openURL(url)
@@ -640,7 +640,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             let theAlert =  SCLAlertView()
                             theAlert.addButton("Settings", action: {
                                 
-                                let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
+                                let settingsUrl = URL(string: UIApplication.openSettingsURLString)
                                 //   let settingsUrl = NSURL(string: UIAppli)
                                 if let url = settingsUrl {
                                     UIApplication.shared.openURL(url)
@@ -678,7 +678,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
         
     }
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
     
@@ -1027,7 +1027,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
             
             
             
-            let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+            let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
             
             UIView.transition(from: self.viewPQ, to: self.viewPQ, duration: 0.8, options: animationOptions, completion: { (Bool) -> Void in
             
@@ -1203,7 +1203,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                 
                 DispatchQueue.main.asyncAfter(deadline: dispatchTimeLoad, execute: {
                     
-                let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+                let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
                     
                   //  dispatch_after(dispatchTimeLoad, dispatch_get_main_queue(), {
                         UIView.transition(from: self.viewCS, to: self.viewPQ, duration: 0.8, options: animationOptions, completion: nil)
@@ -1555,7 +1555,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                     // View1TOPP.constant = 0
                     // View2TOP.constant = 0
                     
-                    let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.TransitionFlipFromRight, UIViewAnimationOptions.ShowHideTransitionViews]
+                    let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.TransitionFlipFromRight, UIView.AnimationOptions.ShowHideTransitionViews]
                     
                     UIView.transitionFromView(self.ViewLoad1, toView: self.ViewLoad2, duration: 0.8, options: animationOptions, completion: nil)
                     
@@ -1757,7 +1757,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
     
     
     
-    func HandleAlertMessage(_ notification:Notification) {
+    @objc func HandleAlertMessage(_ notification:Notification) {
         
         /*
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -1972,8 +1972,8 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             print("Home VC is loaded AND on the screen")
                             
                             //theAlert.hideView()
-                            //theAlert.removeFromParentViewController()
-                            theAlert.removeFromParentViewController()
+                            //theAlert.removeFromParent()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             
@@ -1981,7 +1981,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             
                             // theAlert.hideView()
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             if let viewControllers = self.navigationController?.viewControllers {
@@ -2070,7 +2070,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                         print("Trying to take turn")
                         dispatch_async(dispatch_get_main_queue(), {
                         //  self.dismissViewControllerAnimated(false, completion: nil)
-                        theAlert.removeFromParentViewController()
+                        theAlert.removeFromParent()
                         self.TakeTurn()
                         
                         
@@ -2130,20 +2130,20 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             print("Trying to take turn")
                             DispatchQueue.main.async(execute: {
                                 //  self.dismissViewControllerAnimated(false, completion: nil)
-                                theAlert.removeFromParentViewController()
+                                theAlert.removeFromParent()
                                 theAlert.hideView()
                                 self.TakeTurn()
                                 
                               //  self.PopoverTurn()
                                 
-                                //theAlert.removeFromParentViewController()
+                                //theAlert.removeFromParent()
                                 
                                 
                                 DispatchQueue.main.async(execute: {
                                     //theAlert.dismissViewControllerAnimated(false, completion: nil)
                                     //  UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
                                     self.IsHandlingAlertMessage = false
-                                    // theAlert.removeFromParentViewController()
+                                    // theAlert.removeFromParent()
                                     print("about to dismiss the root view controller????")
                                     
                                     DispatchQueue.main.async(execute: {
@@ -2168,11 +2168,11 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                     })
                     
                     theAlert.addButton("Later", action: {
-                        theAlert.removeFromParentViewController()
+                        theAlert.removeFromParent()
                         
                         DispatchQueue.main.async(execute: {
                             self.IsHandlingAlertMessage = false
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             //theAlert.dismissViewControllerAnimated(false, completion: nil)
                             //self.dismissViewControllerAnimated(false, completion: nil)
@@ -2213,8 +2213,8 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             print("Home VC is loaded AND on the screen")
                             
                             //theAlert.hideView()
-                            //theAlert.removeFromParentViewController()
-                            theAlert.removeFromParentViewController()
+                            //theAlert.removeFromParent()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             
@@ -2222,7 +2222,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             
                             // theAlert.hideView()
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             if let viewControllers = self.navigationController?.viewControllers {
@@ -2311,7 +2311,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                         print("Trying to take turn")
                         dispatch_async(dispatch_get_main_queue(), {
                         //  self.dismissViewControllerAnimated(false, completion: nil)
-                        theAlert.removeFromParentViewController()
+                        theAlert.removeFromParent()
                         self.TakeTurn()
                         
                         
@@ -2371,20 +2371,20 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             print("Trying to take turn")
                             DispatchQueue.main.async(execute: {
                                 //  self.dismissViewControllerAnimated(false, completion: nil)
-                                theAlert.removeFromParentViewController()
+                                theAlert.removeFromParent()
                                 theAlert.hideView()
                                 self.TakeTurn()
                                 
                                 //  self.PopoverTurn()
                                 
-                                //theAlert.removeFromParentViewController()
+                                //theAlert.removeFromParent()
                                 
                                 
                                 DispatchQueue.main.async(execute: {
                                     //theAlert.dismissViewControllerAnimated(false, completion: nil)
                                     //  UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
                                     self.IsHandlingAlertMessage = false
-                                    // theAlert.removeFromParentViewController()
+                                    // theAlert.removeFromParent()
                                     print("about to dismiss the root view controller????")
                                     
                                     DispatchQueue.main.async(execute: {
@@ -2413,7 +2413,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                         DispatchQueue.main.async(execute: {
                             self.IsHandlingAlertMessage = false
                             theAlert.hideView()
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             // theAlert.dismissViewControllerAnimated(false, completion: nil)
                             //self.dismissViewControllerAnimated(false, completion: nil)
                             print("DISMISSING THE MEDIUM ALERT SCREEN")
@@ -2456,8 +2456,8 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             print("Home VC is loaded AND on the screen")
                             
                             //theAlert.hideView()
-                            //theAlert.removeFromParentViewController()
-                            theAlert.removeFromParentViewController()
+                            //theAlert.removeFromParent()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             
@@ -2465,7 +2465,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             
                             // theAlert.hideView()
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             if let viewControllers = self.navigationController?.viewControllers {
@@ -2554,7 +2554,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                         print("Trying to take turn")
                         dispatch_async(dispatch_get_main_queue(), {
                         //  self.dismissViewControllerAnimated(false, completion: nil)
-                        theAlert.removeFromParentViewController()
+                        theAlert.removeFromParent()
                         self.TakeTurn()
                         
                         
@@ -2614,20 +2614,20 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             print("Trying to take turn")
                             DispatchQueue.main.async(execute: {
                                 //  self.dismissViewControllerAnimated(false, completion: nil)
-                                theAlert.removeFromParentViewController()
+                                theAlert.removeFromParent()
                                 theAlert.hideView()
                                 self.TakeTurn()
                                 
                                 //  self.PopoverTurn()
                                 
-                                //theAlert.removeFromParentViewController()
+                                //theAlert.removeFromParent()
                                 
                                 
                                 DispatchQueue.main.async(execute: {
                                     //theAlert.dismissViewControllerAnimated(false, completion: nil)
                                     //  UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
                                     self.IsHandlingAlertMessage = false
-                                    // theAlert.removeFromParentViewController()
+                                    // theAlert.removeFromParent()
                                     print("about to dismiss the root view controller????")
                                     
                                     DispatchQueue.main.async(execute: {
@@ -2656,7 +2656,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                         DispatchQueue.main.async(execute: {
                             
                             self.IsHandlingAlertMessage = false
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             //  self.dismissViewControllerAnimated(false, completion: nil)
                             print("DISMISSING THE HARD ALERT SCREEN")
                             // theAlert.dismissViewControllerAnimated(false, completion: nil)
@@ -2691,7 +2691,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                         
                         DispatchQueue.main.async(execute: {
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             //  self.dismissViewControllerAnimated(false, completion: nil)
                             print("DISMISSING THE HARD ALERT SCREEN")
                             // theAlert.dismissViewControllerAnimated(false, completion: nil)
@@ -2733,8 +2733,8 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             print("Home VC is loaded AND on the screen")
                             
                             //theAlert.hideView()
-                            //theAlert.removeFromParentViewController()
-                            theAlert.removeFromParentViewController()
+                            //theAlert.removeFromParent()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             
@@ -2742,7 +2742,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             
                             // theAlert.hideView()
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             if let viewControllers = self.navigationController?.viewControllers {
@@ -2831,7 +2831,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                         print("Trying to take turn")
                         dispatch_async(dispatch_get_main_queue(), {
                         //  self.dismissViewControllerAnimated(false, completion: nil)
-                        theAlert.removeFromParentViewController()
+                        theAlert.removeFromParent()
                         self.TakeTurn()
                         
                         
@@ -2891,20 +2891,20 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             print("Trying to take turn")
                             DispatchQueue.main.async(execute: {
                                 //  self.dismissViewControllerAnimated(false, completion: nil)
-                                theAlert.removeFromParentViewController()
+                                theAlert.removeFromParent()
                                 theAlert.hideView()
                                 self.TakeTurn()
                                 
                                 //  self.PopoverTurn()
                                 
-                                //theAlert.removeFromParentViewController()
+                                //theAlert.removeFromParent()
                                 
                                 
                                 DispatchQueue.main.async(execute: {
                                     //theAlert.dismissViewControllerAnimated(false, completion: nil)
                                     //  UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
                                     self.IsHandlingAlertMessage = false
-                                    // theAlert.removeFromParentViewController()
+                                    // theAlert.removeFromParent()
                                     print("about to dismiss the root view controller????")
                                     
                                     DispatchQueue.main.async(execute: {
@@ -2933,7 +2933,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                         
                         DispatchQueue.main.async(execute: {
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             //  self.dismissViewControllerAnimated(false, completion: nil)
                             print("DISMISSING THE HARD ALERT SCREEN")
                             
@@ -3005,7 +3005,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             DispatchQueue.main.async(execute: {
                                 //  self.dismissViewControllerAnimated(false, completion: nil)
                                 
-                                theAlert.removeFromParentViewController()
+                                theAlert.removeFromParent()
                                 self.StartSuggestedGame(QuoteExample as NSString, username: self.username, userid: self.userid)
                                 
                             })
@@ -3052,8 +3052,8 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             print("Home VC is loaded AND on the screen")
                             
                             //theAlert.hideView()
-                            //theAlert.removeFromParentViewController()
-                            theAlert.removeFromParentViewController()
+                            //theAlert.removeFromParent()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             
@@ -3061,7 +3061,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             
                             // theAlert.hideView()
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             if let viewControllers = self.navigationController?.viewControllers {
@@ -3150,7 +3150,7 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                         print("Trying to take turn")
                         dispatch_async(dispatch_get_main_queue(), {
                         //  self.dismissViewControllerAnimated(false, completion: nil)
-                        theAlert.removeFromParentViewController()
+                        theAlert.removeFromParent()
                         self.TakeTurn()
                         
                         
@@ -3210,20 +3210,20 @@ class StartUpViewController: UIViewController, GameViewControllerDelegate, UIPop
                             print("Trying to take turn")
                             DispatchQueue.main.async(execute: {
                                 //  self.dismissViewControllerAnimated(false, completion: nil)
-                                theAlert.removeFromParentViewController()
+                                theAlert.removeFromParent()
                                 theAlert.hideView()
                                 self.TakeTurn()
                                 
                                 //  self.PopoverTurn()
                                 
-                                //theAlert.removeFromParentViewController()
+                                //theAlert.removeFromParent()
                                 
                                 
                                 DispatchQueue.main.async(execute: {
                                     //theAlert.dismissViewControllerAnimated(false, completion: nil)
                                     //  UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
                                     self.IsHandlingAlertMessage = false
-                                    // theAlert.removeFromParentViewController()
+                                    // theAlert.removeFromParent()
                                     print("about to dismiss the root view controller????")
                                     
                                     DispatchQueue.main.async(execute: {

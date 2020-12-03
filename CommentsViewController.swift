@@ -95,16 +95,16 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         TableView.dataSource = self
         TableView.delegate = self
         
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        self.refreshControl.addTarget(self, action: #selector(CommentsViewController.RefreshCommentData(_:)), for: UIControlEvents.valueChanged)
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.refreshControl.addTarget(self, action: #selector(CommentsViewController.RefreshCommentData(_:)), for: UIControl.Event.valueChanged)
         self.TableView.addSubview(refreshControl)
     
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CommentsViewController.DismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(CommentsViewController.keyboardWasShown(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(CommentsViewController.keyboardWasShown(_:)), name: UIResponder.keyboardWillShowNotification, object: nil);
         
-        NotificationCenter.default.addObserver(self, selector: #selector(CommentsViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(CommentsViewController.keyboardWillHide(_:)), name:UIResponder.keyboardWillHideNotification, object: nil);
         
 self.TableViewTOP.constant = 5
         // Do any additional setup after loading the view.
@@ -112,7 +112,7 @@ self.TableViewTOP.constant = 5
     
     
     
-    func DismissKeyboard(){
+    @objc  func DismissKeyboard(){
         view.endEditing(true)
     }
     
@@ -171,7 +171,7 @@ self.TableViewTOP.constant = 5
     }
     
     }
-    func keyboardWasShown(_ notification: Notification) {
+    @objc func keyboardWasShown(_ notification: Notification) {
         print("KeyboardShown1")
         //EditingGameTitle = false
         
@@ -180,8 +180,9 @@ self.TableViewTOP.constant = 5
         var info = (notification as NSNotification).userInfo!
         
         
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        //let keyboardFrame: CGRect = (info UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
             
@@ -203,11 +204,11 @@ self.TableViewTOP.constant = 5
         
     }
     
-    func keyboardWillHide(_ notification: Notification) {
+    @objc func keyboardWillHide(_ notification: Notification) {
  
         var info = (notification as NSNotification).userInfo!
-        var rect: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        
+        //var rect: CGRect = (info UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let rect: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
             
@@ -233,7 +234,7 @@ self.TableViewTOP.constant = 5
     }
     
     
-    func RefreshCommentData(_ sender:AnyObject) {
+    @objc func RefreshCommentData(_ sender:AnyObject) {
         print("removing array data")
         idArrayInfo.removeAll()
         userArrayInfo.removeAll()
@@ -429,7 +430,7 @@ self.TableViewTOP.constant = 5
         
     }
     
-    func DeleteCommentClicked(_ sender: UIButton!) {
+    @objc func DeleteCommentClicked(_ sender: UIButton!) {
         
         
         let theAlert = SCLAlertView()

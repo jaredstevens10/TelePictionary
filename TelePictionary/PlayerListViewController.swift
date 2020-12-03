@@ -19,7 +19,7 @@ class PlayerListViewController: UIViewController, ABPeoplePickerNavigationContro
 //}, EasyGameCenterDelegate {
     
     var IsPlayerLoggedInGC = Bool()
-    var localPlayer = GKLocalPlayer.localPlayer()
+    var localPlayer = GKLocalPlayer.local
     var GAMECENTERLOGGEDIN = Bool()
     var GCplayer = NSString()
     var GCplayerid = NSString()
@@ -268,7 +268,7 @@ class PlayerListViewController: UIViewController, ABPeoplePickerNavigationContro
         
         TableView.backgroundColor = UIColor.clear
        
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
 
         TableView.delegate = self
         TableView.dataSource = self
@@ -439,7 +439,7 @@ print("PlayerIDs[indexPath.row] = \(PlayerIDs[(indexPath as NSIndexPath).row])")
     }
     
     
-    func EditPlayerClicked(_ sender: UIButton!) {
+    @objc func EditPlayerClicked(_ sender: UIButton!) {
         
         
         PlayerRowSelected = sender.tag
@@ -521,7 +521,7 @@ print("PlayerIDs[indexPath.row] = \(PlayerIDs[(indexPath as NSIndexPath).row])")
     //func sh
     
     
-    func SendPlayerNotice(_ sender: UIButton!) {
+    @objc func SendPlayerNotice(_ sender: UIButton!) {
         
         
         PlayerRowSelected = sender.tag
@@ -1847,8 +1847,8 @@ print("PlayerIDs[indexPath.row] = \(PlayerIDs[(indexPath as NSIndexPath).row])")
                         
                         
                         //self.player = localPlayer.displayName
-                        self.GCplayerid = self.localPlayer.playerID! as NSString
-                        self.GCplayer = self.localPlayer.alias! as NSString
+                        self.GCplayerid = self.localPlayer.playerID as NSString
+                        self.GCplayer = self.localPlayer.alias as NSString
                         
                         print("player: \(self.GCplayer)")
                         print("playerid: \(self.GCplayerid)")

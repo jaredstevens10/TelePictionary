@@ -21,7 +21,7 @@ class MyFriendsViewController: UIViewController, ABPeoplePickerNavigationControl
     
     var interAd: ADInterstitialAd?
     var interAdView = UIView()
-    var closeButton = UIButton(type: UIButtonType.system)
+    var closeButton = UIButton(type: UIButton.ButtonType.system)
     
     let prefs:UserDefaults = UserDefaults.standard
     
@@ -82,7 +82,7 @@ class MyFriendsViewController: UIViewController, ABPeoplePickerNavigationControl
     
     //@IBOutlet weak var EditBTn: UIBarButtonItem!
     
-    var localPlayer = GKLocalPlayer.localPlayer()
+    var localPlayer = GKLocalPlayer.local
     var AddGroupName = NSString()
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
@@ -410,7 +410,7 @@ class MyFriendsViewController: UIViewController, ABPeoplePickerNavigationControl
         self.title = "My Friends"
     /*
         if let font = UIFont(name: "ChalkboardSE-Regular", size: 20.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font]
         }
      */
         
@@ -442,16 +442,16 @@ class MyFriendsViewController: UIViewController, ABPeoplePickerNavigationControl
         View4.layer.cornerRadius = 10
         
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
         }        //self.
         
             //self.TableView.backgroundColor = UIColor.clearColor()
         
-       // self.TableView.separatorStyle = UITableViewCellSeparatorStyle.None
+       // self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.None
         
         self.tableViewGroups.backgroundColor = UIColor.clear
         
-        self.tableViewGroups.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableViewGroups.separatorStyle = UITableViewCell.SeparatorStyle.none
         
  //navigationController!.navigationBar.barTintColor = UIColor(red: 0.0, green: 0.941, blue: 0.6078, alpha: 0.1)
         
@@ -890,7 +890,7 @@ print("should have shown alert controller")
             
             cell = tableViewGroups.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath) as! BasicCell
             
-             cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
              cell.backgroundColor = UIColor.clear
             
@@ -964,33 +964,33 @@ print("should have shown alert controller")
         /*
         if TableView.editing{
             TableView.setEditing(false, animated: false)
-            EditBTN.style = UIBarButtonItemStyle.Plain;
+            EditBTN.style = UIBarButtonItem.Style.Plain;
             EditBTN.title = "Edit";
             TableView.reloadData()
         } else {
             TableView.setEditing(true, animated: true)
             EditBTN.title = "Done";
-            EditBTN.style = UIBarButtonItemStyle.Done;
+            EditBTN.style = UIBarButtonItem.Style.Done;
             TableView.reloadData()
         }
 */
         
         if tableViewGroups.isEditing{
             tableViewGroups.setEditing(false, animated: false)
-            //EditBTN.style = UIBarButtonItemStyle.Plain;
+            //EditBTN.style = UIBarButtonItem.Style.Plain;
             //EditBTN.title = "Edit";
             tableViewGroups.reloadData()
         } else {
             tableViewGroups.setEditing(true, animated: true)
             //EditBTN.title = "Done";
-            //EditBTN.style = UIBarButtonItemStyle.Done;
+            //EditBTN.style = UIBarButtonItem.Style.Done;
             tableViewGroups.reloadData()
         }
         
         
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    private func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         /*
         if tableView == TableView {
@@ -1050,13 +1050,13 @@ print("should have shown alert controller")
                      //  }
         }
         /*
-        if editingStyle == UITableViewCellEditingStyle.Delete {
+        if editingStyle == UITableViewCell.EditingStyle.Delete {
             Friends.removeAtIndex(indexPath.row);
          //   EmailInfo.removeAtIndex(indexPath.row);
          //   NameInfo.removeAtIndex(indexPath.row)
             self.editTableView(EditBTN)
             TableView.reloadData()
-        } else if editingStyle == UITableViewCellEditingStyle.Insert{
+        } else if editingStyle == UITableViewCell.EditingStyle.Insert{
           //  Friends.append();
          //   EmailInfo.append("New Item");
          //   NameInfo.append("New Name");
@@ -1244,10 +1244,10 @@ print("should have shown alert controller")
     }
     
     
-    //localPlayer = GKLocalPlayer.localPlayer()
+    //localPlayer = GKLocalPlayer.local
     func GetGCFriends () -> [NSString] {
         print("login called")
-        //localPlayer = GKLocalPlayer.localPlayer()
+        //localPlayer = GKLocalPlayer.local
         
       //friendPlayers = [NSString]()
        _ = NSArray()
@@ -1281,7 +1281,7 @@ print("should have shown alert controller")
         
         ViewHolderTOP.constant = 0
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View1, to: self.View2, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1303,7 +1303,7 @@ print("should have shown alert controller")
         ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View2, to: self.View1, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1319,7 +1319,7 @@ print("should have shown alert controller")
         ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View2, to: self.View3, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1339,7 +1339,7 @@ print("should have shown alert controller")
         subViewHolderTOP.constant = middleY
         ViewHolderTOP.constant = 0
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View3, to: self.View2, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1354,7 +1354,7 @@ print("should have shown alert controller")
         ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View3, to: self.View4, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1370,7 +1370,7 @@ print("should have shown alert controller")
         ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View4, to: self.View3, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1403,7 +1403,7 @@ print("should have shown alert controller")
             })
         
         
-     //   let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.TransitionFlipFromLeft, UIViewAnimationOptions.ShowHideTransitionViews]
+     //   let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.TransitionFlipFromLeft, UIView.AnimationOptions.ShowHideTransitionViews]
         
       //  UIView.transitionFromView(self.View4, toView: self.View1, duration: 0.8, options: animationOptions, completion: nil)
         

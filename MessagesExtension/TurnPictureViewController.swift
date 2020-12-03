@@ -1146,7 +1146,7 @@ class TurnPictureViewController: UIViewController, UIImagePickerControllerDelega
         
     }
     
-    internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey  : Any]) {
         
         
         var chosenImage = UIImage()

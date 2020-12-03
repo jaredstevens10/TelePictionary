@@ -201,11 +201,11 @@ var quoteImage = UIImage()
             shadow.shadowOffset = CGSize(width: 0,height: 1)
             // let textColorShadow = UIColor.whiteColor()
             
-            var textFontAttributes: [String : AnyObject]?
+            var textFontAttributes: [NSAttributedString.Key : AnyObject]?
             
             
             if let actualFont = font {
-                textFontAttributes = [NSFontAttributeName: actualFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: textStyle]
+                textFontAttributes = [NSAttributedString.Key.font: actualFont, NSAttributedString.Key.foregroundColor: textColor, NSAttributedString.Key.paragraphStyle: textStyle]
                 
             }
             
@@ -260,7 +260,7 @@ var quoteImage = UIImage()
             
             
             if let actualFont = font {
-                textFontAttributes = [NSFontAttributeName: actualFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: textStyle]
+                textFontAttributes = [NSAttributedString.Key.font: actualFont, NSAttributedString.Key.foregroundColor: textColor, NSParagraphStyleAttributeName: textStyle]
                 
             }
             
@@ -379,11 +379,11 @@ var quoteImage = UIImage()
             shadow.shadowOffset = CGSize(width: 0,height: 1)
             // let textColorShadow = UIColor.whiteColor()
             
-            var textFontAttributes: [String : AnyObject]?
+            var textFontAttributes: [NSAttributedString.Key : AnyObject]?
             
             
             if let actualFont = font {
-                textFontAttributes = [NSFontAttributeName: actualFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: textStyle]
+                textFontAttributes = [NSAttributedString.Key.font: actualFont, NSAttributedString.Key.foregroundColor: textColor, NSAttributedString.Key.paragraphStyle: textStyle]
                 
             }
             
@@ -440,11 +440,11 @@ var quoteImage = UIImage()
             shadow.shadowOffset = CGSize(width: 0,height: 1)
             // let textColorShadow = UIColor.whiteColor()
             
-            var textFontAttributes2: [String : AnyObject]?
+            var textFontAttributes2: [NSAttributedString.Key : AnyObject]?
             
             
             if let actualFont2 = font {
-                textFontAttributes2 = [NSFontAttributeName: actualFont2, NSForegroundColorAttributeName: textColor2, NSParagraphStyleAttributeName: textStyle2]
+                textFontAttributes2 = [NSAttributedString.Key.font: actualFont2, NSAttributedString.Key.foregroundColor: textColor2, NSAttributedString.Key.paragraphStyle: textStyle2]
                 
             }
             
@@ -554,10 +554,10 @@ var quoteImage = UIImage()
         }
         
       //  CreateTheImage()
-     //   self.TableView.separatorStyle = UITableViewCellSeparatorStyle.None
+     //   self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.None
         /*
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: "RefreshFailData:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: "RefreshFailData:", forControlEvents: UIControl.Event.ValueChanged)
         */
         /*
         PlayerArrayTemp.append(player1)
@@ -1000,9 +1000,9 @@ var quoteImage = UIImage()
             
         } else {
             /*
-            let alert = UIAlertController(title: "Accounts", message: "Please login to Facebook", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Accounts", message: "Please login to Facebook", preferredStyle: UIAlertController.Style.Alert)
             
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.Default, handler: nil))
             
             self.presentViewController(alert, animated: true, completion: nil)
             
@@ -1100,8 +1100,8 @@ var quoteImage = UIImage()
         _ = ALAssetsLibrary()
         // let imageToSave = filter.outputImage
         _ = self.TheFinalImage.imageOrientation
-        let imageData = UIImageJPEGRepresentation(TheFinalImage, 1.0)
-        
+        //let imageData = UIImageJPEGRepresentation(TheFinalImage, 1.0)
+        let imageData = TheFinalImage.jpegData(compressionQuality: 1.0)
         //let imageData = UIImageJPEGRepresentation(newImage, 1.0)
         _ = UIImage(data: imageData!)
         
@@ -1292,9 +1292,9 @@ var quoteImage = UIImage()
     
     } else {
     /*
-    let alert = UIAlertController(title: "Accounts", message: "Please login to Twitter", preferredStyle: UIAlertControllerStyle.Alert)
+    let alert = UIAlertController(title: "Accounts", message: "Please login to Twitter", preferredStyle: UIAlertController.Style.Alert)
     
-    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.Default, handler: nil))
     
     self.presentViewController(alert, animated: true, completion: nil)
     */
@@ -1365,7 +1365,7 @@ var quoteImage = UIImage()
     
     //UIImagePNGRepresentation(newImage)!.writeToFile(destinationPath, atomically: false)
     
-    try? UIImagePNGRepresentation(TheFinalImage)!.write(to: URL(fileURLWithPath: destinationPath), options: [])
+    try? TheFinalImage.pngData()!.write(to: URL(fileURLWithPath: destinationPath), options: [])
     let fileUrl = URL(fileURLWithPath: destinationPath) as URL
     
     self.documentController = UIDocumentInteractionController(url: fileUrl)
@@ -1428,8 +1428,9 @@ var quoteImage = UIImage()
     if(UIApplication.shared.canOpenURL(instagramUrl!)){
         
         
-    let imageData = UIImageJPEGRepresentation(TheFinalImage, 1.0)
-    //let imageData = UIImageJPEGRepresentation(newImage, 1.0)
+    //let imageData = UIImageJPEGRepresentation(TheFinalImage, 1.0)
+    let imageData = TheFinalImage.jpegData(compressionQuality: 1.0)
+        //let imageData = UIImageJPEGRepresentation(newImage, 1.0)
     
     
     let captionString = "I'm playing Pics & Quotes"
@@ -1523,7 +1524,8 @@ var quoteImage = UIImage()
     _ = ALAssetsLibrary()
     // let imageToSave = filter.outputImage
     _ = self.TheImage.imageOrientation
-    let imageData = UIImageJPEGRepresentation(newImage, 1.0)
+    //let imageData = UIImageJPEGRepresentation(newImage, 1.0)
+    let imageData = newImage.jpegData(compressionQuality: 1.0)
     let compressedJPGImage = UIImage(data: imageData!)
     UIImageWriteToSavedPhotosAlbum(compressedJPGImage!, nil, nil, nil)
     print("Should show JSSAlertView")

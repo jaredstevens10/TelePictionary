@@ -160,7 +160,7 @@ public class SCLAlertView: UIViewController {
         super.init(nibName:nil, bundle:nil)
         // Set up main view
         view.frame = UIScreen.mainScreen().bounds
-        view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
+        view.autoresizingMask = [UIView.AutoresizingMask.FlexibleHeight, UIView.AutoresizingMask.FlexibleWidth]
         view.backgroundColor = UIColor(red:0, green:0, blue:0, alpha:kDefaultShadowOpacity)
         view.addSubview(baseView)
         // Base View
@@ -471,7 +471,7 @@ public class SCLAlertView: UIViewController {
             viewText.text = subTitle
             // Adjust text view size, if necessary
             let str = subTitle as NSString
-            let attr = [NSFontAttributeName:viewText.font ?? UIFont()]
+            let attr = [NSAttributedString.Key.font:viewText.font ?? UIFont()]
             let sz = CGSize(width: kWindowWidth - 24, height:90)
             let r = str.boundingRectWithSize(sz, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes:attr, context:nil)
             let ht = ceil(r.size.height)
@@ -521,7 +521,7 @@ public class SCLAlertView: UIViewController {
         }
         for btn in buttons {
             btn.backgroundColor = viewColor
-            btn.setTitleColor(UIColorFromRGB(colorTextButton!), forState:UIControlState.Normal)
+            btn.setTitleColor(UIColorFromRGB(colorTextButton!), forState:UIControl.State.Normal)
         }
         
         // Adding duration
@@ -602,7 +602,7 @@ public class SCLAlertView: UIViewController {
             viewText.text = subTitle
             // Adjust text view size, if necessary
             let str = subTitle as NSString
-            let attr = [NSFontAttributeName:viewText.font ?? UIFont()]
+            let attr = [NSAttributedString.Key.font:viewText.font ?? UIFont()]
             let sz = CGSize(width: kWindowWidth - 24, height:90)
             let r = str.boundingRectWithSize(sz, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes:attr, context:nil)
             let ht = ceil(r.size.height)
@@ -651,7 +651,7 @@ public class SCLAlertView: UIViewController {
         }
         for btn in buttons {
             btn.backgroundColor = viewColor
-            btn.setTitleColor(UIColorFromRGB(colorTextButton!), forState:UIControlState.Normal)
+            btn.setTitleColor(UIColorFromRGB(colorTextButton!), forState:UIControl.State.Normal)
         }
         
         // Adding duration
@@ -731,7 +731,7 @@ public class SCLAlertView: UIViewController {
             viewText.text = subTitle
             // Adjust text view size, if necessary
             let str = subTitle as NSString
-            let attr = [NSFontAttributeName:viewText.font ?? UIFont()]
+            let attr = [NSAttributedString.Key.font:viewText.font ?? UIFont()]
             let sz = CGSize(width: kWindowWidth - 24, height:90)
             let r = str.boundingRectWithSize(sz, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes:attr, context:nil)
             let ht = ceil(r.size.height)
@@ -767,7 +767,7 @@ public class SCLAlertView: UIViewController {
         }
         for btn in buttons {
             btn.backgroundColor = viewColor
-            btn.setTitleColor(UIColorFromRGB(colorTextButton!), forState:UIControlState.Normal)
+            btn.setTitleColor(UIColorFromRGB(colorTextButton!), forState:UIControl.State.Normal)
         }
         
         // Adding duration
@@ -1214,7 +1214,7 @@ open class SCLAlertView: UIViewController {
         super.init(nibName:nil, bundle:nil)
         // Set up main view
         view.frame = UIScreen.main.bounds
-        view.autoresizingMask = [UIViewAutoresizing.flexibleHeight, UIViewAutoresizing.flexibleWidth]
+        view.autoresizingMask = [UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleWidth]
         view.backgroundColor = UIColor(red:0, green:0, blue:0, alpha:kDefaultShadowOpacity)
         view.addSubview(baseView)
         // Base View
@@ -1327,10 +1327,10 @@ open class SCLAlertView: UIViewController {
         kWindowHeight += kTextFieldHeight
         // Add text field
         let txt = UITextField()
-        txt.borderStyle = UITextBorderStyle.roundedRect
+        txt.borderStyle = UITextField.BorderStyle.roundedRect
         txt.font = UIFont(name:kDefaultFont, size: 14)
         txt.autocapitalizationType = UITextAutocapitalizationType.words
-        txt.clearButtonMode = UITextFieldViewMode.whileEditing
+        txt.clearButtonMode = UITextField.ViewMode.whileEditing
         txt.layer.masksToBounds = true
         txt.layer.borderWidth = 1.0
         if title != nil {
@@ -1369,7 +1369,7 @@ open class SCLAlertView: UIViewController {
         // Add button
         let btn = SCLButton()
         btn.layer.masksToBounds = true
-        btn.setTitle(title, for: UIControlState())
+        btn.setTitle(title, for: UIControl.State())
         btn.titleLabel?.font = UIFont(name:kButtonFont, size: 14)
         contentView.addSubview(btn)
         buttons.append(btn)
@@ -1377,8 +1377,8 @@ open class SCLAlertView: UIViewController {
         return btn
     }
     
-    func buttonTapped(_ btn:SCLButton) {
-        if btn.state == UIControlState.highlighted {
+    @objc func buttonTapped(_ btn:SCLButton) {
+        if btn.state == UIControl.State.highlighted {
             
             print("Button Should Highlight")
             btn.isHighlighted = true
@@ -1399,7 +1399,7 @@ open class SCLAlertView: UIViewController {
     }
     
     
-    func buttonTapDown(_ btn:SCLButton) {
+    @objc func buttonTapDown(_ btn:SCLButton) {
         var hue : CGFloat = 0
         var saturation : CGFloat = 0
         var brightness : CGFloat = 0
@@ -1409,12 +1409,12 @@ open class SCLAlertView: UIViewController {
         btn.backgroundColor = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
     }
     
-    func buttonRelease(_ btn:SCLButton) {
+    @objc func buttonRelease(_ btn:SCLButton) {
         btn.backgroundColor = viewColor
     }
     
     //Dismiss keyboard when tapped outside textfield
-    func dismissKeyboard(){
+    @objc func dismissKeyboard(){
         self.view.endEditing(true)
     }
     
@@ -1525,7 +1525,7 @@ open class SCLAlertView: UIViewController {
             viewText.text = subTitle
             // Adjust text view size, if necessary
             let str = subTitle as NSString
-            let attr = [NSFontAttributeName:viewText.font ?? UIFont()]
+            let attr = [NSAttributedString.Key.font:viewText.font ?? UIFont()]
             let sz = CGSize(width: kWindowWidth - 24, height:90)
             let r = str.boundingRect(with: sz, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:attr, context:nil)
             let ht = ceil(r.size.height)
@@ -1548,7 +1548,7 @@ open class SCLAlertView: UIViewController {
         circleView.backgroundColor = viewColor
         // Spinner / icon
         if style == .wait {
-            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+            let indicator = UIActivityIndicatorView(style: .whiteLarge)
             indicator.startAnimating()
             circleIconView = indicator
         }
@@ -1575,7 +1575,7 @@ open class SCLAlertView: UIViewController {
         }
         for btn in buttons {
             btn.backgroundColor = viewColor
-            btn.setTitleColor(UIColorFromRGB(colorTextButton!), for:UIControlState())
+            btn.setTitleColor(UIColorFromRGB(colorTextButton!), for:UIControl.State())
         }
         
         // Adding duration
@@ -1656,7 +1656,7 @@ open class SCLAlertView: UIViewController {
             viewText.text = subTitle
             // Adjust text view size, if necessary
             let str = subTitle as NSString
-            let attr = [NSFontAttributeName:viewText.font ?? UIFont()]
+            let attr = [NSAttributedString.Key.font:viewText.font ?? UIFont()]
             let sz = CGSize(width: kWindowWidth - 24, height:90)
             let r = str.boundingRect(with: sz, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:attr, context:nil)
             let ht = ceil(r.size.height)
@@ -1679,7 +1679,7 @@ open class SCLAlertView: UIViewController {
         circleView.backgroundColor = viewColor
         // Spinner / icon
         if style == .wait {
-            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+            let indicator = UIActivityIndicatorView(style: .whiteLarge)
             indicator.startAnimating()
             circleIconView = indicator
         }
@@ -1717,7 +1717,7 @@ open class SCLAlertView: UIViewController {
         }
         for btn in buttons {
             btn.backgroundColor = viewColor
-            btn.setTitleColor(UIColorFromRGB(colorTextButton!), for:UIControlState())
+            btn.setTitleColor(UIColorFromRGB(colorTextButton!), for:UIControl.State())
         }
         
         // Adding duration
@@ -1800,7 +1800,7 @@ open class SCLAlertView: UIViewController {
             viewText.text = subTitle
             // Adjust text view size, if necessary
             let str = subTitle as NSString
-            let attr = [NSFontAttributeName:viewText.font ?? UIFont()]
+            let attr = [NSAttributedString.Key.font:viewText.font ?? UIFont()]
             let sz = CGSize(width: kWindowWidth - 24, height:90)
             let r = str.boundingRect(with: sz, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:attr, context:nil)
             let ht = ceil(r.size.height)
@@ -1829,7 +1829,7 @@ open class SCLAlertView: UIViewController {
         circleView.backgroundColor = viewColor
         // Spinner / icon
         if style == .wait {
-            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+            let indicator = UIActivityIndicatorView(style: .whiteLarge)
             indicator.startAnimating()
             circleIconView = indicator
         }
@@ -1867,7 +1867,7 @@ open class SCLAlertView: UIViewController {
         }
         for btn in buttons {
             btn.backgroundColor = viewColor
-            btn.setTitleColor(UIColorFromRGB(colorTextButton!), for:UIControlState())
+            btn.setTitleColor(UIColorFromRGB(colorTextButton!), for:UIControl.State())
         }
         
         // Adding duration
@@ -1947,7 +1947,7 @@ open class SCLAlertView: UIViewController {
             viewText.text = subTitle
             // Adjust text view size, if necessary
             let str = subTitle as NSString
-            let attr = [NSFontAttributeName:viewText.font ?? UIFont()]
+            let attr = [NSAttributedString.Key.font:viewText.font ?? UIFont()]
             let sz = CGSize(width: kWindowWidth - 24, height:90)
             let r = str.boundingRect(with: sz, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:attr, context:nil)
             let ht = ceil(r.size.height)
@@ -1976,7 +1976,7 @@ open class SCLAlertView: UIViewController {
         circleView.backgroundColor = viewColor
         // Spinner / icon
         if style == .wait {
-            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+            let indicator = UIActivityIndicatorView(style: .whiteLarge)
             indicator.startAnimating()
             circleIconView = indicator
         }
@@ -2014,7 +2014,7 @@ open class SCLAlertView: UIViewController {
         }
         for btn in buttons {
             btn.backgroundColor = viewColor
-            btn.setTitleColor(UIColorFromRGB(colorTextButton!), for:UIControlState())
+            btn.setTitleColor(UIColorFromRGB(colorTextButton!), for:UIControl.State())
         }
         
         // Adding duration
@@ -2096,7 +2096,7 @@ open class SCLAlertView: UIViewController {
             viewText.text = subTitle
             // Adjust text view size, if necessary
             let str = subTitle as NSString
-            let attr = [NSFontAttributeName:viewText.font ?? UIFont()]
+            let attr = [NSAttributedString.Key.font:viewText.font ?? UIFont()]
             let sz = CGSize(width: kWindowWidth - 24, height:90)
             let r = str.boundingRect(with: sz, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:attr, context:nil)
             let ht = ceil(r.size.height)
@@ -2116,7 +2116,7 @@ open class SCLAlertView: UIViewController {
         circleView.backgroundColor = viewColor
         // Spinner / icon
         if style == .wait {
-            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+            let indicator = UIActivityIndicatorView(style: .whiteLarge)
             indicator.startAnimating()
             circleIconView = indicator
         }
@@ -2132,7 +2132,7 @@ open class SCLAlertView: UIViewController {
         }
         for btn in buttons {
             btn.backgroundColor = viewColor
-            btn.setTitleColor(UIColorFromRGB(colorTextButton!), for:UIControlState())
+            btn.setTitleColor(UIColorFromRGB(colorTextButton!), for:UIControl.State())
         }
         
         // Adding duration
@@ -2156,7 +2156,7 @@ open class SCLAlertView: UIViewController {
     }
     
     // Close SCLAlertView
-    open func hideView() {
+    @objc open func hideView() {
         UIView.animate(withDuration: 0.2, animations: {
             self.view.alpha = 0
             }, completion: { finished in

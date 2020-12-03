@@ -145,7 +145,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
     //MARK: Configurations
     
     fileprivate func subscribeForNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(KolodaView.layoutDeck), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KolodaView.layoutDeck), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     fileprivate func unsubsribeFromNotifications() {
@@ -185,7 +185,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    open func layoutDeck() {
+    @objc open func layoutDeck() {
         if !visibleCards.isEmpty {
             for (index, card) in visibleCards.enumerated() {
                 if index == 0 {

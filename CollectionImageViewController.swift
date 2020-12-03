@@ -176,8 +176,8 @@ class CollectionImageViewController: UIViewController {
    PreviousImageView.layer.masksToBounds = true
    MainImageView.layer.cornerRadius = 5
    MainImageView.layer.masksToBounds = true
-   MainImageView.contentMode = UIViewContentMode.scaleAspectFit
-   PreviousImageView.contentMode = UIViewContentMode.scaleAspectFit
+            MainImageView.contentMode = UIView.ContentMode.scaleAspectFit
+            PreviousImageView.contentMode = UIView.ContentMode.scaleAspectFit
           //  MainView.layer.mask
             
             if let AudioData = try? Data(contentsOf: URL(string: AudioDataURL)!) {
@@ -202,7 +202,7 @@ class CollectionImageViewController: UIViewController {
             
         theImage = UIImage(named: "BoomBox1.png")!
         MainImageView.image = theImage
-        MainImageView.contentMode = UIViewContentMode.scaleAspectFit
+            MainImageView.contentMode = UIView.ContentMode.scaleAspectFit
             
             
             
@@ -222,7 +222,7 @@ class CollectionImageViewController: UIViewController {
             DispatchQueue.main.async(execute: {
             if let tempImage2 = UIImage(data: data) {
                 self.PreviousImageView.image = tempImage2
-                self.PreviousImageView.contentMode = UIViewContentMode.scaleAspectFit
+                self.PreviousImageView.contentMode = UIView.ContentMode.scaleAspectFit
             } else {
                 self.PreviousImageView.image = UIImage(named: "noImage.jpg")
             }
@@ -255,7 +255,7 @@ class CollectionImageViewController: UIViewController {
                             
                             // if let cellToUpdate = collectionView.cellForRowAtIndexPath(indexPath) {
                             self.MainImageView.image = image
-                        self.MainImageView.contentMode = UIViewContentMode.scaleAspectFit
+                        self.MainImageView.contentMode = UIView.ContentMode.scaleAspectFit
                             //cellToUpdate.TurnImage?.image = image
                     //    }
                     })
@@ -459,14 +459,14 @@ class CollectionImageViewController: UIViewController {
                 
                 
                 /*
-                UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                UIView.animateWithDuration(0.2, delay: 0.0, options: UIView.AnimationOptions.CurveEaseOut, animations: {
                     self.NewLikeBTN.alpha = 0.0
                     }, completion: {
                         (finished: Bool) -> Void in
                         //  })
                         self.NewLikeBTN.imageView?.image = UIImage(named: "LikeIconGrayGreen.png")
                         
-                        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                        UIView.animateWithDuration(0.2, delay: 0.0, options: UIView.AnimationOptions.CurveEaseIn, animations: {
                             self.NewLikeBTN.alpha = 1.0
                             }, completion: nil)
                 })
@@ -728,14 +728,14 @@ class CollectionImageViewController: UIViewController {
                 
                 /*
                 
-                UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                UIView.animateWithDuration(0.2, delay: 0.0, options: UIView.AnimationOptions.CurveEaseOut, animations: {
                     self.NewLikeBTN.alpha = 0.0
                     }, completion: {
                         (finished: Bool) -> Void in
                         //  })
                         self.NewLikeBTN.imageView?.image = UIImage(named: "LikeIconGrayBlur.png")
                         
-                        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                        UIView.animateWithDuration(0.2, delay: 0.0, options: UIView.AnimationOptions.CurveEaseIn, animations: {
                             self.NewLikeBTN.alpha = 1.0
                             }, completion: nil)
                 })
@@ -797,14 +797,14 @@ class CollectionImageViewController: UIViewController {
                 
                 
                 /*
-                UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                UIView.animateWithDuration(0.2, delay: 0.0, options: UIView.AnimationOptions.CurveEaseOut, animations: {
                     self.NewFailBTN.alpha = 0.0
                     }, completion: {
                         (finished: Bool) -> Void in
                         //  })
                         self.NewFailBTN.imageView?.image = UIImage(named: "FailIconWhiteRed.png")
                         
-                        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                        UIView.animateWithDuration(0.2, delay: 0.0, options: UIView.AnimationOptions.CurveEaseIn, animations: {
                             self.NewFailBTN.alpha = 1.0
                             }, completion: nil)
                 })
@@ -986,14 +986,14 @@ class CollectionImageViewController: UIViewController {
                 
                 /*
                 
-                UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                UIView.animateWithDuration(0.2, delay: 0.0, options: UIView.AnimationOptions.CurveEaseOut, animations: {
                     self.NewFailBTN.alpha = 0.0
                     }, completion: {
                         (finished: Bool) -> Void in
                         //  })
                         self.NewFailBTN.imageView?.image = UIImage(named: "FailIconGrayBlur.png")
                         
-                        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                        UIView.animateWithDuration(0.2, delay: 0.0, options: UIView.AnimationOptions.CurveEaseIn, animations: {
                             self.NewFailBTN.alpha = 1.0
                             }, completion: nil)
                 })

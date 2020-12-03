@@ -54,7 +54,7 @@ class HowToViewController: UIViewController, UIPageViewControllerDataSource, UIP
     @IBAction func swiped(_ sender: AnyObject) {
         
         self.HowToPage.view .removeFromSuperview()
-        self.HowToPage.removeFromParentViewController()
+        self.HowToPage.removeFromParent()
         reset()
   
  
@@ -98,7 +98,7 @@ class HowToViewController: UIViewController, UIPageViewControllerDataSource, UIP
     
     let pageContentViewController = self.viewControllerAtIndex(0)
     
-    self.HowToPage.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+        self.HowToPage.setViewControllers([pageContentViewController!], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
     
     /* We are substracting 30 because we have a start again button whose height is 30*/
     self.HowToPage.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 30)
@@ -113,12 +113,12 @@ class HowToViewController: UIViewController, UIPageViewControllerDataSource, UIP
    // self.view.bringSubviewToFront(pageControl)
  //   self.HowToPage.view.addSubview(pageControl)
         
-    self.addChildViewController(HowToPage)
+        self.addChild(HowToPage)
         
     self.view.addSubview(HowToPage.view)
   //  self.view.addSubview(pageControl)
         
-    self.HowToPage.didMove(toParentViewController: self)
+        self.HowToPage.didMove(toParent: self)
       /*
         var pageControl = UIPageControl.appearance()
         pageControl.pageIndicatorTintColor = UIColor.whiteColor()
@@ -131,7 +131,7 @@ class HowToViewController: UIViewController, UIPageViewControllerDataSource, UIP
     
     @IBAction func start(_ sender: AnyObject) {
     let pageContentViewController = self.viewControllerAtIndex(0)
-    self.HowToPage.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+        self.HowToPage.setViewControllers([pageContentViewController!], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -140,7 +140,7 @@ class HowToViewController: UIViewController, UIPageViewControllerDataSource, UIP
         isFun = prefs.value(forKey: "ISFUN") as! NSString
         /*
         if let font = UIFont(name: "DK Cool Crayon", size: 20.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.whiteColor()]
         }
         */
         
@@ -628,7 +628,7 @@ class HowToViewController: UIViewController, UIPageViewControllerDataSource, UIP
         self.title = "How To Play"
         
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.whiteColor()]
         }
        */
         /*

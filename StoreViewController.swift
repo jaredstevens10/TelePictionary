@@ -71,9 +71,9 @@ class StoreViewController: UIViewController, SKProductsRequestDelegate, UITableV
             {
                 let restoreButton = UIButton(frame: CGRect(x: 10.0, y: 10.0, width: UIScreen.main.bounds.width - 20.0, height: 44.0))
                 restoreButton.titleLabel!.font = UIFont (name: "HelveticaNeue-Bold", size: 20)
-                restoreButton.addTarget(self, action: #selector(StoreViewController.restorePurchases(_:)), for: UIControlEvents.touchUpInside)
+                restoreButton.addTarget(self, action: #selector(StoreViewController.restorePurchases(_:)), for: UIControl.Event.touchUpInside)
                 restoreButton.backgroundColor = UIColor.black
-                restoreButton.setTitle("Restore Purchases", for: UIControlState())
+                restoreButton.setTitle("Restore Purchases", for: UIControl.State())
                 retCell.addSubview(restoreButton)
             }
             else
@@ -95,12 +95,12 @@ class StoreViewController: UIViewController, SKProductsRequestDelegate, UITableV
                 let buyButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 60.0, y: 5.0, width: 50.0, height: 20.0))
                 buyButton.titleLabel!.font = UIFont (name: "HelveticaNeue", size: 12)
                 buyButton.tag = (indexPath as NSIndexPath).row
-                buyButton.addTarget(self, action: #selector(StoreViewController.buyProduct(_:)), for: UIControlEvents.touchUpInside)
+                buyButton.addTarget(self, action: #selector(StoreViewController.buyProduct(_:)), for: UIControl.Event.touchUpInside)
                 buyButton.backgroundColor = UIColor.black
                 let numberFormatter = NumberFormatter()
                 numberFormatter.numberStyle = .currency
                 numberFormatter.locale = Locale.current
-                buyButton.setTitle(numberFormatter.string(from: singleProduct.price), for: UIControlState())
+                buyButton.setTitle(numberFormatter.string(from: singleProduct.price), for: UIControl.State())
                 retCell.addSubview(buyButton)
             }
         }
@@ -151,19 +151,19 @@ class StoreViewController: UIViewController, SKProductsRequestDelegate, UITableV
             request.delegate = self
             request.start()
         } else {
-            let alert = UIAlertController(title: "In-App Purchases Not Enabled", message: "Please enable In App Purchase in Settings", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "In-App Purchases Not Enabled", message: "Please enable In App Purchase in Settings", preferredStyle: UIAlertController.Style.alert)
             
-            alert.addAction(UIAlertAction(title: "Settings", style: UIAlertActionStyle.default, handler: { alertAction in
+            alert.addAction(UIAlertAction(title: "Settings", style: UIAlertAction.Style.default, handler: { alertAction in
                 alert.dismiss(animated: true, completion: nil)
                 
-                let url: URL? = URL(string: UIApplicationOpenSettingsURLString)
+                let url: URL? = URL(string: UIApplication.openSettingsURLString)
                 if url != nil
                 {
                     UIApplication.shared.openURL(url!)
                 }
                 
             }))
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { alertAction in
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { alertAction in
                 alert.dismiss(animated: true, completion: nil)
             }))
             self.present(alert, animated: true, completion: nil)
@@ -244,7 +244,7 @@ class StoreViewController: UIViewController, SKProductsRequestDelegate, UITableV
         }
     }
     
-    func restorePurchases(_ sender: UIButton) {
+    @objc func restorePurchases(_ sender: UIButton) {
         SKPaymentQueue.default().add(self)
         SKPaymentQueue.default().restoreCompletedTransactions()
     }

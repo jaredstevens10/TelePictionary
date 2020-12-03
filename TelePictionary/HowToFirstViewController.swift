@@ -138,7 +138,7 @@ class HowToFirstViewController: UIViewController, UITableViewDataSource, UITable
         self.title = "How To?"
         
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
         }
         
         
@@ -149,7 +149,7 @@ class HowToFirstViewController: UIViewController, UITableViewDataSource, UITable
         }
         
         
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         self.TableView.backgroundColor = UIColor.clear
         
@@ -322,7 +322,7 @@ class HowToFirstViewController: UIViewController, UITableViewDataSource, UITable
     
     var howtype : HowGroup
     
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         cell.backgroundColor = UIColor.clear
     
@@ -373,7 +373,7 @@ class HowToFirstViewController: UIViewController, UITableViewDataSource, UITable
     
     /*
     // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if editingStyle == .Delete {
     // Delete the row from the data source
     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)

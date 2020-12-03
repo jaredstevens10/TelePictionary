@@ -26,6 +26,9 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
     
     @IBOutlet weak var commentBTN: UIButton!
     
+    @IBOutlet var mainBackButton: UIButton!
+    
+    
     var CompletedGameIDs = [String]()
     
     let dirpath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
@@ -265,7 +268,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         messageFrame.layer.cornerRadius = 15
         messageFrame.backgroundColor = UIColor(white: 0, alpha: 0.7)
         if indicator {
-            ActivityInd = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+            ActivityInd = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.white)
             ActivityInd.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
             ActivityInd.startAnimating()
             messageFrame.addSubview(ActivityInd)
@@ -274,16 +277,24 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         view.addSubview(messageFrame)
     }
     
+    
+    @IBAction func closeScreen(_ sender: AnyObject) {
+        print("close Screen")
+        self.performSegue(withIdentifier: "goto_mygames", sender: self)
+    }
+    
     @IBAction func swipeLeft(_ sender: AnyObject) {
         print("Swipe left")
-        
-        
     }
+    
+    
+    
+    
     @IBAction func swiped(_ sender: AnyObject) {
         
         
         self.pageViewController.view.removeFromSuperview()
-        self.pageViewController.removeFromParentViewController()
+        self.pageViewController.removeFromParent()
         
         self.ViewFailLBL.text = theNumFails as String
         self.ViewLikesLBL.text = theNumLikes as String
@@ -318,16 +329,16 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         
         let pageContentViewController = self.viewControllerAtIndex(0)
         
-        self.pageViewController.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+        self.pageViewController.setViewControllers([pageContentViewController!], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
         
         /* We are substracting 30 because we have a start again button whose height is 30*/
-        self.pageViewController.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 50)
+        self.pageViewController.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 70)
         
-        self.addChildViewController(pageViewController)
+        self.addChild(pageViewController)
         
         self.view.addSubview(pageViewController.view)
         
-        self.pageViewController.didMove(toParentViewController: self)
+        self.pageViewController.didMove(toParent: self)
     }
     
     func resetRefresh(_ index: Int) {
@@ -338,23 +349,23 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         
         let pageContentViewController = self.viewControllerAtIndex(0)
         
-        self.pageViewController.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+        self.pageViewController.setViewControllers([pageContentViewController!], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
         
         /* We are substracting 30 because we have a start again button whose height is 30*/
         self.pageViewController.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 50)
         
-        self.addChildViewController(pageViewController)
+        self.addChild(pageViewController)
         
         self.view.addSubview(pageViewController.view)
         
-        self.pageViewController.didMove(toParentViewController: self)
+        self.pageViewController.didMove(toParent: self)
     }
     
     
     @IBAction func start(_ sender: AnyObject) {
         let pageContentViewController = self.viewControllerAtIndex(0)
         
-        self.pageViewController.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+        self.pageViewController.setViewControllers([pageContentViewController!], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
     }
     /*
     override func viewDidLoad() {
@@ -431,7 +442,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         //println("Friends Now: \(NameInfo)")
     }
     
-    func AddLike(_ notification:Notification) {
+    @objc func AddLike(_ notification:Notification) {
 
         let data = (notification as NSNotification).userInfo
         let newNumber1 = data!["likes"] as! String
@@ -457,7 +468,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         //["message"].stringValue
     }
     
-    func AddFail(_ notification:Notification) {
+    @objc func AddFail(_ notification:Notification) {
         let data = (notification as NSNotification).userInfo
         let newNumber1 = data!["fails"] as! String
         let LikeIndex1 = data!["index"] as! String
@@ -482,7 +493,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
     }
     
     
-    func DeleteLike(_ notification:Notification) {
+    @objc func DeleteLike(_ notification:Notification) {
         
         let data = (notification as NSNotification).userInfo
         let newNumber1 = data!["likes"] as! String
@@ -508,7 +519,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         //["message"].stringValue
     }
     
-    func DeleteFail(_ notification:Notification) {
+    @objc func DeleteFail(_ notification:Notification) {
         let data = (notification as NSNotification).userInfo
         let newNumber1 = data!["fails"] as! String
         let LikeIndex1 = data!["index"] as! String
@@ -580,7 +591,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         pulse.duration = 1
         pulse.fromValue = 0.3
         pulse.toValue = 1
-        pulse.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        pulse.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         pulse.autoreverses = true
         pulse.repeatCount = FLT_MAX
         
@@ -612,12 +623,14 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             if GAME_ID == "demo" {
                 username = "demoName"
                 userID = "demoID"
-                
+                self.mainBackButton.isHidden = true
                 
             } else {
                 username = (prefs.value(forKey: "USERNAME") as! NSString) as String as String as NSString
                 userID = (prefs.value(forKey: "PLAYERID") as! NSString) as String as String as NSString
             
+                //self.mainBackButton.isHidden = false
+                
             }
            // username = prefs.valueForKey("USERNAME") as! NSString as String
           //  userID = prefs.valueForKey("PLAYERID") as! NSString as String
@@ -2474,9 +2487,9 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
                 
             } else {
                 
-                let alert = UIAlertController(title: "Accounts", message: "Please login to Facebook", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Accounts", message: "Please login to Facebook", preferredStyle: UIAlertController.Style.alert)
                 
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                 
                 self.present(alert, animated: true, completion: nil)
                 
@@ -2553,9 +2566,9 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
                 
             } else {
                 
-                let alert = UIAlertController(title: "Accounts", message: "Please login to Twitter", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Accounts", message: "Please login to Twitter", preferredStyle: UIAlertController.Style.alert)
                 
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                 
                 self.present(alert, animated: true, completion: nil)
                 
@@ -2594,7 +2607,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
                 
               //  .stringByExpandingTildeInPath
             
-            try? UIImagePNGRepresentation(newImage)!.write(to: URL(fileURLWithPath: destinationPath), options: [])
+            try? newImage.pngData()!.write(to: URL(fileURLWithPath: destinationPath), options: [])
             let fileUrl = URL(fileURLWithPath: destinationPath) as URL
             
             self.documentController = UIDocumentInteractionController(url: fileUrl)
@@ -2609,8 +2622,8 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             print("About to open Instagram")
             let instagramUrl = URL(string: "instagram://app")
             if(UIApplication.shared.canOpenURL(instagramUrl!)){
-                let imageData = UIImageJPEGRepresentation(self.theimage, 1.0)
-                
+                //let imageData = UIImageJPEGRepresentation(self.theimage, 1.0)
+                let imageData = self.theimage.jpegData(compressionQuality: 1.0)
                 
                 let captionString = "I'm playing Pics & Quotes"
                 let writePath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("instagram.igo")
@@ -2665,7 +2678,8 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             let library = ALAssetsLibrary()
            // let imageToSave = filter.outputImage
             let orientation = self.theimage.imageOrientation
-            let imageData = UIImageJPEGRepresentation(newImage, 1.0)
+            //let imageData = UIImageJPEGRepresentation(newImage, 1.0)
+            let imageData = newImage.jpegData(compressionQuality: 1.0)
             let compressedJPGImage = UIImage(data: imageData!)
             UIImageWriteToSavedPhotosAlbum(compressedJPGImage!, nil, nil, nil)//  library.writeImageToSavedPhotosAlbum(theimage.CGImage, orientation: orientation, completionBlock: nil)
           //  library.writeImageToSavedPhotosAlbum(theimage.CGImage, orientation: orientation, completionBlock: nil)
@@ -2724,8 +2738,9 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             let library = ALAssetsLibrary()
             // let imageToSave = filter.outputImage
             let orientation = self.theimage.imageOrientation
-            let imageData = UIImageJPEGRepresentation(newImage, 1.0)
-            let compressedJPGImage = UIImage(data: imageData!)
+            //let imageData = UIImageJPEGRepresentation(newImage, 1.0)
+            let imageData = newImage.jpegData(compressionQuality: 1.0)!
+            let compressedJPGImage = UIImage(data: imageData)
             
             let messageVC = MFMessageComposeViewController()
             
@@ -2733,7 +2748,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             messageVC.body = "";
            // messageVC.recipients = [""]
             messageVC.messageComposeDelegate = self;
-            messageVC.addAttachmentData(imageData!, typeIdentifier: "image/jpeg", filename: "GamePhoto.jpeg")
+            messageVC.addAttachmentData(imageData, typeIdentifier: "image/jpeg", filename: "GamePhoto.jpeg")
             
             self.present(messageVC, animated: false, completion: nil)
             //UIImageWriteToSavedPhotosAlbum(compressedJPGImage, nil, nil, nil)//
@@ -3302,7 +3317,21 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         
       //  self.performSegueWithIdentifier("restart", sender: self)
             
-        self.dismiss(animated: true, completion: nil)
+        print("not a demo, dismiss self")
+            
+            let presentingViewController = self.presentingViewController as! GameViewController
+            
+            presentingViewController.IsUnwinding = true
+            
+            self.dismiss(animated: true, completion: {
+                //presentingViewController.IsUnwinding = false
+                /*
+                presentingViewController?.dismiss(animated: true, completion: {
+                    print("dismissing 2nd View Controller")
+                })
+                */
+            })
+          //  self.performSegue(withIdentifier: "BackToMyGames", sender: self)
             
         } else {
             
@@ -3495,16 +3524,16 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         shadow.shadowOffset = CGSize(width: 0,height: 1)
         // let textColorShadow = UIColor.whiteColor()
         
-        var textFontAttributes: [String : AnyObject]?
-        var textFontAttributesTitle: [String : AnyObject]?
+        var textFontAttributes: [NSAttributedString.Key : NSObject]?
+        var textFontAttributesTitle: [NSAttributedString.Key :NSObject]?
         
         if let actualFont = font {
-            textFontAttributes = [NSFontAttributeName: actualFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: textStyle]
+            textFontAttributes = [NSAttributedString.Key.font: actualFont, NSAttributedString.Key.foregroundColor: textColor, NSAttributedString.Key.paragraphStyle: textStyle]
             
         }
         
         if let actualFontTitle = fontTitle {
-            textFontAttributesTitle = [NSFontAttributeName: actualFontTitle, NSForegroundColorAttributeName: textColorTitle, NSParagraphStyleAttributeName: textStyle]
+            textFontAttributesTitle = [NSAttributedString.Key.font: actualFontTitle, NSAttributedString.Key.foregroundColor: textColorTitle, NSAttributedString.Key.paragraphStyle: textStyle]
             //, NSShadowAttributeName: shadow]
             
         }
@@ -3707,7 +3736,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
 
         
         let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        let imageData = UIImagePNGRepresentation(newImage)
+        let imageData = newImage.pngData()
         
         
         images.append(newImage)
@@ -3727,8 +3756,8 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         
         
         
-        let IntroTime = CMTimeMake(4, 1)
-        let TitleTime = CMTimeMake(2, 1)
+        let IntroTime = CMTimeMake(value: 4, timescale: 1)
+        let TitleTime = CMTimeMake(value: 2, timescale: 1)
         var TimeLength1 = CMTime()
         var TimeLength2 = CMTime()
         var TimeLength3 = CMTime()
@@ -3755,10 +3784,10 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         
         
         var TotalTime = IntroTime + TitleTime
-        let SlideTime = CMTimeMake(3, 1)
-        let Audio0Time = CMTimeMake(5, 1)
-        let TimeLength0 = CMTimeMake(2, 1)
-        Audio1Time = CMTimeMake(6, 1);
+        let SlideTime = CMTimeMake(value: 3, timescale: 1)
+        let Audio0Time = CMTimeMake(value: 5, timescale: 1)
+        let TimeLength0 = CMTimeMake(value: 2, timescale: 1)
+        Audio1Time = CMTimeMake(value: 6, timescale: 1);
         
         var STInt = Int64()
         STInt = 3
@@ -3808,10 +3837,10 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
       //  print("GIF URL FOR COMP = \(gifurl)")
        // let GIFAsset = AVURLAsset(URL: gifurl!, options: nil) as AVAsset
         
-        let vtrack = VideoAsset.tracks(withMediaType: AVMediaTypeVideo)
-        let atrack = AudioAsset.tracks(withMediaType: AVMediaTypeAudio)
+        let vtrack = VideoAsset.tracks(withMediaType: AVMediaType.video)
+        let atrack = AudioAsset.tracks(withMediaType: AVMediaType.audio)
         
-      //  let giftrack = GIFAsset.tracksWithMediaType(AVMediaTypeVideo)
+      //  let giftrack = GIFAsset.tracksWithMediaType(AVMediaType.video)
       //  let atrack1 = AVAsset(URL: AudioClips[0], options: nil) as AVAsset
        
         let videoTrack:AVAssetTrack = vtrack[0]
@@ -3821,8 +3850,8 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         
         let vid_duration = videoTrack.timeRange.duration
         
-        let vid_timerange = CMTimeRangeMake(kCMTimeZero, VideoAsset.duration)
-        let aud_timerange = CMTimeRangeMake(kCMTimeZero, AudioAsset.duration)
+        let vid_timerange = CMTimeRangeMake(start: CMTime.zero, duration: VideoAsset.duration)
+        let aud_timerange = CMTimeRangeMake(start: CMTime.zero, duration: AudioAsset.duration)
         
         print("Video TimeRange = \(vid_timerange)")
         
@@ -3834,8 +3863,8 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         
         for track in atrack {
            // var audioInputParams : AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters()
-            //audioInputParams.setVolume(5, atTime:kCMTimeZero)
-            allAudioParams.setVolume(5, at: kCMTimeZero)
+            //audioInputParams.setVolume(5, atTime:CMTime.zero)
+            allAudioParams.setVolume(5, at: CMTime.zero)
             
             //allAudioParams.addObject(audioInputParams)
         }
@@ -3848,28 +3877,33 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         
         // GETS PRIMARY VIDEO TEMP FILE
         
-        let compVideoTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+        let compVideoTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
         
         do {
-            try compVideoTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, VideoAsset.duration), of: VideoAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: kCMTimeZero)
+            
+            try compVideoTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: VideoAsset.duration), of: VideoAsset.tracks(withMediaType: AVMediaType.video)[0], at: CMTime.zero)
+            
+            /*
+             try compVideoTrack.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: VideoAsset.duration), of: VideoAsset.tracks(withMediaType: AVMediaType.video)[0], at: CMTime.zero)
+            */
         } catch {
             print("Video Error = \(error)")
         }
         
        // print("set up comVideoTrack")
-        let compAudioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+        let compAudioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
         
         do {
-            try compAudioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, AudioAsset.duration), of: VideoAsset.tracks(withMediaType: AVMediaTypeAudio)[0], at: kCMTimeZero)
+            try compAudioTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: AudioAsset.duration), of: VideoAsset.tracks(withMediaType: AVMediaType.audio)[0], at: CMTime.zero)
         } catch {
             print("Audio Error = \(error)")
         }
         
         /*
-         let compTrackGIF = mixComposition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+         let compTrackGIF = mixComposition.addMutableTrackWithMediaType(AVMediaType.video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
         
         do {
-            try compTrackGIF.insertTimeRange(CMTimeRangeMake(kCMTimeZero, GIFAsset.duration), ofTrack: GIFAsset.tracksWithMediaType(AVMediaTypeVideo)[0], atTime: kCMTimeZero)
+            try compTrackGIF.insertTimeRange(CMTimeRangeMake(CMTime.zero, GIFAsset.duration), ofTrack: GIFAsset.tracksWithMediaType(AVMediaType.video)[0], atTime: CMTime.zero)
         } catch {
             print("Audio Error = \(error)")
         }
@@ -3898,13 +3932,13 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
        let AudioAsset1_URL = URL(fileURLWithPath: A_Path1)
         
     let AudioAsset1 = AVURLAsset(url: AudioAsset1_URL, options: nil) as AVAsset
-    //let aTrack1 = AudioAsset1.tracksWithMediaType(AVMediaTypeAudio)
+    //let aTrack1 = AudioAsset1.tracksWithMediaType(AVMediaType.audio)
        
         
-        let compAudioTrack1 = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+        let compAudioTrack1 = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
         
         do {
-            try compAudioTrack1.insertTimeRange(CMTimeRangeMake(kCMTimeZero, AudioAsset1.duration), of: AudioAsset1.tracks(withMediaType: AVMediaTypeAudio)[0], at: Audio1Time)
+            try compAudioTrack1?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: AudioAsset1.duration), of: AudioAsset1.tracks(withMediaType: AVMediaType.audio)[0], at: Audio1Time)
         } catch {
             print("Video Error = \(error)")
         }
@@ -3914,7 +3948,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         TotalTime = TimeLength1
         TimeLength1 = AudioAsset1.duration
        } else {
-        TimeLength1 = CMTimeMake(STInt, 1) + TotalTime
+        TimeLength1 = CMTimeMake(value: STInt, timescale: 1) + TotalTime
         Audio2Time = TimeLength1
         TotalTime = TimeLength1
         TimeLength1 = SlideTime
@@ -3957,14 +3991,14 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         try? AudioClips[1].write(to: URL(fileURLWithPath: A_Path2), options: [.atomic])
     let AudioAsset2_URL = URL(fileURLWithPath: A_Path2)
     let AudioAsset2 = AVURLAsset(url: AudioAsset2_URL, options: nil) as AVAsset
-        let aTrack2 = AudioAsset2.tracks(withMediaType: AVMediaTypeAudio)
+        let aTrack2 = AudioAsset2.tracks(withMediaType: AVMediaType.audio)
       //  let audioTrack2:AVAssetTrack = aTrack2[0]
         //END SET UP AUDIO TRACK 2
         
-        let compAudioTrack2 = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+        let compAudioTrack2 = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
         
         do {
-            try compAudioTrack2.insertTimeRange(CMTimeRangeMake(kCMTimeZero, AudioAsset2.duration), of: AudioAsset2.tracks(withMediaType: AVMediaTypeAudio)[0], at: Audio2Time)
+            try compAudioTrack2?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: AudioAsset2.duration), of: AudioAsset2.tracks(withMediaType: AVMediaType.audio)[0], at: Audio2Time)
         } catch {
             print("Video Error = \(error)")
         }
@@ -3973,7 +4007,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             TotalTime = TimeLength2
             TimeLength2 = AudioAsset2.duration
         } else {
-            TimeLength2 = CMTimeMake(STInt, 1) + TotalTime
+            TimeLength2 = CMTimeMake(value: STInt, timescale: 1) + TotalTime
             Audio3Time = TimeLength2
             TotalTime = TimeLength2
             TimeLength2 = SlideTime
@@ -4011,13 +4045,13 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         try? AudioClips[2].write(to: URL(fileURLWithPath: A_Path3), options: [.atomic])
        let AudioAsset3_URL = URL(fileURLWithPath: A_Path3)
         let AudioAsset3 = AVURLAsset(url: AudioAsset3_URL, options: nil) as AVAsset
-        let aTrack3 = AudioAsset3.tracks(withMediaType: AVMediaTypeAudio)
+        let aTrack3 = AudioAsset3.tracks(withMediaType: AVMediaType.audio)
        // let audioTrack3:AVAssetTrack = aTrack3[0]
         //END SET UP AUDIO TRACK 1
-            let compAudioTrack3 = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            let compAudioTrack3 = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
             
             do {
-                try compAudioTrack3.insertTimeRange(CMTimeRangeMake(kCMTimeZero, AudioAsset3.duration), of: AudioAsset3.tracks(withMediaType: AVMediaTypeAudio)[0], at: Audio3Time)
+                try compAudioTrack3?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: AudioAsset3.duration), of: AudioAsset3.tracks(withMediaType: AVMediaType.audio)[0], at: Audio3Time)
             } catch {
                 print("Video Error = \(error)")
             }
@@ -4026,7 +4060,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             TotalTime = TimeLength3
             TimeLength3 = AudioAsset3.duration
         } else {
-            TimeLength3 = CMTimeMake(STInt, 1) + TotalTime
+            TimeLength3 = CMTimeMake(value: STInt, timescale: 1) + TotalTime
             Audio4Time = TimeLength3
             TotalTime = TimeLength3
             TimeLength3 = SlideTime
@@ -4063,13 +4097,13 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         try? AudioClips[3].write(to: URL(fileURLWithPath: A_Path4), options: [.atomic])
         let AudioAsset4_URL = URL(fileURLWithPath: A_Path4)
         let AudioAsset4 = AVURLAsset(url: AudioAsset4_URL, options: nil) as AVAsset
-       // let aTrack4 = AudioAsset4.tracksWithMediaType(AVMediaTypeAudio)
+       // let aTrack4 = AudioAsset4.tracksWithMediaType(AVMediaType.audio)
       //  audioTrack4:AVAssetTrack = aTrack4[0]
 
-            let compAudioTrack4 = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            let compAudioTrack4 = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
             
             do {
-                try compAudioTrack4.insertTimeRange(CMTimeRangeMake(kCMTimeZero, AudioAsset4.duration), of: AudioAsset4.tracks(withMediaType: AVMediaTypeAudio)[0], at: Audio4Time)
+                try compAudioTrack4?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: AudioAsset4.duration), of: AudioAsset4.tracks(withMediaType: AVMediaType.audio)[0], at: Audio4Time)
             } catch {
                 print("Video Error = \(error)")
             }
@@ -4079,7 +4113,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             TotalTime = TimeLength4
             TimeLength4 = AudioAsset4.duration
         } else {
-            TimeLength4 = CMTimeMake(STInt, 1) + TotalTime
+            TimeLength4 = CMTimeMake(value: STInt, timescale: 1) + TotalTime
             Audio5Time = TimeLength4
             TotalTime = TimeLength4
             TimeLength4 = SlideTime
@@ -4115,13 +4149,13 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         try? AudioClips[4].write(to: URL(fileURLWithPath: A_Path5), options: [.atomic])
         let AudioAsset5_URL = URL(fileURLWithPath: A_Path5)
         let AudioAsset5 = AVURLAsset(url: AudioAsset5_URL, options: nil) as AVAsset
-       let aTrack5 = AudioAsset5.tracks(withMediaType: AVMediaTypeAudio)
+       let aTrack5 = AudioAsset5.tracks(withMediaType: AVMediaType.audio)
      //  audioTrack5:AVAssetTrack = aTrack5[0]
         //END SET UP AUDIO TRACK 5
-            let compAudioTrack5 = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            let compAudioTrack5 = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
             
             do {
-                try compAudioTrack5.insertTimeRange(CMTimeRangeMake(kCMTimeZero, AudioAsset5.duration), of: AudioAsset5.tracks(withMediaType: AVMediaTypeAudio)[0], at: Audio5Time)
+                try compAudioTrack5?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: AudioAsset5.duration), of: AudioAsset5.tracks(withMediaType: AVMediaType.audio)[0], at: Audio5Time)
             } catch {
                 print("Video Error = \(error)")
             }
@@ -4130,7 +4164,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             TotalTime = TimeLength5
             TimeLength5 = AudioAsset5.duration
         } else {
-            TimeLength5 = CMTimeMake(STInt, 1) + TotalTime
+            TimeLength5 = CMTimeMake(value: STInt, timescale: 1) + TotalTime
             Audio6Time = TimeLength5
             TotalTime = TimeLength5
             TimeLength5 = SlideTime
@@ -4165,13 +4199,13 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             try? AudioClips[5].write(to: URL(fileURLWithPath: A_Path6), options: [.atomic])
             let AudioAsset6_URL = URL(fileURLWithPath: A_Path6)
             let AudioAsset6 = AVURLAsset(url: AudioAsset6_URL, options: nil) as AVAsset
-            let aTrack6 = AudioAsset6.tracks(withMediaType: AVMediaTypeAudio)
+            let aTrack6 = AudioAsset6.tracks(withMediaType: AVMediaType.audio)
             //  audioTrack5:AVAssetTrack = aTrack5[0]
             //END SET UP AUDIO TRACK 5
-            let compAudioTrack6 = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            let compAudioTrack6 = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
             
             do {
-                try compAudioTrack6.insertTimeRange(CMTimeRangeMake(kCMTimeZero, AudioAsset6.duration), of: AudioAsset6.tracks(withMediaType: AVMediaTypeAudio)[0], at: Audio6Time)
+                try compAudioTrack6?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: AudioAsset6.duration), of: AudioAsset6.tracks(withMediaType: AVMediaType.audio)[0], at: Audio6Time)
                 print("inserting turn 6 Audio")
             } catch {
                 print("Video Error = \(error)")
@@ -4191,7 +4225,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             
     images2.append(images[5])
             }
-    TimeLength6 = CMTimeMake(STInt, 1) + TotalTime
+            TimeLength6 = CMTimeMake(value: STInt, timescale: 1) + TotalTime
     Audio7Time = TimeLength6
     TotalTime = TimeLength6
     TimeLength6 = SlideTime
@@ -4217,13 +4251,13 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             try? AudioClips[6].write(to: URL(fileURLWithPath: A_Path7), options: [.atomic])
             let AudioAsset7_URL = URL(fileURLWithPath: A_Path7)
             let AudioAsset7 = AVURLAsset(url: AudioAsset7_URL, options: nil) as AVAsset
-            let aTrack7 = AudioAsset7.tracks(withMediaType: AVMediaTypeAudio)
+            let aTrack7 = AudioAsset7.tracks(withMediaType: AVMediaType.audio)
             //  audioTrack5:AVAssetTrack = aTrack5[0]
             //END SET UP AUDIO TRACK 5
-            let compAudioTrack7 = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            let compAudioTrack7 = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
             
             do {
-                try compAudioTrack7.insertTimeRange(CMTimeRangeMake(kCMTimeZero, AudioAsset7.duration), of: AudioAsset7.tracks(withMediaType: AVMediaTypeAudio)[0], at: Audio7Time)
+                try compAudioTrack7?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: AudioAsset7.duration), of: AudioAsset7.tracks(withMediaType: AVMediaType.audio)[0], at: Audio7Time)
             } catch {
                 print("Video Error = \(error)")
             }
@@ -4234,7 +4268,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
     TimeLength7 = AudioAsset7.duration
             
     } else {
-    TimeLength7 = CMTimeMake(STInt, 1) + TotalTime
+            TimeLength7 = CMTimeMake(value: STInt, timescale: 1) + TotalTime
     Audio8Time = TimeLength7
     TotalTime = TimeLength7
     TimeLength7 = SlideTime
@@ -4267,13 +4301,13 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             try? AudioClips[7].write(to: URL(fileURLWithPath: A_Path8), options: [.atomic])
             let AudioAsset8_URL = URL(fileURLWithPath: A_Path8)
             let AudioAsset8 = AVURLAsset(url: AudioAsset8_URL, options: nil) as AVAsset
-            let aTrack8 = AudioAsset8.tracks(withMediaType: AVMediaTypeAudio)
+            let aTrack8 = AudioAsset8.tracks(withMediaType: AVMediaType.audio)
             //  audioTrack5:AVAssetTrack = aTrack5[0]
             //END SET UP AUDIO TRACK 5
-            let compAudioTrack8 = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            let compAudioTrack8 = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
             
             do {
-                try compAudioTrack8.insertTimeRange(CMTimeRangeMake(kCMTimeZero, AudioAsset8.duration), of: AudioAsset8.tracks(withMediaType: AVMediaTypeAudio)[0], at: Audio8Time)
+                try compAudioTrack8?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: AudioAsset8.duration), of: AudioAsset8.tracks(withMediaType: AVMediaType.audio)[0], at: Audio8Time)
             } catch {
                 print("Video Error = \(error)")
             }
@@ -4283,7 +4317,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
     TotalTime = TimeLength8
     TimeLength8 = AudioAsset8.duration
     } else {
-    TimeLength8 = CMTimeMake(STInt, 1) + TotalTime
+            TimeLength8 = CMTimeMake(value: STInt, timescale: 1) + TotalTime
     Audio9Time = TimeLength8
     TotalTime = TimeLength8
     TimeLength8 = SlideTime
@@ -4318,13 +4352,13 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             try? AudioClips[8].write(to: URL(fileURLWithPath: A_Path9), options: [.atomic])
             let AudioAsset9_URL = URL(fileURLWithPath: A_Path9)
             let AudioAsset9 = AVURLAsset(url: AudioAsset9_URL, options: nil) as AVAsset
-            let aTrack9 = AudioAsset9.tracks(withMediaType: AVMediaTypeAudio)
+            let aTrack9 = AudioAsset9.tracks(withMediaType: AVMediaType.audio)
             //  audioTrack5:AVAssetTrack = aTrack5[0]
             //END SET UP AUDIO TRACK 5
-            let compAudioTrack9 = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            let compAudioTrack9 = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
             
             do {
-                try compAudioTrack9.insertTimeRange(CMTimeRangeMake(kCMTimeZero, AudioAsset9.duration), of: AudioAsset9.tracks(withMediaType: AVMediaTypeAudio)[0], at: Audio9Time)
+                try compAudioTrack9?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: AudioAsset9.duration), of: AudioAsset9.tracks(withMediaType: AVMediaType.audio)[0], at: Audio9Time)
             } catch {
                 print("Video Error = \(error)")
             }
@@ -4334,7 +4368,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
     TotalTime = TimeLength9
     TimeLength9 = AudioAsset9.duration
     } else {
-    TimeLength9 = CMTimeMake(STInt, 1) + TotalTime
+            TimeLength9 = CMTimeMake(value: STInt, timescale: 1) + TotalTime
     Audio10Time = TimeLength9
     TotalTime = TimeLength9
     TimeLength9 = SlideTime
@@ -4369,13 +4403,13 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
             try? AudioClips[9].write(to: URL(fileURLWithPath: A_Path10), options: [.atomic])
             let AudioAsset10_URL = URL(fileURLWithPath: A_Path10)
             let AudioAsset10 = AVURLAsset(url: AudioAsset10_URL, options: nil) as AVAsset
-            let aTrack10 = AudioAsset10.tracks(withMediaType: AVMediaTypeAudio)
+            let aTrack10 = AudioAsset10.tracks(withMediaType: AVMediaType.audio)
             //  audioTrack5:AVAssetTrack = aTrack5[0]
             //END SET UP AUDIO TRACK 5
-            let compAudioTrack10 = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            let compAudioTrack10 = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)
             
             do {
-                try compAudioTrack10.insertTimeRange(CMTimeRangeMake(kCMTimeZero, AudioAsset10.duration), of: AudioAsset10.tracks(withMediaType: AVMediaTypeAudio)[0], at: Audio10Time)
+                try compAudioTrack10?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: AudioAsset10.duration), of: AudioAsset10.tracks(withMediaType: AVMediaType.audio)[0], at: Audio10Time)
             } catch {
                 print("Video Error = \(error)")
             }
@@ -4386,7 +4420,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
     TimeLength10 = AudioAsset10.duration
             
     } else {
-    TimeLength10 = CMTimeMake(STInt, 1) + TotalTime
+            TimeLength10 = CMTimeMake(value: STInt, timescale: 1) + TotalTime
     AudioEndTime = TimeLength10
     TotalTime = TimeLength10
     TimeLength10 = SlideTime
@@ -4406,7 +4440,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         print("All Audio Tracks have been set up")        
         
         print("Insert all audio tracks")
-        compVideoTrack.preferredTransform = videoTrack.preferredTransform
+        compVideoTrack?.preferredTransform = videoTrack.preferredTransform
         
         //STARTS CREATING TURN 1 INSERT
         let videoLayer = CALayer()
@@ -4503,7 +4537,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         //"Text Test"
        //titleLayer.frame = CGRectMake(0, 30, size.width, size.height / 6)
         titleLayer.frame = CGRect(x: (size.width * 0.2) / 2, y: (size.height / 2) + 10, width: size.width * 0.8, height: size.height / 7)
-        titleLayer.alignmentMode = kCAAlignmentCenter
+        titleLayer.alignmentMode = CATextLayerAlignmentMode.center
         titleLayer.beginTime = CFTimeInterval(2.9)
         titleLayer.duration = CFTimeInterval(1.8)
         //textLayer1.r
@@ -4522,7 +4556,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         textLayer1.string = Quotes[0] as String
         //"Text Test"
         textLayer1.frame = CGRect(x: 0, y: 50, width: size.width, height: size.height / 2)
-        textLayer1.alignmentMode = kCAAlignmentCenter
+        textLayer1.alignmentMode = CATextLayerAlignmentMode.center
         textLayer1.beginTime = CFTimeInterval(5.5)
         //CMTimeGetSeconds(Audio1Time) + 1
         textLayer1.duration = CMTimeGetSeconds(TimeLength1)
@@ -4546,7 +4580,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         bytextLayer1.string = users[0] as String
         //"Text Test"
         bytextLayer1.frame = CGRect(x: (size.width * 0.25) / 2, y: 15, width: size.width * 0.75, height: size.height / 7)
-        bytextLayer1.alignmentMode = kCAAlignmentCenter
+        bytextLayer1.alignmentMode = CATextLayerAlignmentMode.center
         bytextLayer1.beginTime = CFTimeInterval(5.5)
         //CMTimeGetSeconds(Audio1Time) + 1
         bytextLayer1.duration =  CMTimeGetSeconds(TimeLength1)
@@ -4593,10 +4627,11 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         
         
         //CREATING TURN 2
+        //CATextLayerAlignmentMode.center = CATextLayer()
         let textLayer2 = CATextLayer()
         textLayer2.string = Quotes[1] as String
         textLayer2.frame = CGRect(x: 0, y: 50, width: size.width, height: size.height / 2)
-        textLayer2.alignmentMode = kCAAlignmentCenter
+        textLayer2.alignmentMode = CATextLayerAlignmentMode.center
         textLayer2.beginTime =  CMTimeGetSeconds(Audio2Time)
         textLayer2.duration =  CMTimeGetSeconds(TimeLength2)
         textLayer2.font = gameFont
@@ -4606,9 +4641,10 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         
         let bytextLayer2 = CATextLayer()
         bytextLayer2.string = users[1] as String
+        //bytextLayer2[CATextLayerAlignmentMode.center] as String
         //"Text Test"
         bytextLayer2.frame = CGRect(x: (size.width * 0.25) / 2, y: 15, width: size.width * 0.75, height: size.height / 7)
-        bytextLayer2.alignmentMode = kCAAlignmentCenter
+        bytextLayer2.alignmentMode = CATextLayerAlignmentMode.center
         bytextLayer2.beginTime = CMTimeGetSeconds(Audio2Time)
         bytextLayer2.duration = CMTimeGetSeconds(TimeLength2)
         //textLayer1.r
@@ -4665,7 +4701,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         textLayer3.string = Quotes[2] as String
         //"Text Test"
         textLayer3.frame = CGRect(x: 0, y: 50, width: size.width, height: size.height / 2)
-        textLayer3.alignmentMode = kCAAlignmentCenter
+        textLayer3.alignmentMode = CATextLayerAlignmentMode.center
         textLayer3.beginTime = CMTimeGetSeconds(Audio3Time)
         textLayer3.duration = CMTimeGetSeconds(TimeLength3)
         textLayer3.font = gameFont
@@ -4684,7 +4720,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         bytextLayer3.string = users[2] as String
         //"Text Test"
         bytextLayer3.frame = CGRect(x: (size.width * 0.25) / 2, y: 15, width: size.width * 0.75, height: size.height / 7)
-        bytextLayer3.alignmentMode = kCAAlignmentCenter
+        bytextLayer3.alignmentMode = CATextLayerAlignmentMode.center
         bytextLayer3.beginTime = CMTimeGetSeconds(Audio3Time)
         bytextLayer3.duration = CMTimeGetSeconds(TimeLength3)
         //textLayer1.r
@@ -4718,7 +4754,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         textLayer4.string = Quotes[3] as String
         //"Text Test"
         textLayer4.frame = CGRect(x: 0, y: 50, width: size.width, height: size.height / 2)
-        textLayer4.alignmentMode = kCAAlignmentCenter
+        textLayer4.alignmentMode = CATextLayerAlignmentMode.center
         textLayer4.beginTime = CMTimeGetSeconds(Audio4Time)
         textLayer4.duration = CMTimeGetSeconds(TimeLength4)
         textLayer4.font = gameFont
@@ -4741,7 +4777,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         bytextLayer4.string = users[3] as String
         //"Text Test"
         bytextLayer4.frame = CGRect(x: (size.width * 0.25) / 2, y: 15, width: size.width * 0.75, height: size.height / 7)
-        bytextLayer4.alignmentMode = kCAAlignmentCenter
+        bytextLayer4.alignmentMode = CATextLayerAlignmentMode.center
         bytextLayer4.beginTime = CMTimeGetSeconds(Audio4Time)
         bytextLayer4.duration = CMTimeGetSeconds(TimeLength4)
         //textLayer1.r
@@ -4772,7 +4808,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         textLayer5.string = Quotes[4] as String
         //"Text Test"
         textLayer5.frame = CGRect(x: 0, y: 50, width: size.width, height: size.height / 2)
-        textLayer5.alignmentMode = kCAAlignmentCenter
+        textLayer5.alignmentMode = CATextLayerAlignmentMode.center
         textLayer5.beginTime = CMTimeGetSeconds(Audio5Time)
         textLayer5.duration = CMTimeGetSeconds(TimeLength5)
         textLayer5.font = gameFont
@@ -4791,7 +4827,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         bytextLayer5.string = users[4] as String
         //"Text Test"
         bytextLayer5.frame = CGRect(x: (size.width * 0.25) / 2, y: 15, width: size.width * 0.75, height: size.height / 7)
-        bytextLayer5.alignmentMode = kCAAlignmentCenter
+        bytextLayer5.alignmentMode = CATextLayerAlignmentMode.center
         bytextLayer5.beginTime = CMTimeGetSeconds(Audio5Time)
         bytextLayer5.duration = CMTimeGetSeconds(TimeLength5)
         //textLayer1.r
@@ -4815,7 +4851,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         textLayer6.string = Quotes[5] as String
         //"Text Test"
         textLayer6.frame = CGRect(x: 0, y: 50, width: size.width, height: size.height / 2)
-        textLayer6.alignmentMode = kCAAlignmentCenter
+        textLayer6.alignmentMode = CATextLayerAlignmentMode.center
         textLayer6.beginTime = CMTimeGetSeconds(Audio6Time)
         textLayer6.duration = CMTimeGetSeconds(TimeLength6)
         //textLayer1.r
@@ -4828,7 +4864,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         bytextLayer6.string = users[5] as String
         //"Text Test"
         bytextLayer6.frame = CGRect(x: (size.width * 0.25) / 2, y: 15, width: size.width * 0.75, height: size.height / 7)
-        bytextLayer6.alignmentMode = kCAAlignmentCenter
+        bytextLayer6.alignmentMode = CATextLayerAlignmentMode.center
         bytextLayer6.beginTime =  CMTimeGetSeconds(Audio6Time)
         bytextLayer6.duration =  CMTimeGetSeconds(TimeLength6)
         //textLayer1.r
@@ -4899,7 +4935,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         let textLayer7 = CATextLayer()
         textLayer7.string = Quotes[6] as String
         textLayer7.frame = CGRect(x: 0, y: 50, width: size.width, height: size.height / 2)
-        textLayer7.alignmentMode = kCAAlignmentCenter
+        textLayer7.alignmentMode = CATextLayerAlignmentMode.center
         textLayer7.beginTime =  CMTimeGetSeconds(Audio7Time)
         textLayer7.duration =  CMTimeGetSeconds(TimeLength7)
         textLayer7.font = gameFont
@@ -4911,7 +4947,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         bytextLayer7.string = users[6] as String
         //"Text Test"
         bytextLayer7.frame = CGRect(x: (size.width * 0.25) / 2, y: 15, width: size.width * 0.75, height: size.height / 7)
-        bytextLayer7.alignmentMode = kCAAlignmentCenter
+        bytextLayer7.alignmentMode = CATextLayerAlignmentMode.center
         bytextLayer7.beginTime = CMTimeGetSeconds(Audio7Time)
         bytextLayer7.duration = CMTimeGetSeconds(TimeLength7)
         //textLayer1.r
@@ -4968,7 +5004,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         textLayer8.string = Quotes[7] as String
         //"Text Test"
         textLayer8.frame = CGRect(x: 0, y: 50, width: size.width, height: size.height / 2)
-        textLayer8.alignmentMode = kCAAlignmentCenter
+        textLayer8.alignmentMode = CATextLayerAlignmentMode.center
         textLayer8.beginTime = CMTimeGetSeconds(Audio8Time)
         textLayer8.duration = CMTimeGetSeconds(TimeLength8)
         textLayer8.font = gameFont
@@ -4986,7 +5022,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         bytextLayer8.string = users[7] as String
         //"Text Test"
         bytextLayer8.frame = CGRect(x: (size.width * 0.25) / 2, y: 15, width: size.width * 0.75, height: size.height / 7)
-        bytextLayer8.alignmentMode = kCAAlignmentCenter
+        bytextLayer8.alignmentMode = CATextLayerAlignmentMode.center
         bytextLayer8.beginTime = CMTimeGetSeconds(Audio8Time)
         bytextLayer8.duration = CMTimeGetSeconds(TimeLength8)
         //textLayer1.r
@@ -5018,7 +5054,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         textLayer9.string = Quotes[8] as String
         //"Text Test"
         textLayer9.frame = CGRect(x: 0, y: 50, width: size.width, height: size.height / 2)
-        textLayer9.alignmentMode = kCAAlignmentCenter
+        textLayer9.alignmentMode = CATextLayerAlignmentMode.center
         textLayer9.beginTime = CMTimeGetSeconds(Audio9Time)
         textLayer9.duration = CMTimeGetSeconds(TimeLength9)
         textLayer9.font = gameFont
@@ -5037,7 +5073,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         bytextLayer9.string = users[8] as String
         //"Text Test"
         bytextLayer9.frame = CGRect(x: (size.width * 0.25) / 2, y: 15, width: size.width * 0.75, height: size.height / 7)
-        bytextLayer9.alignmentMode = kCAAlignmentCenter
+        bytextLayer9.alignmentMode = CATextLayerAlignmentMode.center
         bytextLayer9.beginTime = CMTimeGetSeconds(Audio9Time)
         bytextLayer9.duration = CMTimeGetSeconds(TimeLength9)
         //textLayer1.r
@@ -5068,7 +5104,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         textLayer10.string = Quotes[9] as String
         //"Text Test"
         textLayer10.frame = CGRect(x: 0, y: 50, width: size.width, height: size.height / 2)
-        textLayer10.alignmentMode = kCAAlignmentCenter
+        textLayer10.alignmentMode = CATextLayerAlignmentMode.center
         textLayer10.beginTime = CMTimeGetSeconds(Audio10Time)
         textLayer10.duration = CMTimeGetSeconds(TimeLength10)
         textLayer10.font = gameFont
@@ -5087,7 +5123,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         bytextLayer10.string = users[9] as String
         //"Text Test"
         bytextLayer10.frame = CGRect(x: (size.width * 0.25) / 2, y: 15, width: size.width * 0.75, height: size.height / 7)
-        bytextLayer10.alignmentMode = kCAAlignmentCenter
+        bytextLayer10.alignmentMode = CATextLayerAlignmentMode.center
         bytextLayer10.beginTime = CMTimeGetSeconds(Audio10Time)
         bytextLayer10.duration = CMTimeGetSeconds(TimeLength10)
         //textLayer1.r
@@ -5210,6 +5246,7 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         
         ImageLayerGIF.contents = images2[9].cgImage
         ImageLayerGIF.beginTime = CMTimeGetSeconds(Audio10Time)
+        //    ?? <#default value#>ImageLayerGIF.beginTime = CMTimeGetSeconds(Audio10Time)
         ImageLayerGIF.duration = CMTimeGetSeconds(TimeLength10)
         
         
@@ -5222,16 +5259,16 @@ class PageIntroViewController: UIViewController, UIPageViewControllerDataSource,
         print("Added the layers to the parent layer")
         let gameComposition1 = AVMutableVideoComposition()
     
-        gameComposition1.frameDuration = CMTimeMake(1, 30)
+        gameComposition1.frameDuration = CMTimeMake(value: 1, timescale: 30)
         gameComposition1.renderSize = size
         gameComposition1.animationTool = AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: videoLayer, in: parentLayer1)
         
 
         
        // let layerInstruction = AVMU
-        let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: compVideoTrack)
+        let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: compVideoTrack!)
         
-        let Turn1Instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: compVideoTrack)
+        let Turn1Instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: compVideoTrack!)
        // Turn1Instruction.
         
         
@@ -5286,7 +5323,7 @@ try FileManager.default.removeItem(atPath: savePath as String)
         print("About to add the overlay composition")
         exporter!.videoComposition = gameComposition1
         exporter!.audioMix = audioZeroMix
-        exporter!.outputFileType = AVFileTypeQuickTimeMovie
+        exporter!.outputFileType = AVFileType.mov
         exporter!.shouldOptimizeForNetworkUse = true
         //exporter!.videoComposition = mainComposition
         
@@ -5389,9 +5426,9 @@ try FileManager.default.removeItem(atPath: savePath as String)
                     
                 } else {
                     
-                    let alert = UIAlertController(title: "Accounts", message: "Please login to Facebook", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Accounts", message: "Please login to Facebook", preferredStyle: UIAlertController.Style.Alert)
                     
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.Default, handler: nil))
                     
                     self.presentViewController(alert, animated: true, completion: nil)
                     
@@ -5417,9 +5454,9 @@ try FileManager.default.removeItem(atPath: savePath as String)
                     
                 } else {
                     
-                    let alert = UIAlertController(title: "Accounts", message: "Please login to Twitter", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Accounts", message: "Please login to Twitter", preferredStyle: UIAlertController.Style.Alert)
                     
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.Default, handler: nil))
                     
                     self.presentViewController(alert, animated: true, completion: nil)
                     
@@ -5449,7 +5486,7 @@ try FileManager.default.removeItem(atPath: savePath as String)
                                 message = "The has been Video saved to your photo library."
                             }
                           //  let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                          //  alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                          //  alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.Cancel, handler: nil))
                           //  self.presentViewController(alert, animated: true, completion: nil)
                             
                             
@@ -5540,9 +5577,9 @@ try FileManager.default.removeItem(atPath: savePath as String)
                     
                 } else {
                     
-                    let alert = UIAlertController(title: "Accounts", message: "Please login to Facebook", preferredStyle: UIAlertControllerStyle.alert)
+                    let alert = UIAlertController(title: "Accounts", message: "Please login to Facebook", preferredStyle: UIAlertController.Style.alert)
                     
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                     
                     self.present(alert, animated: true, completion: nil)
                     
@@ -5567,9 +5604,9 @@ try FileManager.default.removeItem(atPath: savePath as String)
                     
                 } else {
                     
-                    let alert = UIAlertController(title: "Accounts", message: "Please login to Twitter", preferredStyle: UIAlertControllerStyle.alert)
+                    let alert = UIAlertController(title: "Accounts", message: "Please login to Twitter", preferredStyle: UIAlertController.Style.alert)
                     
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                     
                     self.present(alert, animated: true, completion: nil)
                     
@@ -5613,7 +5650,7 @@ try FileManager.default.removeItem(atPath: savePath as String)
                                 message = "The has been Video saved to your photo library."
                             }
                             //  let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                            //  alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                            //  alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.Cancel, handler: nil))
                             //  self.presentViewController(alert, animated: true, completion: nil)
                             
                             
@@ -5708,6 +5745,8 @@ try FileManager.default.removeItem(atPath: savePath as String)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
+        print("segue \(segue.identifier)")
+        
         if segue.identifier == "ShowComments" {
             if let destination = segue.destination as? CommentsViewController {
 
@@ -5732,8 +5771,20 @@ try FileManager.default.removeItem(atPath: savePath as String)
             
             let controller = segue.destination as! GameViewController
             controller.IsUnwinding = true
+            print("isUnwinding = true")
         }
 
+        
+        if segue.identifier == "goto_mygames" {
+            
+             print("Go to my games clicked")
+            let nav = segue.destination as! UINavigationController
+            if let controller = nav.topViewController as? GameViewController {
+            //let controller = segue.destination as! GameViewController
+            controller.IsUnwinding = true
+            print("isUnwinding = true")
+            }
+        }
         
     }
     @IBAction func TestShare(_ sender: AnyObject) {

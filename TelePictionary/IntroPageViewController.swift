@@ -78,7 +78,7 @@ class IntroPageViewController: UIViewController, UIPageViewControllerDataSource,
         messageFrame.layer.cornerRadius = 15
         messageFrame.backgroundColor = UIColor(white: 0, alpha: 0.7)
         if indicator {
-            ActivityInd = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+            ActivityInd = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.white)
             ActivityInd.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
             ActivityInd.startAnimating()
             messageFrame.addSubview(ActivityInd)
@@ -94,7 +94,7 @@ class IntroPageViewController: UIViewController, UIPageViewControllerDataSource,
         
         
         self.pageViewController2.view .removeFromSuperview()
-        self.pageViewController2.removeFromParentViewController()
+        self.pageViewController2.removeFromParent()
         reset()
         print("Index is \(index)")
     }
@@ -118,19 +118,19 @@ class IntroPageViewController: UIViewController, UIPageViewControllerDataSource,
         
         let pageContentViewController = self.viewControllerAtIndex(0)
         
-        self.pageViewController2.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+        self.pageViewController2.setViewControllers([pageContentViewController!], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
         
         /* We are substracting 30 because we have a start again button whose height is 30*/
         self.pageViewController2.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 50)
-        self.addChildViewController(pageViewController2)
+        self.addChild(pageViewController2)
         self.view.addSubview(pageViewController2.view)
-        self.pageViewController2.didMove(toParentViewController: self)
+        self.pageViewController2.didMove(toParent: self)
     }
     
     @IBAction func start(_ sender: AnyObject) {
         let pageContentViewController = self.viewControllerAtIndex(0)
         
-        self.pageViewController2.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+        self.pageViewController2.setViewControllers([pageContentViewController!], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
     }
     /*
     override func viewDidLoad() {

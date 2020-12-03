@@ -55,7 +55,7 @@ class GameStartedViewController: UIViewController, UITableViewDelegate, UITableV
         self.doneBTN.layer.borderColor = UIColor.white.cgColor
         TableView.backgroundColor = UIColor.clear
         
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         TableView.delegate = self
         TableView.dataSource = self
@@ -89,7 +89,7 @@ class GameStartedViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     
-    func SendPlayerNotice(_ sender: UIButton!) {
+    @objc func SendPlayerNotice(_ sender: UIButton!) {
         
         
         PlayerRowSelected = sender.tag

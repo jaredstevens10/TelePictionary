@@ -119,10 +119,10 @@ class AllPlayersViewController: UIViewController, UIScrollViewDelegate, UICollec
             print("Is reveal view controller enabled")
             // backBTN.target = self.revealViewController()
             // rightmenuButton.target = self.revealViewController()
-            //backBTN.addTarget(<#T##target: AnyObject?##AnyObject?#>, action: <#T##Selector#>, forControlEvents: <#T##UIControlEvents#>)
+            //backBTN.addTarget(<#T##target: AnyObject?##AnyObject?#>, action: <#T##Selector#>, forControlEvents: <#T##UIControl.Event#>)
             // backBTN.addTarget(self.revealViewController().frontViewController, action: "revealToggle:", forControlEvents: .TouchUpInside)
             
-            //    button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            //    button.addTarget(self, action: "buttonAction:", forControlEvents: UIControl.Event.TouchUpInside)
             //  backBTN.action = "revealToggle:"
             //  rightmenuButton.action = "rightRevealToggle:"
             
@@ -192,7 +192,7 @@ class AllPlayersViewController: UIViewController, UIScrollViewDelegate, UICollec
         
         self.collectionView.backgroundColor = UIColor.clear
         
-        self.refreshControl.addTarget(self, action: #selector(AllPlayersViewController.RefreshCommentData(_:)), for: UIControlEvents.valueChanged)
+        self.refreshControl.addTarget(self, action: #selector(AllPlayersViewController.RefreshCommentData(_:)), for: UIControl.Event.valueChanged)
         self.collectionView!.addSubview(refreshControl)
         
         
@@ -435,7 +435,7 @@ class AllPlayersViewController: UIViewController, UIScrollViewDelegate, UICollec
     
     
     
-    func RefreshCommentData(_ sender:AnyObject) {
+    @objc func RefreshCommentData(_ sender:AnyObject) {
         print("Refresh Comment Data")
         ISLOGGEDIN = UserDefaults.standard.bool(forKey: "ISLOGGEDIN")
         
@@ -656,7 +656,7 @@ class AllPlayersViewController: UIViewController, UIScrollViewDelegate, UICollec
         //return Photos.count
     }
     
-    func ViewStats(_ sender: UIButton!) {
+    @objc func ViewStats(_ sender: UIButton!) {
         let EmployeeRowSelected = sender.tag
         
         print(EmployeeName)
@@ -828,7 +828,7 @@ class AllPlayersViewController: UIViewController, UIScrollViewDelegate, UICollec
         
         //UIColor.whiteColor().CGColor
         cell.profileImage?.layer.borderWidth = 1
-        cell.profileImage?.contentMode = UIViewContentMode.scaleAspectFit
+        cell.profileImage?.contentMode = UIView.ContentMode.scaleAspectFit
         
         cell.theButton?.tag = (indexPath as NSIndexPath).row
         cell.theButton?.addTarget(self, action: #selector(AllPlayersViewController.ViewStats(_:)), for: .touchUpInside)
@@ -1007,7 +1007,7 @@ class AllPlayersViewController: UIViewController, UIScrollViewDelegate, UICollec
     }
     
     
-    func DismissKeyboard(){
+    @objc func DismissKeyboard(){
         
         /*
         if GameTitleTXT.text.isEmpty {
@@ -1122,7 +1122,7 @@ class AllPlayersViewController: UIViewController, UIScrollViewDelegate, UICollec
     
     
     if let font = UIFont(name: "Marker Felt", size: 25.0) {
-    self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+    self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.darkGrayColor()]
     }
     
     if self.revealViewController() != nil {
@@ -1264,7 +1264,7 @@ class AllPlayersViewController: UIViewController, UIScrollViewDelegate, UICollec
     */
     
     
-    func segmentValueChanged(_ sender: AnyObject?){
+    @objc func segmentValueChanged(_ sender: AnyObject?){
         
         if segmentControl.selectedIndex == 0 {
             self.actInd.isHidden = false
@@ -1753,14 +1753,14 @@ class AllPlayersViewController: UIViewController, UIScrollViewDelegate, UICollec
         })
     }
     
-     func FollowerClicked(_ sender: UIButton!) {
+    @objc func FollowerClicked(_ sender: UIButton!) {
         
         print("this is your follower")
         
     }
     
     
-    func FollowClicked(_ sender: UIButton!) {
+    @objc func FollowClicked(_ sender: UIButton!) {
         
         
         

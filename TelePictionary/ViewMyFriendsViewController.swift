@@ -49,7 +49,7 @@ class ViewMyFriendsViewController: UIViewController, UITableViewDataSource, UITa
 
     TableView.dataSource = self
     TableView.delegate = self
-    self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+    self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     // Do any additional setup after loading the view.
         
         
@@ -72,7 +72,7 @@ class ViewMyFriendsViewController: UIViewController, UITableViewDataSource, UITa
         self.title = "Friends"
         
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-          //  self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
+          //  self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.whiteColor()]
             
            // self.ta
         }
@@ -166,8 +166,8 @@ class ViewMyFriendsViewController: UIViewController, UITableViewDataSource, UITa
 
     
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
 
             let RemoveName: NSString = self.FriendNameInfo[(indexPath as NSIndexPath).row]
             let RemoveID: NSString = self.FriendIDInfo[(indexPath as NSIndexPath).row]

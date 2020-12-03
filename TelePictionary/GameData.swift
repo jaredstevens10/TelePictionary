@@ -1199,7 +1199,15 @@ func MyTurnsCount (_ username: NSString, userID: NSString) -> Data {
             
             //NSUserDefaults.standardUserDefaults().setInteger(newAppBadges, forKey: "appBadges")
             
-            UIApplication.shared.applicationIconBadgeNumber = turnCount
+            
+            //JARED 11-26-2020 - FIX TURN COUNT
+            DispatchQueue.main.async {
+                //UIApplication.shared.registerForRemoteNotifications()
+                UIApplication.shared.applicationIconBadgeNumber = turnCount
+            }
+            //UIApplication.shared.applicationIconBadgeNumber = turnCount
+            
+            
             
             //[jsonData[@"success"] integerValue];
             

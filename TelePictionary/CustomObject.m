@@ -86,7 +86,7 @@
     // FIRST, start up an AVAssetWriter instance to write your video
     // Give it a destination path (for us: tmp/temp.mov)
     AVAssetWriter *videoWriter = [[AVAssetWriter alloc] initWithURL:[NSURL fileURLWithPath:path]
-                                                           fileType:AVFileTypeQuickTimeMovie
+                                                           fileType:AVFileType.mov
                                                               error:&error];
     
     
@@ -98,7 +98,7 @@
                                    [NSNumber numberWithInt:size.height], AVVideoHeightKey,
                                    nil];
     
-    AVAssetWriterInput* writerInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo
+    AVAssetWriterInput* writerInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaType.video
                                                                          outputSettings:videoSettings];
     
     AVAssetWriterInputPixelBufferAdaptor *adaptor = [AVAssetWriterInputPixelBufferAdaptor assetWriterInputPixelBufferAdaptorWithAssetWriterInput:writerInput

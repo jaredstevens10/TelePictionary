@@ -154,7 +154,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var numPoints = Int()
     var Total_Likes = Int()
     var NotfirstLaunch = false
-    var localPlayer = GKLocalPlayer.localPlayer()
+    var localPlayer = GKLocalPlayer.local
     var SuggestedQuote = NSString()
     var SuggestedUserName = NSString()
     var SuggestedUserID = NSString()
@@ -262,11 +262,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         //dobPicker.setDate(NSDate(), animated: true)
         dobPicker.maximumDate = Date()
-        dobPicker.datePickerMode = UIDatePickerMode.date
+        dobPicker.datePickerMode = UIDatePicker.Mode.date
         pickerDoneButton.layer.cornerRadius = 5
         pickerDoneButton.layer.borderWidth = 1
         pickerDoneButton.layer.borderColor = UIColor.white.cgColor
-        pickerDoneButton.addTarget(self, action: #selector(ViewController.dismissPicker), for: UIControlEvents.touchUpInside)
+        pickerDoneButton.addTarget(self, action: #selector(ViewController.dismissPicker), for: UIControl.Event.touchUpInside)
         
         self.actIndTwo.isHidden = true
         mygamesBTN.isEnabled = false
@@ -290,13 +290,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
    //     NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayRemoteNotificationKeyDetails", name: UIApplicationLaunchOptionsRemoteNotificationKey, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWasShown:"), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWasShown:"), name:UIResponder.keyboardWillShowNotification, object: nil);
         
-        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWillHide:"), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWillHide:"), name:UIResponder.keyboardWillHideNotification, object: nil);
         
-    //    dobTXT.addTarget(self, action: Selector("textFieldDidChangeBegin:"), forControlEvents: UIControlEvents.EditingDidBegin)
+    //    dobTXT.addTarget(self, action: Selector("textFieldDidChangeBegin:"), forControlEvents: UIControl.Event.EditingDidBegin)
         
-    //    dobTXT.addTarget(self, action: Selector("textFieldDidChangeEnd:"), forControlEvents: UIControlEvents.EditingDidEnd)
+    //    dobTXT.addTarget(self, action: Selector("textFieldDidChangeEnd:"), forControlEvents: UIControl.Event.EditingDidEnd)
         
         
         
@@ -463,7 +463,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         PlayBackgroundMusic()
         
     }
-    func dobLBLAction(_ sender: UITapGestureRecognizer) {
+    @objc func dobLBLAction(_ sender: UITapGestureRecognizer) {
         
        
         ProfileFirstNameTXT.resignFirstResponder()
@@ -668,7 +668,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     */
     
-    func dismissPicker ()
+    @objc func dismissPicker ()
     {
         
         if EditingDOB {
@@ -700,7 +700,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.dobnewLBL.text = dateFormatter.string(from: self.dobPicker.date)
             self.dobnewLBL.textColor = UIColor.black
             
-           // self.selectedDate.setTitle(dateFormatter.stringFromDate(self.picker.date), forState: UIControlState.Normal)
+           // self.selectedDate.setTitle(dateFormatter.stringFromDate(self.picker.date), forState: UIControl.State.Normal)
             
             
         })
@@ -1141,7 +1141,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 let theAlert =  SCLAlertView()
                 theAlert.addButton("Settings", action: {
                     
-                    let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
+                    let settingsUrl = URL(string: UIApplication.openSettingsURLString)
                     //   let settingsUrl = NSURL(string: UIAppli)
                     if let url = settingsUrl {
                         UIApplication.shared.openURL(url)
@@ -1166,7 +1166,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     let theAlert =  SCLAlertView()
                     theAlert.addButton("Settings", action: {
                         
-                        let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
+                        let settingsUrl = URL(string: UIApplication.openSettingsURLString)
                         //   let settingsUrl = NSURL(string: UIAppli)
                         if let url = settingsUrl {
                             UIApplication.shared.openURL(url)
@@ -1196,7 +1196,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             let theAlert =  SCLAlertView()
                             theAlert.addButton("Settings", action: {
                                 
-                                let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
+                                let settingsUrl = URL(string: UIApplication.openSettingsURLString)
                                 //   let settingsUrl = NSURL(string: UIAppli)
                                 if let url = settingsUrl {
                                     UIApplication.shared.openURL(url)
@@ -1414,8 +1414,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         
                         
                         //self.player = localPlayer.displayName
-                        self.playerid = self.localPlayer.playerID! as NSString
-                        self.player = self.localPlayer.alias! as NSString
+                        self.playerid = self.localPlayer.playerID as NSString
+                        self.player = self.localPlayer.alias as NSString
                         
                         print("player: \(self.player)")
                         print("playerid: \(self.playerid)")
@@ -1849,7 +1849,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     let theAlert =  SCLAlertView()
                     theAlert.addButton("Settings", action: {
                         
-                        let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
+                        let settingsUrl = URL(string: UIApplication.openSettingsURLString)
                         //   let settingsUrl = NSURL(string: UIAppli)
                         if let url = settingsUrl {
                             UIApplication.shared.openURL(url)
@@ -1873,7 +1873,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 let alertController = UIAlertController (title: "Notifications", message: "Looks like your Push Notifications are turned off, turn them on for a better game experience", preferredStyle: .Alert)
                 
                 let settingsAction = UIAlertAction(title: "Settings", style: .Default) { (_) -> Void in
-                    let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+                    let settingsUrl = NSURL(string: UIApplication.openSettingsURLString)
                     //   let settingsUrl = NSURL(string: UIAppli)
                     if let url = settingsUrl {
                         UIApplication.sharedApplication().openURL(url)
@@ -1901,7 +1901,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         let theAlert =  SCLAlertView()
                         theAlert.addButton("Settings", action: {
                             
-                            let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
+                            let settingsUrl = URL(string: UIApplication.openSettingsURLString)
                             //   let settingsUrl = NSURL(string: UIAppli)
                             if let url = settingsUrl {
                                 UIApplication.shared.openURL(url)
@@ -1939,7 +1939,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
     
@@ -2019,7 +2019,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func GameLogin () -> NSString {
         print("login called")
-        //localPlayer = GKLocalPlayer.localPlayer()
+        //localPlayer = GKLocalPlayer.local
         
         localPlayer.authenticateHandler = {(ViewController: UIViewController?, error: Error?) -> Void in
             if ((ViewController) != nil) {
@@ -2032,8 +2032,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 print("Player authenticated")
                 
                 //self.player = localPlayer.displayName
-                self.playerid = self.localPlayer.playerID! as NSString
-                self.player = self.localPlayer.alias! as NSString
+                self.playerid = self.localPlayer.playerID as NSString
+                self.player = self.localPlayer.alias as NSString
                 
                 print("player: \(self.player)")
                 print("playerid: \(self.playerid)")
@@ -2071,8 +2071,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 
                 if self.localPlayer.isAuthenticated {
                     
-                    
-                
+              //JARED 11-26-2020 - FIX BELOW
+              /*
                 self.localPlayer.loadFriendPlayers(completionHandler: { (GCFriends) -> Void in
                     print("TEST")
                     print("GCFriend = \(GCFriends)")
@@ -2099,6 +2099,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 */
                     }
                 })
+                    */
                     
                     if self.TryAgain {
                         
@@ -2312,7 +2313,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                    // View1TOPP.constant = 0
                    // View2TOP.constant = 0
                     
-                    let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+                    let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
                     
                     UIView.transition(from: self.ViewLoad1, to: self.ViewLoad2, duration: 0.8, options: animationOptions, completion: nil)
                     
@@ -3116,8 +3117,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             print("Home VC is loaded AND on the screen")
                             
                              //theAlert.hideView()
-                            //theAlert.removeFromParentViewController()
-                            theAlert.removeFromParentViewController()
+                            //theAlert.removeFromParent()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
 
                             
@@ -3125,7 +3126,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             
                            // theAlert.hideView()
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             if let viewControllers = self.navigationController?.viewControllers {
@@ -3210,7 +3211,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             print("Trying to take turn")
                             dispatch_async(dispatch_get_main_queue(), {
                             //  self.dismissViewControllerAnimated(false, completion: nil)
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             self.TakeTurn()
                             
                             
@@ -3270,16 +3271,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             print("Trying to take turn")
                             DispatchQueue.main.async(execute: {
                                 //  self.dismissViewControllerAnimated(false, completion: nil)
-                                theAlert.removeFromParentViewController()
+                                theAlert.removeFromParent()
                                 theAlert.hideView()
                                 self.TakeTurn()
                                 
-                                 //theAlert.removeFromParentViewController()
+                                 //theAlert.removeFromParent()
                                 DispatchQueue.main.async(execute: {
                                     //theAlert.dismissViewControllerAnimated(false, completion: nil)
                                    //  UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
                                     self.IsHandlingAlertMessage = false
-                                   // theAlert.removeFromParentViewController()
+                                   // theAlert.removeFromParent()
                                     print("about to dismiss the root view controller????")
                                     
                                     DispatchQueue.main.async(execute: {
@@ -3301,11 +3302,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     })
                     
                     theAlert.addButton("Later", action: {
-                        theAlert.removeFromParentViewController()
+                        theAlert.removeFromParent()
 
                         DispatchQueue.main.async(execute: {
                             self.IsHandlingAlertMessage = false
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             //theAlert.dismissViewControllerAnimated(false, completion: nil)
                             //self.dismissViewControllerAnimated(false, completion: nil)
@@ -3344,7 +3345,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         
                         if let viewControllers = self.navigationController?.viewControllers {
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             print("view controller is navigation controller")
@@ -3362,7 +3363,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             print("else showing")
                             
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             self.navigationController?.popToRootViewController(animated: false)
@@ -3382,7 +3383,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             print("Trying to take turn")
                             DispatchQueue.main.async(execute: {
                                 //  self.dismissViewControllerAnimated(false, completion: nil)
-                                theAlert.removeFromParentViewController()
+                                theAlert.removeFromParent()
                                 theAlert.hideView()
                                 self.TakeTurn()
                                 DispatchQueue.main.async(execute: {
@@ -3390,7 +3391,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                                     
                                     self.IsHandlingAlertMessage = false
                                    // theAlert.hideView()
-                                    //theAlert.removeFromParentViewController()
+                                    //theAlert.removeFromParent()
                                     self.dismiss(animated: false, completion: nil)
                                     print("DISMISSING THE MEDIUM ALERT SCREEN")
                                 })
@@ -3407,7 +3408,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         DispatchQueue.main.async(execute: {
                             self.IsHandlingAlertMessage = false
                             theAlert.hideView()
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                            // theAlert.dismissViewControllerAnimated(false, completion: nil)
                             //self.dismissViewControllerAnimated(false, completion: nil)
                             print("DISMISSING THE MEDIUM ALERT SCREEN")
@@ -3448,7 +3449,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         
                         if let viewControllers = self.navigationController?.viewControllers {
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             print("view controller is navigation controller")
                             for viewController in viewControllers {
@@ -3463,7 +3464,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             }
                         } else {
                             print("else showing")
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             theAlert.hideView()
                             
                             
@@ -3484,14 +3485,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             print("Trying to take turn")
                             DispatchQueue.main.async(execute: {
                                 //  self.dismissViewControllerAnimated(false, completion: nil)
-                                theAlert.removeFromParentViewController()
+                                theAlert.removeFromParent()
                                 theAlert.hideView()
                                 self.TakeTurn()
                                 DispatchQueue.main.async(execute: {
                                     
                                     self.IsHandlingAlertMessage = false
                                     
-                                    theAlert.removeFromParentViewController()
+                                    theAlert.removeFromParent()
                                     //theAlert.dismissViewControllerAnimated(false, completion: nil)
                                     //self.dismissViewControllerAnimated(false, completion: nil)
                                     print("DISMISSING THE HARD ALERT SCREEN")
@@ -3511,7 +3512,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         DispatchQueue.main.async(execute: {
                             
                             self.IsHandlingAlertMessage = false
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             //  self.dismissViewControllerAnimated(false, completion: nil)
                             print("DISMISSING THE HARD ALERT SCREEN")
                             // theAlert.dismissViewControllerAnimated(false, completion: nil)
@@ -3546,7 +3547,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         
                         DispatchQueue.main.async(execute: {
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             //  self.dismissViewControllerAnimated(false, completion: nil)
                             print("DISMISSING THE HARD ALERT SCREEN")
                             // theAlert.dismissViewControllerAnimated(false, completion: nil)
@@ -3606,7 +3607,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         print("Trying to take turn")
                         DispatchQueue.main.async(execute: {
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             //  self.dismissViewControllerAnimated(false, completion: nil)
                             self.TakeTurn()
                             
@@ -3620,7 +3621,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         
                         DispatchQueue.main.async(execute: {
                             
-                            theAlert.removeFromParentViewController()
+                            theAlert.removeFromParent()
                             //  self.dismissViewControllerAnimated(false, completion: nil)
                             print("DISMISSING THE HARD ALERT SCREEN")
                             // theAlert.dismissViewControllerAnimated(false, completion: nil)
@@ -3690,7 +3691,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             DispatchQueue.main.async(execute: {
                                 //  self.dismissViewControllerAnimated(false, completion: nil)
                                 
-                                theAlert.removeFromParentViewController()
+                                theAlert.removeFromParent()
                                 self.StartSuggestedGame(QuoteExample as NSString, username: self.username, userid: self.userID)
                                 
                             })
@@ -3890,7 +3891,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let theAlert = SCLAlertView()
         theAlert.addButton("Settings") {
             print("Settings pushed")
-            let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+            let settingsUrl = NSURL(string: UIApplication.openSettingsURLString)
             //   let settingsUrl = NSURL(string: UIAppli)
             if let url = settingsUrl {
                 UIApplication.sharedApplication().openURL(url)

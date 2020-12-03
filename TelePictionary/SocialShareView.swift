@@ -16,7 +16,7 @@ class SocialShare: UIVisualEffectView {
             label.text = text
         }
     }
-    let activityIndictor: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+    let activityIndictor: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
     
     let label: UILabel = UILabel()
     let FaceBook: UIButton = UIButton()
@@ -129,8 +129,8 @@ class SocialShare: UIVisualEffectView {
             FaceBook.frame = CGRect(x: 60, y: 100, width: 50, height: 50)
             Instagram.frame = CGRect(x: 110, y: 10, width: 50, height: 50)
             
-            closeBTN.setTitle("Close", for: UIControlState())
-            closeBTN.setTitleColor(UIColor.black, for: UIControlState())
+            closeBTN.setTitle("Close", for: UIControl.State())
+            closeBTN.setTitleColor(UIColor.black, for: UIControl.State())
             closeBTN.addTarget(self, action: #selector(SocialShare.closeView(_:)), for: .touchUpInside)
             
            
@@ -140,7 +140,7 @@ class SocialShare: UIVisualEffectView {
             
         }
     }
-    func closeView(_ sender: UIButton!) {
+    @objc func closeView(_ sender: UIButton!) {
     self.isHidden = true
     }
     

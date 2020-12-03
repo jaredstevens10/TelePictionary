@@ -30,7 +30,7 @@
         var resizeW = CGFloat()
         var interAd: ADInterstitialAd?
         var interAdView = UIView()
-        var closeButton = UIButton(type: UIButtonType.system)
+        var closeButton = UIButton(type: UIButton.ButtonType.system)
         @IBOutlet weak var snippedPic: UIImageView!
         
         
@@ -203,7 +203,7 @@
        
         
      //   func tapAction(sender: UITapGestureRecognizer) {
-        func LongPressAction(_ sender: UILongPressGestureRecognizer) {
+        @objc func LongPressAction(_ sender: UILongPressGestureRecognizer) {
             let point = sender.location(in: self.view)
             
             let currentURL = self.webView2.request!.url?.absoluteString
@@ -652,7 +652,9 @@ print("google image should not be true")
         
             //self.snipImage.image = snipTemp
             self.snipView.isHidden = false
-            imageData = UIImageJPEGRepresentation(snipImage.image!, 1.0)!;
+            //imageData = UIImage.JPEGData(snipImage.image!, 1.0)!;
+            imageData = snipImage.image!.jpegData(compressionQuality: 1.0)!;
+            //imageData = UIImageJPEGRepresentation(snipImage.image!, 1.0)!;
             
             print("ImageNSData = \(imageData)")
              self.trimSaveBTN.isHidden = false
@@ -668,7 +670,7 @@ print("google image should not be true")
             self.present(AC, animated: true, completion: nil)
         }
         
-        func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
             
             print("did finish loading web page")
             print("request = \(request.url)")
@@ -776,7 +778,7 @@ print("google image should not be true")
         
         
         
-        func handleTap(_ recognizer: UITapGestureRecognizer) {
+        @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
             
            // let snipTemp = self.snipView.pb_takeSnapshot()
            // self.snippedPic.image = snipTemp

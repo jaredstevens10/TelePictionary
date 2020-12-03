@@ -83,7 +83,7 @@ class RepeatFriendsViewController: UIViewController, UITableViewDataSource, UITa
         self.TableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         TableView.dataSource = self
         TableView.delegate = self
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none        // Do any additional setup after loading the view.
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none        // Do any additional setup after loading the view.
         
         GCFriendID = "PUSHID"
         let prefs:UserDefaults = UserDefaults.standard
@@ -330,7 +330,7 @@ class RepeatFriendsViewController: UIViewController, UITableViewDataSource, UITa
             
             let URL = NSURL(string: "\(infotype.imageURL).jpg)")!
             cell.Turn1Image?.hnk_setImageFromURL(URL)
-            cell.Turn1Image?.contentMode = UIViewContentMode.ScaleAspectFit
+            cell.Turn1Image?.contentMode = UIView.ContentMode.ScaleAspectFit
                 
             }
             
@@ -338,7 +338,7 @@ class RepeatFriendsViewController: UIViewController, UITableViewDataSource, UITa
             cell.Turn1Image?.layer.borderWidth = 1
             cell.Turn1Image?.layer.borderColor = UIColor.whiteColor().CGColor
             cell.Turn1Image?.layer.masksToBounds = true
-            cell.Turn1Image?.contentMode = UIViewContentMode.ScaleAspectFit
+            cell.Turn1Image?.contentMode = UIView.ContentMode.ScaleAspectFit
             cell.Turn1Image?.clipsToBounds = true
             
             */
@@ -498,7 +498,7 @@ class RepeatFriendsViewController: UIViewController, UITableViewDataSource, UITa
         
     }
     
-    func segmentValueChanged(_ sender: AnyObject?){
+    @objc func segmentValueChanged(_ sender: AnyObject?){
         
         if segment.selectedIndex == 0 {
             

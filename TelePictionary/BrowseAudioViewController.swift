@@ -34,7 +34,7 @@ class BrowseAudioViewController: UIViewController, UIWebViewDelegate, UIGestureR
     var resizeW = CGFloat()
     var interAd: ADInterstitialAd?
     var interAdView = UIView()
-    var closeButton = UIButton(type: UIButtonType.system)
+    var closeButton = UIButton(type: UIButton.ButtonType.system)
     @IBOutlet weak var snippedPic: UIImageView!
     
    // @IBOutlet var recordButton : UIButton!
@@ -300,7 +300,7 @@ class BrowseAudioViewController: UIViewController, UIWebViewDelegate, UIGestureR
         let session = AVAudioSession.sharedInstance()
         
         do{
-            try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try session.setCategory(AVAudioSession.Category.playAndRecord)
             try session.setActive(true)
             session.requestRecordPermission({ (allowed : Bool) -> Void in
                 
@@ -329,7 +329,7 @@ class BrowseAudioViewController: UIViewController, UIWebViewDelegate, UIGestureR
                     print("granted")
                     
                     //set category and activate recorder session
-                    try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+                    try! audioSession.setCategory(AVAudioSession.Category.playAndRecord)
                     try! audioSession.setActive(true)
                     
                     
@@ -444,7 +444,7 @@ class BrowseAudioViewController: UIViewController, UIWebViewDelegate, UIGestureR
     
     
     //   func tapAction(sender: UITapGestureRecognizer) {
-    func LongPressAction(_ sender: UILongPressGestureRecognizer) {
+    @objc func LongPressAction(_ sender: UILongPressGestureRecognizer) {
         let point = sender.location(in: self.view)
         
         let currentURL = self.webView2.request!.url?.absoluteString
@@ -886,7 +886,8 @@ class BrowseAudioViewController: UIViewController, UIWebViewDelegate, UIGestureR
         
         //self.snipImage.image = snipTemp
         self.snipView.isHidden = false
-        imageData = UIImageJPEGRepresentation(snipImage.image!, 1.0)!;
+        //imageData = UIImageJPEGRepresentation(snipImage.image!, 1.0)!;
+        imageData = snipImage.image!.jpegData(compressionQuality: 1.0)!
         
         print("ImageNSData = \(imageData)")
         self.trimSaveBTN.isHidden = false
@@ -902,7 +903,7 @@ class BrowseAudioViewController: UIViewController, UIWebViewDelegate, UIGestureR
         self.present(AC, animated: true, completion: nil)
     }
     
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
         
         print("did finish loading web page")
         print("request = \(request.url)")
@@ -1010,7 +1011,7 @@ class BrowseAudioViewController: UIViewController, UIWebViewDelegate, UIGestureR
     
     
     
-    func handleTap(_ recognizer: UITapGestureRecognizer) {
+    @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
         
         // let snipTemp = self.snipView.pb_takeSnapshot()
         // self.snippedPic.image = snipTemp

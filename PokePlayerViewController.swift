@@ -72,10 +72,10 @@
             
             self.navigationController?.popoverPresentationController?.backgroundColor = UIColor.lightGray
             
-            self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+            self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
          /*
             self.refreshControl = UIRefreshControl()
-            self.refreshControl.addTarget(self, action: "RefreshFailData:", forControlEvents: UIControlEvents.ValueChanged)
+            self.refreshControl.addTarget(self, action: "RefreshFailData:", forControlEvents: UIControl.Event.ValueChanged)
           */
             
             PlayerArrayTemp.append(player1)
@@ -281,7 +281,7 @@
         
             */
         
-        func PokeClicked(_ sender: UIButton){
+        @objc func PokeClicked(_ sender: UIButton){
             let tag = sender.tag
             print("Tag = \(tag)")
             print("Poked  Clicked")
@@ -487,7 +487,7 @@
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = TableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath) as! BasicCell
             
-           // cell.selectionStyle = UITableViewCellSelectionStyle.None
+           // cell.selectionStyle = UITableViewCell.SelectionStyle.None
             
             
             

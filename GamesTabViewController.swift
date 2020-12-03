@@ -44,7 +44,7 @@ open class GamesTabViewController: UITabBarController, UITabBarControllerDelegat
             if tabBarItem.title == "Gallery" {
                 tabBarItem.title = ""
             }
-            item.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "DK Cool Crayon", size: 8.0)!], for:UIControlState())
+            item.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "DK Cool Crayon", size: 8.0)!], for:UIControl.State())
             
             if let image = item.image {
                 item.image = image.withRenderingMode(.alwaysOriginal)
@@ -108,8 +108,8 @@ open class GamesTabViewController: UITabBarController, UITabBarControllerDelegat
         let frame = CGRect(x: 0.0, y: 0.0, width: imageW, height: imageH)
        // let frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height)
         button = UIButton(frame: frame)
-        button.setBackgroundImage(buttonImage, for: UIControlState())
-        button.setBackgroundImage(highlightImage, for: UIControlState.highlighted)
+        button.setBackgroundImage(buttonImage, for: UIControl.State())
+        button.setBackgroundImage(highlightImage, for: UIControl.State.highlighted)
         button.layer.cornerRadius = 30
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.cgColor
@@ -129,13 +129,13 @@ open class GamesTabViewController: UITabBarController, UITabBarControllerDelegat
             button.center = center;
         }
         
-        button.addTarget(self, action: #selector(GamesTabViewController.changeTabToMiddleTab(_:)), for: UIControlEvents.touchUpInside)
+        button.addTarget(self, action: #selector(GamesTabViewController.changeTabToMiddleTab(_:)), for: UIControl.Event.touchUpInside)
         
         self.view.addSubview(button)
     }
     
     
-    func changeTabToMiddleTab(_ sender:UIButton)
+    @objc func changeTabToMiddleTab(_ sender:UIButton)
     {
         
         let selectedIndex = Int(self.viewControllers!.count/2)
@@ -169,12 +169,12 @@ open class GamesTabViewController: UITabBarController, UITabBarControllerDelegat
     
     open func addRaisedButton(_ buttonImage: UIImage?, highlightImage: UIImage?) {
         if let buttonImage = buttonImage {
-            let button = UIButton(type: UIButtonType.custom)
-            button.autoresizingMask = [UIViewAutoresizing.flexibleRightMargin, UIViewAutoresizing.flexibleLeftMargin, UIViewAutoresizing.flexibleBottomMargin, UIViewAutoresizing.flexibleTopMargin]
+            let button = UIButton(type: UIButton.ButtonType.custom)
+            button.autoresizingMask = [UIView.AutoresizingMask.flexibleRightMargin, UIView.AutoresizingMask.flexibleLeftMargin, UIView.AutoresizingMask.flexibleBottomMargin, UIView.AutoresizingMask.flexibleTopMargin]
             
             button.frame = CGRect(x: 0.0, y: 0.0, width: buttonImage.size.width, height: buttonImage.size.height)
-            button.setBackgroundImage(buttonImage, for: UIControlState())
-            button.setBackgroundImage(highlightImage, for: UIControlState.highlighted)
+            button.setBackgroundImage(buttonImage, for: UIControl.State())
+            button.setBackgroundImage(highlightImage, for: UIControl.State.highlighted)
             button.layer.cornerRadius = 30
             button.layer.borderWidth = 1
             button.clipsToBounds = true
@@ -192,12 +192,12 @@ open class GamesTabViewController: UITabBarController, UITabBarControllerDelegat
                 button.center = center
             }
             
-            button.addTarget(self, action: #selector(GamesTabViewController.onRaisedButton(_:)), for: UIControlEvents.touchUpInside)
+            button.addTarget(self, action: #selector(GamesTabViewController.onRaisedButton(_:)), for: UIControl.Event.touchUpInside)
             self.view.addSubview(button)
         }
     }
     
-    open func onRaisedButton(_ sender: UIButton!) {
+    @objc open func onRaisedButton(_ sender: UIButton!) {
         
     }
 }

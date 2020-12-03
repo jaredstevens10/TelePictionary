@@ -51,7 +51,7 @@ class GameCompleteViewController: UIViewController, LikesViewControllerDelegate,
     var product_id_ads: NSString?;
     var interAd: ADInterstitialAd?
     var interAdView = UIView()
-    var closeButton = UIButton(type: UIButtonType.system)
+    var closeButton = UIButton(type: UIButton.ButtonType.system)
     var imageURL = NSString()
     @IBOutlet weak var visibleView: UIView!
     @IBOutlet weak var shareImage: UIImageView!
@@ -229,7 +229,7 @@ class GameCompleteViewController: UIViewController, LikesViewControllerDelegate,
         messageFrame.layer.cornerRadius = 15
         messageFrame.backgroundColor = UIColor(white: 0, alpha: 0.7)
         if indicator {
-            ActivityInd = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+            ActivityInd = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.white)
             ActivityInd.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
             ActivityInd.startAnimating()
             messageFrame.addSubview(ActivityInd)
@@ -811,12 +811,12 @@ visibleView.isHidden = false
         closeButton.backgroundColor = UIColor.white
         closeButton.layer.borderColor = UIColor.black.cgColor
         closeButton.layer.borderWidth = 1
-        closeButton.setTitleColor(UIColor.black, for: UIControlState())
+        closeButton.setTitleColor(UIColor.black, for: UIControl.State())
         // Wire up the closeAd function when the user taps the button
-        closeButton.addTarget(self, action: #selector(GameCompleteViewController.closeAd(_:)), for: UIControlEvents.touchDown)
+        closeButton.addTarget(self, action: #selector(GameCompleteViewController.closeAd(_:)), for: UIControl.Event.touchDown)
         // Some funkiness to get the title to display correctly every time:
         closeButton.isEnabled = false
-        closeButton.setTitle("skip", for: UIControlState())
+        closeButton.setTitle("skip", for: UIControl.State())
         closeButton.isEnabled = true
         closeButton.setNeedsLayout()
         
@@ -999,7 +999,7 @@ visibleView.isHidden = false
             scrollView.contentSize = finalImage.bounds.size
             scrollView.contentSize.height = 3000;
             
-            scrollView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+            scrollView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
             
             scrollView.addSubview(ImageView)
             view.addSubview(scrollView)
@@ -1271,12 +1271,11 @@ visibleView.isHidden = false
         //playBTN.enabled = false
         //let url = Audio_Data
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-            
-            // .setCategory(AVAudioSessionCategoryPlayback, error: nil)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)         // .setCategory(AVAudioSessionCategoryPlayback, error: nil)
             
             try AVAudioSession.sharedInstance().setActive(true)
-            player = try AVAudioPlayer(data: TheAudioClip, fileTypeHint: AVFileTypeAppleM4A)
+            player = try AVAudioPlayer(data: TheAudioClip, fileTypeHint: AVFileType.m4a.rawValue)
+            //player = try AVAudioPlayer(data: TheAudioClip, fileTypeHint: AVFileTypeAppleM4A)
             // player = AVAudioPlayer(data: url, fileTypeHing: AVFileTypeMPEGLayer3, error: nil)
             player.prepareToPlay()
             player.play()
@@ -1324,7 +1323,7 @@ visibleView.isHidden = false
         let currentRoute = AVAudioSession.sharedInstance().currentRoute
         if currentRoute.outputs.count > 0 {
             for description in currentRoute.outputs {
-                if description.portType == AVAudioSessionPortHeadphones {
+                if description.portType == AVAudioSession.Port.headphones {
                     print("headphones are plugged in")
                     break
                 } else {
@@ -1332,12 +1331,12 @@ visibleView.isHidden = false
                 }
             }
         } else {
-            print("checking headphones requires a connection to a device")
+            print("checking head@objc phones requires a connection to a device")
         }
     }
     
     
-    func updateMusicMeter(_ timer:Timer) {
+    @objc func updateMusicMeter(_ timer:Timer) {
         
         //  if recorder.recording {
         let min = Int((player?.currentTime)! / 60)
@@ -1559,14 +1558,14 @@ visibleView.isHidden = false
         if !FailTurn {
             FailTurn = true
             
-            UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseOut, animations: {
                 self.NewFailBTN.alpha = 0.0
                 }, completion: {
                 (finished: Bool) -> Void in
       //  })
             self.NewFailBTN.imageView?.image = UIImage(named: "FailIconWhiteRed.png")
                 
-                    UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
                         self.NewFailBTN.alpha = 1.0
                     }, completion: nil)
     })
@@ -1784,14 +1783,14 @@ visibleView.isHidden = false
             FailTurn = false
         
             
-            UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseOut, animations: {
                 self.NewFailBTN.alpha = 0.0
                 }, completion: {
                     (finished: Bool) -> Void in
                     //  })
                     self.NewFailBTN.imageView?.image = UIImage(named: "FailIconGrayBlur.png")
                     
-                    UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
                         self.NewFailBTN.alpha = 1.0
                         }, completion: nil)
             })
@@ -1822,14 +1821,14 @@ visibleView.isHidden = false
         if !LikedTurn {
         LikedTurn = true
       
-            UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseOut, animations: {
                 self.NewLikeBTN.alpha = 0.0
                 }, completion: {
                     (finished: Bool) -> Void in
                     //  })
                     self.NewLikeBTN.imageView?.image = UIImage(named: "LikeIconGrayGreen.png")
                     
-                    UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
                         self.NewLikeBTN.alpha = 1.0
                         }, completion: nil)
             })
@@ -2127,14 +2126,14 @@ visibleView.isHidden = false
             LikedTurn = false
       
             
-            UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseOut, animations: {
                 self.NewLikeBTN.alpha = 0.0
                 }, completion: {
                     (finished: Bool) -> Void in
                     //  })
                     self.NewLikeBTN.imageView?.image = UIImage(named: "LikeIconGrayBlur.png")
                     
-                    UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
                         self.NewLikeBTN.alpha = 1.0
                         }, completion: nil)
             })
@@ -2168,11 +2167,11 @@ visibleView.isHidden = false
         shadow.shadowOffset = CGSize(width: 0,height: 1)
         // let textColorShadow = UIColor.whiteColor()
         
-        var textFontAttributes: [String : AnyObject]?
+        var textFontAttributes: [NSAttributedString.Key : AnyObject]?
         
         
         if let actualFont = font {
-            textFontAttributes = [NSFontAttributeName: actualFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: textStyle]
+            textFontAttributes = [NSAttributedString.Key.font: actualFont, NSAttributedString.Key.foregroundColor: textColor, NSAttributedString.Key.paragraphStyle: textStyle]
             
         }
         
@@ -2305,7 +2304,7 @@ visibleView.isHidden = false
     }
     
     // When the user clicks the close button, route to the adFinished function:
-    func closeAd(_ sender: UIButton) {
+    @objc func closeAd(_ sender: UIButton) {
         adFinished()
     }
     
@@ -2512,7 +2511,7 @@ visibleView.isHidden = false
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let leftRightInset: CGFloat = CGFloat(0)
         //self.view.frame.size.width / 14.0
-        return UIEdgeInsetsMake(0, leftRightInset, 0, leftRightInset)
+        return UIEdgeInsets(top: 0, left: leftRightInset, bottom: 0, right: leftRightInset)
     }
   
     

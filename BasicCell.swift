@@ -140,7 +140,7 @@ class BasicCell: UITableViewCell {
                 
                 //self.visualEffectView!.autoresizingMask = UIViewAu
                 
-                //self.visualEffectView!.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+                //self.visualEffectView!.autoresizingMask = [UIView.AutoresizingMask.FlexibleWidth, UIView.AutoresizingMask.FlexibleHeight]
                 
                 self.Turn1Image.addSubview(visualEffectView)
                 
@@ -169,7 +169,7 @@ class BasicCell: UITableViewCell {
             let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale");
             pulseAnimation.duration = 30.0;
             pulseAnimation.toValue = NSNumber(value: 1.0 as Float);
-            pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut);
+            pulseAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut);
             pulseAnimation.autoreverses = true;
             pulseAnimation.repeatCount = FLT_MAX;
             self.TakeTurnBTN.layer.add(pulseAnimation, forKey: nil)

@@ -413,7 +413,7 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     @IBOutlet weak var TimeConfirmedLBL: UILabel!
     
     
-    func keyboardWasShown(_ notification: Notification) {
+    @objc func keyboardWasShown(_ notification: Notification) {
         print("KeyboardShown1")
         //EditingGameTitle = false
         
@@ -430,7 +430,7 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             print("NOW IM EDITING GMAE TITLE")
        
             var info = (notification as NSNotification).userInfo!
-            let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             
             
             UIView.animate(withDuration: 0.3, animations: { () -> Void in
@@ -453,7 +453,7 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         
         var info = (notification as NSNotification).userInfo!
         
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
             self.QuoteBoxBottom.constant = (keyboardFrame.size.height - 120) + 5
@@ -482,7 +482,7 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         
     }
     
-    func keyboardWillHide(_ notification: Notification) {
+    @objc func keyboardWillHide(_ notification: Notification) {
         
         if EditingGameTitle {
             
@@ -577,7 +577,7 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
 
     
-    func textFieldDidChangeBegin(_ textField: UITextField) {
+    @objc func textFieldDidChangeBegin(_ textField: UITextField) {
         print("textFieldChange1")
         
         qbDoneBTN.isHidden = false
@@ -615,7 +615,7 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         print("bottom textfieldchange1")
 }
     
-    func textFieldDidChangeEnd(_ textField: UITextField) {
+    @objc func textFieldDidChangeEnd(_ textField: UITextField) {
 
         qbDoneBTN.isHidden = true
     
@@ -668,7 +668,7 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             View2TOP.constant = 30
         }
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View1, to: self.View2Quote, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -685,7 +685,7 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             
             
         }
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
 
     UIView.transition(from: self.View2Quote, to: self.View1, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -703,13 +703,13 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         print("Picture is NewGameFirstTurn")
         if View1SelectImage {
             
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         
             UIView.transition(from: self.View2Quote, to: self.ImageView, duration: 0.8, options: animationOptions, completion: nil)
             
         } else {
-            let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+            let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
             
             
             UIView.transition(from: self.View2Quote, to: self.ImageView, duration: 0.8, options: animationOptions, completion: nil)
@@ -732,12 +732,12 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         
         if View1SelectImage {
             
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.ImageView, to: self.View2Quote, duration: 0.8, options: animationOptions, completion: nil)
             
         } else {
-            let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+            let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
             
             UIView.transition(from: self.ImageView, to: self.View2Quote, duration: 0.8, options: animationOptions, completion: nil)
         }
@@ -759,7 +759,7 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View1, to: self.ImageView, duration: 0.8, options: animationOptions, completion: nil)
         
@@ -1244,7 +1244,7 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                 
                 tabBarController?.selectedIndex = 2
                 
-                //  UIView.transitionFromView(fromView!, toView: toView, duration: 0.325, options: UIViewAnimationOptions.CurveEaseInOut, completion: nil)
+                //  UIView.transitionFromView(fromView!, toView: toView, duration: 0.325, options: UIView.AnimationOptions.CurveEaseInOut, completion: nil)
                 
                 
             } else {
@@ -1312,7 +1312,7 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         
         backBTN.isHidden = true
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
         }
             
             
@@ -1433,15 +1433,15 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         qbDoneBTN.layer.cornerRadius = 10
                PictureAdded = false
         EditingGameTitle = false
-        NotificationCenter.default.addObserver(self, selector: #selector(NewViewController.keyboardWasShown(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(NewViewController.keyboardWasShown(_:)), name:UIResponder.keyboardWillShowNotification, object: nil);
         
-        NotificationCenter.default.addObserver(self, selector: #selector(NewViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(NewViewController.keyboardWillHide(_:)), name:UIResponder.keyboardWillHideNotification, object: nil);
         
         
-        GameTitleTXT.addTarget(self, action: #selector(NewViewController.textFieldDidChangeBegin(_:)), for: UIControlEvents.editingDidBegin)
+        GameTitleTXT.addTarget(self, action: #selector(NewViewController.textFieldDidChangeBegin(_:)), for: UIControl.Event.editingDidBegin)
         
-        GameTitleTXT.addTarget(self, action: #selector(NewViewController.textFieldDidChangeEnd(_:)), for: UIControlEvents.editingDidEnd)
-        //QuoteBox.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        GameTitleTXT.addTarget(self, action: #selector(NewViewController.textFieldDidChangeEnd(_:)), for: UIControl.Event.editingDidEnd)
+        //QuoteBox.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControl.Event.EditingChanged)
         
         product_id = "com.ClavenSolutions.TelePictionary.pcamera"
         product_id_all = "com.ClavenSolutions.TelePictionary.allpurchase"
@@ -1457,11 +1457,11 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         TurnTimePKR.selectRow(1, inComponent: 0, animated: true)
         
         let SwipeDown = UISwipeGestureRecognizer(target: self, action: #selector(NewViewController.respondToSwipeGesture(_:)))
-        SwipeDown.direction = UISwipeGestureRecognizerDirection.down
+        SwipeDown.direction = UISwipeGestureRecognizer.Direction.down
         self.view.addGestureRecognizer(SwipeDown)
         
         let SwipeUp = UISwipeGestureRecognizer(target: self, action: #selector(NewViewController.respondToSwipeGesture(_:)))
-        SwipeUp.direction = UISwipeGestureRecognizerDirection.up
+        SwipeUp.direction = UISwipeGestureRecognizer.Direction.up
         self.view.addGestureRecognizer(SwipeUp)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(NewViewController.DismissKeyboard))
@@ -1553,11 +1553,11 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         
         if isFun.isEqual(to: "no") {
             
-            contentE.setImage(UIImage(named: "ContentEasy.png"), for: UIControlState())
-            contentM.setImage(UIImage(named: "ContentHard.png"), for: UIControlState())
-            contentT.setImage(UIImage(named: "ContentMedium.png"), for: UIControlState())
+            contentE.setImage(UIImage(named: "ContentEasy.png"), for: UIControl.State())
+            contentM.setImage(UIImage(named: "ContentHard.png"), for: UIControl.State())
+            contentT.setImage(UIImage(named: "ContentMedium.png"), for: UIControl.State())
             
-            funBTN.setTitle("Difficulty Rating?", for: UIControlState())
+            funBTN.setTitle("Difficulty Rating?", for: UIControl.State())
             
             funLBL.text = "Select Difficulty Level"
             
@@ -1565,11 +1565,11 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             
             funLBL.text = "Select Content Rating"
             
-            funBTN.setTitle("Content Rating?", for: UIControlState())
+            funBTN.setTitle("Content Rating?", for: UIControl.State())
             
-            contentE.setImage(contentE_NO, for: UIControlState())
-            contentM.setImage(contentM_NO, for: UIControlState())
-            contentT.setImage(contentT_NO, for: UIControlState())
+            contentE.setImage(contentE_NO, for: UIControl.State())
+            contentM.setImage(contentM_NO, for: UIControl.State())
+            contentT.setImage(contentT_NO, for: UIControl.State())
             
         }
 
@@ -1784,12 +1784,12 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     }
     
     
-    func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
+    @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
         if ViewTurnTime {
             if let swipeGesture = gesture as? UISwipeGestureRecognizer {
                 switch swipeGesture.direction {
                     
-                case UISwipeGestureRecognizerDirection.up:
+                case UISwipeGestureRecognizer.Direction.up:
                     //println("swiped image view down")
                     
                     switch TimeLimitPick {
@@ -1865,7 +1865,7 @@ class NewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             if let swipeGesture = gesture as? UISwipeGestureRecognizer {
                 switch swipeGesture.direction {
                     
-                case UISwipeGestureRecognizerDirection.down:
+                case UISwipeGestureRecognizer.Direction.down:
                     
                     
                     if !PictureAdded {
@@ -2110,8 +2110,8 @@ print("POST OLD DATA = \(post_old)")
 
 
 
-post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
-
+//post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
+    post = post_old.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
 
 
 
@@ -2151,8 +2151,8 @@ post_old = "Player1ID=\(Player1ID2)&Player2ID=\(Player2ID2)&Player3ID=\(Player3I
 
 
 
-post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
-
+//post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
+post = post_old.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
 }
 
 
@@ -2171,8 +2171,8 @@ print("Quote is posted")
             
             
             
-            post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
-            
+            //post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
+            post = post_old.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
             
             
             
@@ -2206,8 +2206,8 @@ print("POST OLD DATA = \(post_old)")
 
 
 
-post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
-
+//post = post_old.addingPercentEscapes(using: String.Encoding.utf8)!
+post = post_old.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
 
 
 
@@ -2790,8 +2790,8 @@ self.presentViewController(alertController, animated: true, completion: nil)
                 let smallImage = PicPreview.image!.resize(0.5)
                 
 
-                let imageData = UIImageJPEGRepresentation(smallImage, 0.6)
-                
+                //let imageData = UIImageJPEGRepresentation(smallImage, 0.6)
+                let imageData = smallImage.jpegData(compressionQuality: 0.6)
                 NewGamePictureData = imageData!.base64EncodedString(options: []) as NSString
         
                 
@@ -3133,24 +3133,24 @@ self.presentViewController(alertController, animated: true, completion: nil)
         if pickerView == TurnTimePKR {
         
         
-        attributedString = NSAttributedString(string: pickerData[row], attributes: [NSForegroundColorAttributeName : UIColor.white])
+        attributedString = NSAttributedString(string: pickerData[row], attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
         
 
         return attributedString
         /*
         switch component {
-        case 0: attributedString = NSAttributedString(string: arrayOne[row], attributes: [NSForegroundColorAttributeName : UIColor.whiteColor()])
+        case 0: attributedString = NSAttributedString(string: arrayOne[row], attributes: [NSAttributedString.Key.foregroundColor : UIColor.whiteColor()])
             
-        case 1: attributedString = NSAttributedString(string: arrayOne[row], attributes: [NSForegroundColorAttributeName : UIColor.whiteColor()])
+        case 1: attributedString = NSAttributedString(string: arrayOne[row], attributes: [NSAttributedString.Key.foregroundColor : UIColor.whiteColor()])
         }
 */
         } else {
             
             if component == 0 {
-               attributedString = NSAttributedString(string: MinData[row].description, attributes: [NSForegroundColorAttributeName : UIColor.white])
+               attributedString = NSAttributedString(string: MinData[row].description, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
             } else {
                 
-               attributedString = NSAttributedString(string: SecData[row].description, attributes: [NSForegroundColorAttributeName : UIColor.white])
+               attributedString = NSAttributedString(string: SecData[row].description, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
             }
 
             
@@ -3539,7 +3539,7 @@ self.presentViewController(alertController, animated: true, completion: nil)
             
             if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
                 picker.allowsEditing = false
-                picker.sourceType = UIImagePickerControllerSourceType.camera
+                picker.sourceType = UIImagePickerController.SourceType.camera
                 picker.cameraCaptureMode = .photo
                 present(picker, animated: true, completion: nil)
                 // mainImageView.image =
@@ -3613,7 +3613,7 @@ self.presentViewController(alertController, animated: true, completion: nil)
                     
                     if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
                         self.picker.allowsEditing = false
-                        self.picker.sourceType = UIImagePickerControllerSourceType.camera
+                        self.picker.sourceType = UIImagePickerController.SourceType.camera
                         self.picker.cameraCaptureMode = .photo
                         self.present(self.picker, animated: true, completion: nil)
                         // mainImageView.image =
@@ -3875,13 +3875,13 @@ self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         var GIFData = Data()
         
         print("GIF Info = \(info)")
         
-        if let imageURL = info[UIImagePickerControllerReferenceURL] as? URL {
+        if let imageURL = info[UIImagePickerController.InfoKey.referenceURL] as? URL {
             let imageName = imageURL.lastPathComponent
            // let imageURLTest = imageURL.
             //GIFData = NSData(contentsOfURL: imageURL)!
@@ -4086,7 +4086,7 @@ self.presentViewController(alertController, animated: true, completion: nil)
                 
                            } else {
                 
-                let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
+                let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage //2
                 
 
                 PicPreview.contentMode = .scaleAspectFit //3
@@ -4176,7 +4176,7 @@ self.presentViewController(alertController, animated: true, completion: nil)
        
 
     
-    func DismissKeyboard(){
+    @objc func DismissKeyboard(){
         
       /*
         if GameTitleTXT.text.isEmpty {
@@ -4232,15 +4232,15 @@ self.presentViewController(alertController, animated: true, completion: nil)
         
         if isFun.isEqual(to: "no") {
             
-            contentE.setImage(UIImage(named: "ContentEasy_Check.png"), for: UIControlState())
-            contentM.setImage(UIImage(named: "ContentHard.png"), for: UIControlState())
-            contentT.setImage(UIImage(named: "ContentMedium.png"), for: UIControlState())
+            contentE.setImage(UIImage(named: "ContentEasy_Check.png"), for: UIControl.State())
+            contentM.setImage(UIImage(named: "ContentHard.png"), for: UIControl.State())
+            contentT.setImage(UIImage(named: "ContentMedium.png"), for: UIControl.State())
             
         } else {
         
-        contentE.setImage(contentE_YES, for: UIControlState())
-        contentM.setImage(contentM_NO, for: UIControlState())
-        contentT.setImage(contentT_NO, for: UIControlState())
+        contentE.setImage(contentE_YES, for: UIControl.State())
+        contentM.setImage(contentM_NO, for: UIControl.State())
+        contentT.setImage(contentT_NO, for: UIControl.State())
 
         }
         
@@ -4257,15 +4257,15 @@ self.presentViewController(alertController, animated: true, completion: nil)
         
         if isFun.isEqual(to: "no") {
             
-            contentE.setImage(UIImage(named: "ContentEasy.png"), for: UIControlState())
-            contentM.setImage(UIImage(named: "ContentHard.png"), for: UIControlState())
-            contentT.setImage(UIImage(named: "ContentMedium_Check.png"), for: UIControlState())
+            contentE.setImage(UIImage(named: "ContentEasy.png"), for: UIControl.State())
+            contentM.setImage(UIImage(named: "ContentHard.png"), for: UIControl.State())
+            contentT.setImage(UIImage(named: "ContentMedium_Check.png"), for: UIControl.State())
             
         } else {
         
-        contentE.setImage(contentE_NO, for: UIControlState())
-        contentM.setImage(contentM_NO, for: UIControlState())
-        contentT.setImage(contentT_YES, for: UIControlState())
+        contentE.setImage(contentE_NO, for: UIControl.State())
+        contentM.setImage(contentM_NO, for: UIControl.State())
+        contentT.setImage(contentT_YES, for: UIControl.State())
             
         }
          ContentRatingSelected = "T"
@@ -4276,15 +4276,15 @@ self.presentViewController(alertController, animated: true, completion: nil)
         
         if isFun.isEqual(to: "no") {
             
-            contentE.setImage(UIImage(named: "ContentEasy.png"), for: UIControlState())
-            contentM.setImage(UIImage(named: "ContentHard_Check.png"), for: UIControlState())
-            contentT.setImage(UIImage(named: "ContentMedium.png"), for: UIControlState())
+            contentE.setImage(UIImage(named: "ContentEasy.png"), for: UIControl.State())
+            contentM.setImage(UIImage(named: "ContentHard_Check.png"), for: UIControl.State())
+            contentT.setImage(UIImage(named: "ContentMedium.png"), for: UIControl.State())
             
         } else {
         
-        contentE.setImage(contentE_NO, for: UIControlState())
-        contentM.setImage(contentM_YES, for: UIControlState())
-        contentT.setImage(contentT_NO, for: UIControlState())
+        contentE.setImage(contentE_NO, for: UIControl.State())
+        contentM.setImage(contentM_YES, for: UIControl.State())
+        contentT.setImage(contentT_NO, for: UIControl.State())
             
         }
         
@@ -4479,11 +4479,11 @@ self.presentViewController(alertController, animated: true, completion: nil)
         shadow.shadowOffset = CGSize(width: 0,height: 1)
         // let textColorShadow = UIColor.whiteColor()
         
-        var textFontAttributes: [String : AnyObject]?
+        var textFontAttributes: [NSAttributedString.Key : AnyObject]?
         
         
         if let actualFont = font {
-            textFontAttributes = [NSFontAttributeName: actualFont, NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: textStyle]
+            textFontAttributes = [NSAttributedString.Key.font: actualFont, NSAttributedString.Key.foregroundColor: textColor, NSAttributedString.Key.paragraphStyle: textStyle]
             
         }
         
@@ -4873,9 +4873,9 @@ self.presentViewController(alertController, animated: true, completion: nil)
             
         } else {
             /*
-            let alert = UIAlertController(title: "Accounts", message: "Please login to Facebook", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Accounts", message: "Please login to Facebook", preferredStyle: UIAlertController.Style.Alert)
             
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.Default, handler: nil))
             
             self.presentViewController(alert, animated: true, completion: nil)
             
@@ -5162,9 +5162,9 @@ self.presentViewController(alertController, animated: true, completion: nil)
             
         } else {
             /*
-            let alert = UIAlertController(title: "Accounts", message: "Please login to Twitter", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Accounts", message: "Please login to Twitter", preferredStyle: UIAlertController.Style.Alert)
             
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.Default, handler: nil))
             
             self.presentViewController(alert, animated: true, completion: nil)
             */
@@ -5353,7 +5353,7 @@ self.presentViewController(alertController, animated: true, completion: nil)
         }
         else if let theGameStartedViewController = unwindSegue.source as? GameStartedViewController {
             
-            let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+            let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
             
             UIView.transition(from: self.View2Quote, to: self.View1, duration: 0.1, options: animationOptions, completion: nil)
             
@@ -5414,7 +5414,7 @@ self.presentViewController(alertController, animated: true, completion: nil)
 extension UIImage {
     func resize(_ scale:CGFloat)-> UIImage {
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: size.width*scale, height: size.height*scale)))
-        imageView.contentMode = UIViewContentMode.scaleAspectFit
+        imageView.contentMode = UIView.ContentMode.scaleAspectFit
         imageView.image = self
         UIGraphicsBeginImageContext(imageView.bounds.size)
         imageView.layer.render(in: UIGraphicsGetCurrentContext()!)
@@ -5424,7 +5424,7 @@ extension UIImage {
     }
     func resizeToWidth(_ width:CGFloat)-> UIImage {
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))))
-        imageView.contentMode = UIViewContentMode.scaleAspectFit
+        imageView.contentMode = UIView.ContentMode.scaleAspectFit
         imageView.image = self
         UIGraphicsBeginImageContext(imageView.bounds.size)
         imageView.layer.render(in: UIGraphicsGetCurrentContext()!)
@@ -5493,12 +5493,12 @@ extension NewViewController {
 
 extension UIViewController {
     
-    func createBlur(_ effectStyle: UIBlurEffectStyle = .dark) {
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
+    func createBlur(_ effectStyle: UIBlurEffect.Style = .dark) {
+        if !UIAccessibility.isReduceTransparencyEnabled {
             view.backgroundColor = UIColor.clear
             
             let blurView = UIVisualEffectView(effect: UIBlurEffect(style: effectStyle))
-            blurView.autoresizingMask = [UIViewAutoresizing.flexibleHeight, UIViewAutoresizing.flexibleWidth]
+            blurView.autoresizingMask = [UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleWidth]
             blurView.frame = view.bounds
             
             view.insertSubview(blurView, at: 0)

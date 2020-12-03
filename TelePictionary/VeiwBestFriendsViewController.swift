@@ -50,7 +50,7 @@ class VeiwBestFriendsViewController: UIViewController, UITableViewDataSource, UI
         
         TableView.dataSource = self
         TableView.delegate = self
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         // Do any additional setup after loading the view.
        // username = prefs.valueForKey("USERNAME") as! NSString as String
        // userID = prefs.valueForKey("PLAYERID") as! NSString as String
@@ -70,7 +70,7 @@ class VeiwBestFriendsViewController: UIViewController, UITableViewDataSource, UI
         self.title = "Best Friends"
         
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
         }
         
         // Do any additional setup after loading the view.
@@ -151,8 +151,8 @@ class VeiwBestFriendsViewController: UIViewController, UITableViewDataSource, UI
     }
     
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
             
             
             let RemoveName: NSString = self.FriendNameInfo[(indexPath as NSIndexPath).row]

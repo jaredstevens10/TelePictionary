@@ -45,14 +45,14 @@ extension ViewController {
     })
     
     /*
-    var localPlayer = GKLocalPlayer.localPlayer()
+    var localPlayer = GKLocalPlayer.local
     localPlayer.authenticateHandler = {(viewController : UIViewController?, error : NSError?) -> Void in
     if viewController != nil {
     self.presentViewController(viewController!, animated: true, completion: nil)
     }else{
     
-    print((GKLocalPlayer.localPlayer().authenticated))
-    print("GKLocalPlayer name = \(GKLocalPlayer.localPlayer().alias)")
+    print((GKLocalPlayer.local.authenticated))
+    print("GKLocalPlayer name = \(GKLocalPlayer.local.alias)")
     }
     }
     */
@@ -90,14 +90,14 @@ extension ViewController {
     
     print("FLIPPING TO ViewWelcome2 NOW")
     
-    let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+    let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
     
     UIView.transition(from: self.ViewWelcome1, to: self.ViewWelcome2, duration: 0.8, options: animationOptions, completion: nil)
     
     /*
     } else {
     
-    let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.TransitionFlipFromLeft, UIViewAnimationOptions.ShowHideTransitionViews]
+    let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.TransitionFlipFromLeft, UIView.AnimationOptions.ShowHideTransitionViews]
     
     
     UIView.transitionFromView(self.View2Quote, toView: self.ImageView, duration: 0.8, options: animationOptions, completion: nil)
@@ -113,7 +113,7 @@ extension ViewController {
     
     // if ViewingWelcome1 {
     
-    let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+    let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
     
     
     UIView.transition(from: self.ViewWelcome2, to: self.ViewWelcome3, duration: 0.8, options: animationOptions, completion: nil)
@@ -121,7 +121,7 @@ extension ViewController {
     /*
     } else {
     
-    let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.TransitionFlipFromLeft, UIViewAnimationOptions.ShowHideTransitionViews]
+    let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.TransitionFlipFromLeft, UIView.AnimationOptions.ShowHideTransitionViews]
     
     
     UIView.transitionFromView(self.View2Quote, toView: self.ImageView, duration: 0.8, options: animationOptions, completion: nil)

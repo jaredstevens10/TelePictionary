@@ -49,8 +49,8 @@ public class YUTableView: UITableView
     /** If "YUTableViewNode"s don't have individual identifiers, this one is used */
     public var defaultCellIdentifier: String!
     
-    public var insertRowAnimation: UITableViewRowAnimation = .right
-    public var deleteRowAnimation: UITableViewRowAnimation = .left
+    public var insertRowAnimation: UITableView.RowAnimation = .right
+    public var deleteRowAnimation: UITableView.RowAnimation = .left
     public var animationCompetitionHandler: () -> Void = {}
     /** Removes other open items before opening a new one */
     public var allowOnlyOneActiveNodeInSameLevel: Bool = false
@@ -60,7 +60,7 @@ public class YUTableView: UITableView
         initializeDefaultValues ()
     }
     
-    public required override init(frame: CGRect, style: UITableViewStyle) {
+    public required override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         initializeDefaultValues ()
     }
@@ -122,7 +122,7 @@ extension YUTableView: UITableViewDataSource {
         return false;
     }
     
-    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let node = nodesToDisplay[(indexPath as NSIndexPath).row]
             removeNodeAtIndexPath (indexPath)

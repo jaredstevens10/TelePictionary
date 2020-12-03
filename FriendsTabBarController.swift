@@ -22,14 +22,14 @@ class FriendsTabBarController: UITabBarController {
         
         for item in self.tabBar.items! as [UITabBarItem]
         {
-         item.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.darkGray], for:UIControlState())
+            item.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for:UIControl.State())
             
         }
         
-      //  UITabBarItem.appearance().setTitleTextAttributes({NSForegroundColorAttributeName;: UIColor.darkGrayColor()}, forState: .Normal)
+      //  UITabBarItem.appearance().setTitleTextAttributes({NSAttributedString.Key.foregroundColor;: UIColor.darkGrayColor()}, forState: .Normal)
      /*
         
-        UITabBarItem.appearance().setTitleTextAttributes({NSForegroundColorAttributeName: UIColor.whiteColor()}, forState: .Selected)
+        UITabBarItem.appearance().setTitleTextAttributes({NSAttributedString.Key.foregroundColor: UIColor.whiteColor()}, forState: .Selected)
 */
        // UITabBar.appearance().selectedImageTintColor = UIColor.darkGrayColor()
         

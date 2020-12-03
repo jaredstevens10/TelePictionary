@@ -20,7 +20,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     var email = NSString()
     var fullname = NSString()
     @IBOutlet weak var cancelButton: UIButton!
-    var localPlayer = GKLocalPlayer.localPlayer()
+    var localPlayer = GKLocalPlayer.local
     var ProfilePictureAdded = Bool()
     @IBOutlet weak var ProfileImage: UIImageView!
     var ShootingPhoto = Bool()
@@ -178,8 +178,8 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             if ProfilePictureAdded {
                 let image = self.ProfileImage.image
                 
-                let imageData = UIImageJPEGRepresentation(image!, 1.0)
-                
+                //let imageData = UIImageJPEGRepresentation(image!, 1.0)
+                let imageData = image!.jpegData(compressionQuality: 1.0)
                 
                 if MediaType == "gif" {
                     
@@ -327,7 +327,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         return true
     }
     
-    func DismissKeyboard(){
+    @objc func DismissKeyboard(){
         view.endEditing(true)
     }
     
@@ -344,8 +344,8 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage //2
         
         ShowingProfileView = true
         
@@ -420,7 +420,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
             picker.allowsEditing = false
-            picker.sourceType = UIImagePickerControllerSourceType.camera
+            picker.sourceType = UIImagePickerController.SourceType.camera
             picker.cameraCaptureMode = .photo
             present(picker, animated: true, completion: nil)
             // mainImageView.image =

@@ -32,17 +32,17 @@ class UpdateProfileViewController: UIViewController {
         /*
         dobPicker.setDate(NSDate(), animated: true)
         dobPicker.maximumDate = NSDate()
-        dobPicker.datePickerMode = UIDatePickerMode.Date
-        pickerDoneButton.addTarget(self, action: Selector("dismissPicker"), forControlEvents: UIControlEvents.TouchUpInside)
+        dobPicker.datePickerMode = UIDatePicker.Mode.Date
+        pickerDoneButton.addTarget(self, action: Selector("dismissPicker"), forControlEvents: UIControl.Event.TouchUpInside)
 */
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
 
         
-        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWasShown:"), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWasShown:"), name:UIResponder.keyboardWillShowNotification, object: nil);
         
-        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWillHide:"), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+        NotificationCenter.default.addObserver(self, selector: Selector("keyboardWillHide:"), name:UIResponder.keyboardWillHideNotification, object: nil);
         
         
         // Do any additional setup after loading the view.
@@ -135,7 +135,7 @@ class UpdateProfileViewController: UIViewController {
     print("UserDOb formater two = \(self.UserDOB)")
     
     self.dobTXT.text = dateFormatter.stringFromDate(self.dobPicker.date)
-    // self.selectedDate.setTitle(dateFormatter.stringFromDate(self.picker.date), forState: UIControlState.Normal)
+    // self.selectedDate.setTitle(dateFormatter.stringFromDate(self.picker.date), forState: UIControl.State.Normal)
     
     
     })

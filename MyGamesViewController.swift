@@ -26,7 +26,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     var iTryAgainSessions = 10
     var interAd: ADInterstitialAd?
     var interAdView = UIView()
-    var closeButton = UIButton(type: UIButtonType.system)
+    var closeButton = UIButton(type: UIButton.ButtonType.system)
     
     var isFun = NSString()
     @IBOutlet weak var swipeIconRIGHT: NSLayoutConstraint!
@@ -450,7 +450,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         
         
             if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-                self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+                self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
             }
         
       
@@ -465,7 +465,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         
     //    if #available(iOS 9.0, *) { self.resultSearchController.loadViewIfNeeded() }
             
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
             
          //navigationController!.navigationBar.barTintColor = UIColor(red: 0.0, green: 0.941, blue: 0.6078, alpha: 0.1)
             
@@ -486,7 +486,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
             self.TableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: #selector(MyGamesViewController.RefreshGameData(_:)), for: UIControlEvents.valueChanged)
+        self.refreshControl.addTarget(self, action: #selector(MyGamesViewController.RefreshGameData(_:)), for: UIControl.Event.valueChanged)
         self.TableView.addSubview(refreshControl)
 
             View1.layer.cornerRadius = 10
@@ -557,8 +557,9 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         */
           // self.TableView.reloadData()
         
-          NotificationCenter.default.addObserver(self, selector: #selector(MyGamesViewController.displayForegroundDetails), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MyGamesViewController.displayForegroundDetails), name: UIApplication.willEnterForegroundNotification, object: nil)
         
+        //NSNotification.Name.
         
         if isFun.isEqual(to: "no") {
             
@@ -711,7 +712,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         }
     }
     
-    func displayForegroundDetails() {
+    @objc func displayForegroundDetails() {
         print("APP ENTERED THE FOREGROUND")
         
         
@@ -786,8 +787,9 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
 
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         
+        //NSNotification.Name.
         if let superView = resultSearchController.view.superview
         {
             superView.removeFromSuperview()
@@ -899,7 +901,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     }
     
     
-    func RefreshGameData(_ sender:AnyObject) {
+    @objc func RefreshGameData(_ sender:AnyObject) {
         print("REFRESHING MY GAMES and removing array data")
               print("adding array data")
         
@@ -931,7 +933,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         View4TOP.constant = middleY
         ViewHolderTOP.constant = 0
         */
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View1, to: self.View2, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -948,7 +950,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
          ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View2, to: self.View1, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -962,7 +964,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         ViewHolderTOP.constant = 0
         
     
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View2, to: self.View3, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -978,7 +980,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
          subViewHolderTOP.constant = middleY
  ViewHolderTOP.constant = 0
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View3, to: self.View2, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -993,7 +995,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
       ViewHolderTOP.constant = 0
 
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromRight, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View3, to: self.View4, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1009,7 +1011,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
        ViewHolderTOP.constant = 0
         
         
-        let animationOptions: UIViewAnimationOptions = [UIViewAnimationOptions.transitionFlipFromLeft, UIViewAnimationOptions.showHideTransitionViews]
+        let animationOptions: UIView.AnimationOptions = [UIView.AnimationOptions.transitionFlipFromLeft, UIView.AnimationOptions.showHideTransitionViews]
         
         UIView.transition(from: self.View4, to: self.View3, duration: 0.8, options: animationOptions, completion: nil)
     }
@@ -1130,7 +1132,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                 
                 tabBarController?.selectedIndex = 2
                 
-              //  UIView.transitionFromView(fromView!, toView: toView, duration: 0.325, options: UIViewAnimationOptions.CurveEaseInOut, completion: nil)
+              //  UIView.transitionFromView(fromView!, toView: toView, duration: 0.325, options: UIView.AnimationOptions.CurveEaseInOut, completion: nil)
 
                 
             } else {
@@ -1426,7 +1428,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
 
     
     
-    func ShowCommentsClicked(_ sender: UIButton!) {
+    @objc func ShowCommentsClicked(_ sender: UIButton!) {
         GameRowSelected = sender.tag
         print("the game rowselected: \(sender.tag)")
         
@@ -1454,7 +1456,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
          self.performSegue(withIdentifier: "ShowComments", sender: self)        
     }
     
-    func pokeAnyClicked(_ sender: UIButton!) {
+    @objc func pokeAnyClicked(_ sender: UIButton!) {
         
 
         GameRowSelected = sender.tag
@@ -1528,7 +1530,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         
     }
     
-    func pokeClicked(_ sender: UIButton!) {
+    @objc func pokeClicked(_ sender: UIButton!) {
         
         let DeviceTKN = "FIND"
         let TurnInfoTest = "Test"
@@ -1593,7 +1595,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     }
         
         
-    func TakeTurnClicked(_ sender: UIButton!) {
+    @objc func TakeTurnClicked(_ sender: UIButton!) {
        
         GameRowSelected = sender.tag
         print("the game rowselected: \(sender.tag)")
@@ -1935,7 +1937,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         
     }
     
-    func ShowRatings(_ sender: UIButton!) {
+    @objc func ShowRatings(_ sender: UIButton!) {
         
         
         
@@ -1956,7 +1958,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
 
     }
     
-    func GameMailClicked2(_ sender: UIButton!) {
+    @objc func GameMailClicked2(_ sender: UIButton!) {
         
         
         JustViewingPlayers = true
@@ -2001,7 +2003,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     }
     
     
-    func GameMailClicked(_ sender: UIButton!) {
+    @objc func GameMailClicked(_ sender: UIButton!) {
         
         GameRowSelected = sender.tag
         print("the game rowselected: \(sender.tag)")
@@ -2336,6 +2338,8 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     }
     
    
+    
+
 
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -2358,7 +2362,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
             //cell.contentView2?.layer.cornerRadius = 5
             
             
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             
             _ = Date()
@@ -2513,7 +2517,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                                 
                                 
                                 
-                               // var darkBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                               // var darkBlur = UIBlurEffect(style: UIBlurEffect.Style.Dark)
                                 // 2
                                // var blurView = UIVisualEffectView(effect: darkBlur)
                                // blurView.frame = (cell.Turn1Image?.bounds)!
@@ -2544,7 +2548,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                               //  cell.Turn1Image?.alpha = 0.7
                                 cell.Turn1ImageBack?.image = UIImage(named: "QuoteBoxImage.png")!
                                 cell.Turn1ImageBack?.isHidden = true
-                             //   var darkBlur = UIBlurEffect(style: UIBlurEffectStyle.Light)
+                             //   var darkBlur = UIBlurEffect(style: UIBlurEffect.Style.Light)
                                 // 2
                              //   var blurView = UIVisualEffectView(effect: darkBlur)
                                // blurView.frame = (cell.Turn1Image?.bounds)!
@@ -2582,7 +2586,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                     //cell.Turn1Image?.image = UIImage(named: "QuoteBoxImage.png")!
                     cell.Turn1ImageBack?.image = UIImage(named: "QuoteBoxImage.png")!
                     cell.Turn1ImageBack?.isHidden = true
-                    //var darkBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                    //var darkBlur = UIBlurEffect(style: UIBlurEffect.Style.Dark)
                     // 2
                    // var blurView = UIVisualEffectView(effect: darkBlur)
                    // blurView.frame = (cell.Turn1Image?.bounds)!
@@ -2614,14 +2618,14 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
             switch gametype.GameContent {
             case "E":
                 //  cell.contentBTN?.imageView?.image = UIImage(named: "ContentE.png")
-                cell.contentBTN?.setImage(contentImage1, for: UIControlState())
+                cell.contentBTN?.setImage(contentImage1, for: UIControl.State())
                 //cell.contentBTN?.layer.cornerRadius = 100
             case "M":
                 // cell.contentBTN?.imageView?.image = UIImage(named: "contentM.png")
-                cell.contentBTN?.setImage(contentImage3, for: UIControlState())
+                cell.contentBTN?.setImage(contentImage3, for: UIControl.State())
             case "T":
                 //  cell.contentBTN?.imageView?.image = UIImage(named: "ContentT.png")
-                cell.contentBTN?.setImage(contentImage2, for: UIControlState())
+                cell.contentBTN?.setImage(contentImage2, for: UIControl.State())
             default:
                 print("no rating available")
                 // cell.contentBTN?.imageView?.image = UIImage(named: "ContentE.png")
@@ -2653,7 +2657,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                 if (gametype.GameIsComplete == "no") {
                     
                     /*
-                    var darkBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                    var darkBlur = UIBlurEffect(style: UIBlurEffect.Style.Dark)
                     // 2
                     var blurView = UIVisualEffectView(effect: darkBlur)
                     blurView.frame = (cell.Turn1Image?.bounds)!
@@ -2673,7 +2677,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                     // println("Edit Shown")
                     
                     // cell.TableImageCTs?.imageView?.image = UIImage(named: "EditButton_white.png")
-                    cell.TableImageCTs?.setTitle("Edit", for: UIControlState())
+                    cell.TableImageCTs?.setTitle("Edit", for: UIControl.State())
                     cell.TableImageCTs?.addTarget(self, action: #selector(MyGamesViewController.GameMailClicked(_:)), for: .touchUpInside)
                     
                     cell.TableImageCTs?.tag = (indexPath as NSIndexPath).row
@@ -2728,8 +2732,8 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                 
                 cell.TakeTurnBTN?.layer.backgroundColor = UIColor(red: 0.572, green: 0.882, blue: 0.949, alpha: 1.0).cgColor
                 
-                cell.TakeTurnBTN?.setTitle("View Game", for: UIControlState())
-                cell.TakeTurnBTN?.setTitleColor(UIColor.darkGray, for: UIControlState())
+                cell.TakeTurnBTN?.setTitle("View Game", for: UIControl.State())
+                cell.TakeTurnBTN?.setTitleColor(UIColor.darkGray, for: UIControl.State())
                 
                 cell.TakeTurnBTN?.addTarget(self, action: #selector(MyGamesViewController.TakeTurnClicked(_:)), for: .touchUpInside)
                 
@@ -2753,13 +2757,13 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                 if (gametype.GameCanTakeTurn == "yes") {
                     
                     if gametype.GameUsersTurn == username.description {
-                        cell.TakeTurnBTN?.setTitle("Your Turn!", for: UIControlState())
+                        cell.TakeTurnBTN?.setTitle("Your Turn!", for: UIControl.State())
                         
                         //cell.TakeTurnBTN?.layer.cornerRadius = 10
                         cell.TakeTurnBTN?.layer.borderWidth = 2
                         cell.TakeTurnBTN?.layer.borderColor = UIColor.white.cgColor
                         cell.TakeTurnBTN?.layer.backgroundColor =  UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0).cgColor
-                        cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControlState())
+                        cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControl.State())
                         cell.currentTurnLBL_who?.textColor = UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0)
                         cell.pokeBTN?.isHidden = false
                         cell.pokeLBL?.isHidden = false
@@ -2769,7 +2773,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                         cell.pokeBTN?.isHidden = true
                         cell.pokeLBL?.isHidden = true
                         
-                        cell.TakeTurnBTN?.setTitle("Take Turn!", for: UIControlState())
+                        cell.TakeTurnBTN?.setTitle("Take Turn!", for: UIControl.State())
                         
                         /*
                         var pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale");
@@ -2785,12 +2789,12 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                         cell.TakeTurnBTN?.layer.borderWidth = 2
                         cell.TakeTurnBTN?.layer.borderColor = UIColor.white.cgColor
                         cell.TakeTurnBTN?.layer.backgroundColor =  UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0).cgColor
-                        cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControlState())
+                        cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControl.State())
                         cell.currentTurnLBL_who?.textColor = UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0)
                       //  cell.lastTurnLBL?.text = gametype.LastTurnUser
                             
                     } else {
-                        cell.TakeTurnBTN?.setTitle("Steal Turn?", for: UIControlState())
+                        cell.TakeTurnBTN?.setTitle("Steal Turn?", for: UIControl.State())
                         
                         //cell.TakeTurnBTN?.layer.cornerRadius = 10
                         cell.TakeTurnBTN?.layer.borderWidth = 2
@@ -2798,7 +2802,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                         // cell.TakeTurnBTN?.layer.backgroundColor =  UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0).CGColor
                         cell.TakeTurnBTN?.layer.backgroundColor =  UIColor.orange.cgColor
                         
-                        cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControlState())
+                        cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControl.State())
                         
                         cell.currentTurnLBL_who?.textColor = UIColor(red: 0.9647, green: 0.34117, blue: 0.42745, alpha: 1.0)
                        // cell.lastTurnLBL?.text = gametype.LastTurnUser
@@ -2879,7 +2883,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                         cell.TakeTurnBTN?.layer.borderColor = UIColor.white.cgColor
                         cell.TakeTurnBTN?.layer.backgroundColor =  UIColor(red: 0.0, green: 0.65098, blue: 0.317647, alpha: 1.0).cgColor
                         
-                        cell.TakeTurnBTN?.setTitle("Take Turn!", for: UIControlState())
+                        cell.TakeTurnBTN?.setTitle("Take Turn!", for: UIControl.State())
                         
                         /*
                         var pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "opacity");
@@ -2891,7 +2895,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                         cell.TakeTurnBTN?.layer.addAnimation(pulseAnimation, forKey: nil)
                         */
                         
-                        cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControlState())
+                        cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControl.State())
                         
                         cell.TakeTurnBTN?.addTarget(self, action: #selector(MyGamesViewController.TakeTurnClicked(_:)), for: .touchUpInside)
                         
@@ -2950,9 +2954,9 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                         cell.TakeTurnBTN?.layer.borderColor = UIColor.white.cgColor
                         cell.TakeTurnBTN?.layer.backgroundColor = UIColor(red: 0.929, green: 0.113, blue: 0.145, alpha: 1.0).cgColor
                         
-                        cell.TakeTurnBTN?.setTitle("Please Wait", for: UIControlState())
+                        cell.TakeTurnBTN?.setTitle("Please Wait", for: UIControl.State())
                         
-                        cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControlState())
+                        cell.TakeTurnBTN?.setTitleColor(UIColor.white, for: UIControl.State())
                         
                         cell.TakeTurnBTN?.addTarget(self, action: #selector(MyGamesViewController.TakeTurnClicked(_:)), for: .touchUpInside)
                         
@@ -3020,7 +3024,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
             var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
             
             cell.Turn1Image?.image = UIImage(named: "QuoteBoxImage.png")!
-            var darkBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+            var darkBlur = UIBlurEffect(style: UIBlurEffect.Style.Dark)
             // 2
             var blurView = UIVisualEffectView(effect: darkBlur)
             //blurView.modalPresentationStyle = .OverFullScreen
@@ -3032,7 +3036,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
             //blurView.alpha = 0.5
             // 3
             // cell.Turn1Image?.addSubview(blurView)
-            cell.Turn1Image?.contentMode = UIViewContentMode.ScaleAspectFit
+            cell.Turn1Image?.contentMode = UIView.ContentMode.ScaleAspectFit
             //cell.Turn1View?.addSubview(blurView)
             cell.Turn1Image?.addSubview(visualEffectView)
             */
@@ -3118,11 +3122,11 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
     
     
     func addBlurView(_ imgView: UIImageView) {
-        let blurEffect: UIBlurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let blurEffect: UIBlurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
         self.blurEffectView = UIVisualEffectView(effect: blurEffect)
         self.blurEffectView.frame = imgView.bounds
-        //self.blurEffectView.autoresizingMask = UIViewAutoresizing.FlexibleWidth |
-        self.blurEffectView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        //self.blurEffectView.autoresizingMask = UIView.AutoresizingMask.FlexibleWidth |
+        self.blurEffectView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
         imgView.addSubview(blurEffectView)
     }
         
@@ -3130,7 +3134,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
         @IBAction func editTableView(_ sender: AnyObject) {
             
             
-             let darkBlur = UIBlurEffect(style: UIBlurEffectStyle.dark)
+            let darkBlur = UIBlurEffect(style: UIBlurEffect.Style.dark)
             // 2
              let blurView = UIVisualEffectView(effect: darkBlur)
              blurView.frame = self.view.bounds
@@ -3141,22 +3145,22 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
             if TableView.isEditing{
                 TableView.setEditing(false, animated: false)
                // self.view.addSubview(blurView)
-                //editBTN.style = UIBarButtonItemStyle.Plain;
+                //editBTN.style = UIBarButtonItem.Style.Plain;
                 //editBTN.title = "Delete Game";
                 TableView.reloadData()
             } else {
               //   blurView.removeFromSuperview()
                 TableView.setEditing(true, animated: true)
                 //editBTN.title = "Done";
-                //editBTN.style = UIBarButtonItemStyle.Done;
+                //editBTN.style = UIBarButtonItem.Style.Done;
                 TableView.reloadData()
             }
             
             
         }
         
-        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == UITableViewCellEditingStyle.delete {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
                 
                 
                 print("Game Creator: \(Player1Info[(indexPath as NSIndexPath).row])")
@@ -3621,7 +3625,7 @@ class MyGamesViewController: UIViewController, AKPickerViewDelegate, AKPickerVie
                 
             }
             
-            } else if editingStyle == UITableViewCellEditingStyle.insert{
+            } else if editingStyle == UITableViewCell.EditingStyle.insert{
 
                 GameNameInfo.append("New Item")
                // GameSearchArray.append()

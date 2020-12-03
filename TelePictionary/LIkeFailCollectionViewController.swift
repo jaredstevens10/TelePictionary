@@ -94,7 +94,7 @@ class LIkeFailCollectionViewController: UIViewController, UICollectionViewDelega
         infoLBL.text = "Check out \(PlayerName)'s \(TurnType)s"
         
         
-        self.refreshControl.addTarget(self, action: #selector(LIkeFailCollectionViewController.RefreshCommentData(_:)), for: UIControlEvents.valueChanged)
+        self.refreshControl.addTarget(self, action: #selector(LIkeFailCollectionViewController.RefreshCommentData(_:)), for: UIControl.Event.valueChanged)
         self.collectionView!.addSubview(refreshControl)
         
         
@@ -219,7 +219,7 @@ class LIkeFailCollectionViewController: UIViewController, UICollectionViewDelega
         
            }
     
-    func RefreshCommentData(_ sender:AnyObject) {
+    @objc func RefreshCommentData(_ sender:AnyObject) {
         print("removing array data")
         //Photos.removeAll()
         //LCountArray.removeAll()
@@ -315,7 +315,7 @@ class LIkeFailCollectionViewController: UIViewController, UICollectionViewDelega
     
     
   
-    func PlayAudioClicked(_ sender: UIButton!) {
+    @objc func PlayAudioClicked(_ sender: UIButton!) {
     
     
     let RowSelected = sender.tag

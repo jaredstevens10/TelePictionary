@@ -47,8 +47,8 @@ class LikesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.refreshControl = UIRefreshControl()
         
-        self.TableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        self.refreshControl.addTarget(self, action: #selector(LikesViewController.RefreshLikeData(_:)), for: UIControlEvents.valueChanged)
+        self.TableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.refreshControl.addTarget(self, action: #selector(LikesViewController.RefreshLikeData(_:)), for: UIControl.Event.valueChanged)
         self.TableView.addSubview(refreshControl)
         
         if prefs.value(forKey: "USERNAME") != nil {
@@ -94,7 +94,7 @@ class LikesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
-    func RefreshLikeData(_ sender:AnyObject) {
+    @objc func RefreshLikeData(_ sender:AnyObject) {
         print("removing array data")
         idArrayInfo.removeAll()
         userArrayInfo.removeAll()
@@ -174,7 +174,7 @@ class LikesViewController: UIViewController, UITableViewDelegate, UITableViewDat
           return userArrayInfo.count
     }
     
-    func DeleteLikeClicked(_ sender: UIButton) {
+    @objc func DeleteLikeClicked(_ sender: UIButton) {
     print("sender tag = \(sender.tag)")
         
         let likeID = idArrayInfo[sender.tag]

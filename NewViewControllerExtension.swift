@@ -806,7 +806,7 @@ func YTCompleteTrim2(_ notification:Notification){
     }
     
     
-    func updateAudioMeter(_ timer:Timer) {
+    @objc func updateAudioMeter(_ timer:Timer) {
         
         
         if recorder.isRecording {
@@ -841,7 +841,7 @@ func YTCompleteTrim2(_ notification:Notification){
         }
     }
     
-    func updateMusicMeter(_ timer:Timer) {
+    @objc func updateMusicMeter(_ timer:Timer) {
         
         print("music playback time = \(myMusicPlayer?.currentPlaybackTime)")
         
@@ -905,7 +905,7 @@ func YTCompleteTrim2(_ notification:Notification){
         
         if recorder == nil {
             print("recording. recorder nil")
-            recordButton.setTitle("Pause", for:UIControlState())
+            recordButton.setTitle("Pause", for:UIControl.State())
             playButton.isEnabled = false
             stopButton.isEnabled = true
             recordWithPermission(true)
@@ -915,11 +915,11 @@ func YTCompleteTrim2(_ notification:Notification){
         if recorder != nil && recorder.isRecording {
             print("pausing")
             recorder.pause()
-            recordButton.setTitle("Continue", for:UIControlState())
+            recordButton.setTitle("Continue", for:UIControl.State())
             
         } else {
             print("recording")
-            recordButton.setTitle("Pause", for:UIControlState())
+            recordButton.setTitle("Pause", for:UIControl.State())
             playButton.isEnabled = false
             stopButton.isEnabled = true
             //            recorder.record()
@@ -941,7 +941,7 @@ func YTCompleteTrim2(_ notification:Notification){
         statusLabel.text = timeCountRecord.description
         statusLabel.textColor = UIColor.black
         
-        recordButton.setTitle("Record", for:UIControlState())
+        recordButton.setTitle("Record", for:UIControl.State())
         let session = AVAudioSession.sharedInstance()
         do {
             try session.setActive(false)
@@ -968,7 +968,7 @@ func YTCompleteTrim2(_ notification:Notification){
         statusLabel.text = timeCountRecord.description
         statusLabel.textColor = UIColor.black
         
-        recordButton.setTitle("Record", for:UIControlState())
+        recordButton.setTitle("Record", for:UIControl.State())
         let session = AVAudioSession.sharedInstance()
         do {
             try session.setActive(false)
@@ -1084,7 +1084,7 @@ func YTCompleteTrim2(_ notification:Notification){
         let session:AVAudioSession = AVAudioSession.sharedInstance()
         
         do {
-            try session.setCategory(AVAudioSessionCategoryPlayback)
+            try session.setCategory(AVAudioSession.Category.playback)
         } catch let error as NSError {
             print("could not set session category")
             print(error.localizedDescription)
@@ -1100,7 +1100,7 @@ func YTCompleteTrim2(_ notification:Notification){
     func setSessionPlayAndRecord() {
         let session = AVAudioSession.sharedInstance()
         do {
-            try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try session.setCategory(AVAudioSession.Category.playAndRecord)
         } catch let error as NSError {
             print("could not set session category")
             print(error.localizedDescription)
@@ -1194,37 +1194,37 @@ func YTCompleteTrim2(_ notification:Notification){
         
         NotificationCenter.default.addObserver(self,
             selector:#selector(NewViewController.background(_:)),
-            name:NSNotification.Name.UIApplicationWillResignActive,
+            name:UIApplication.willResignActiveNotification,
             object:nil)
         
         NotificationCenter.default.addObserver(self,
             selector:#selector(NewViewController.foreground(_:)),
-            name:NSNotification.Name.UIApplicationWillEnterForeground,
+            name:UIApplication.willEnterForegroundNotification,
             object:nil)
         
         NotificationCenter.default.addObserver(self,
             selector:#selector(NewViewController.routeChange(_:)),
-            name:NSNotification.Name.AVAudioSessionRouteChange,
+            name:AVAudioSession.routeChangeNotification,
             object:nil)
     }
     
-    func background(_ notification:Notification) {
+    @objc func background(_ notification:Notification) {
         print("background")
     }
     
-    func foreground(_ notification:Notification) {
+    @objc func foreground(_ notification:Notification) {
         print("foreground")
     }
     
     
-    func routeChange(_ notification:Notification) {
+    @objc func routeChange(_ notification:Notification) {
         print("routeChange \((notification as NSNotification).userInfo)")
         
         if let userInfo = (notification as NSNotification).userInfo {
             //print("userInfo \(userInfo)")
             if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt {
                 //print("reason \(reason)")
-                switch AVAudioSessionRouteChangeReason(rawValue: reason)! {
+                switch AVAudioSession.RouteChangeReason(rawValue: reason)! {
                 case AVAudioSessionRouteChangeReason.newDeviceAvailable:
                     print("NewDeviceAvailable")
                     print("did you plug in headphones?")
@@ -1258,7 +1258,7 @@ func YTCompleteTrim2(_ notification:Notification){
         let currentRoute = AVAudioSession.sharedInstance().currentRoute
         if currentRoute.outputs.count > 0 {
             for description in currentRoute.outputs {
-                if description.portType == AVAudioSessionPortHeadphones {
+                if description.portType == AVAudioSession.Port.headphones {
                     print("headphones are plugged in")
                     break
                 } else {
@@ -1272,7 +1272,7 @@ func YTCompleteTrim2(_ notification:Notification){
     
     
     
-    func musicPlayerStateChanged(_ notification: Notification){
+    @objc func musicPlayerStateChanged(_ notification: Notification){
         
         print("Player State Changed")
         
@@ -1312,7 +1312,7 @@ func YTCompleteTrim2(_ notification:Notification){
         }
     }
     
-    func nowPlayingItemIsChanged(_ notification: Notification){
+    @objc func nowPlayingItemIsChanged(_ notification: Notification){
         
         print("Playing Item Is Changed")
         
@@ -1328,7 +1328,7 @@ func YTCompleteTrim2(_ notification:Notification){
         
     }
     
-    func volumeIsChanged(_ notification: Notification){
+    @objc func volumeIsChanged(_ notification: Notification){
         print("Volume Is Changed")
         /* The userInfo dictionary of this notification is normally empty */
     }
@@ -1353,7 +1353,7 @@ func YTCompleteTrim2(_ notification:Notification){
             
             /* Instantiate the music player */
             
-            self.myMusicPlayer = MPMusicPlayerController()
+            self.myMusicPlayer = MPMusicPlayerController.applicationMusicPlayer
             
             let aMediaItem = mediaItemCollection.items[0] as MPMediaItem
             
@@ -1974,7 +1974,7 @@ func YTCompleteTrim2(_ notification:Notification){
         }
         
         let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A)
-        exporter!.outputFileType = AVFileTypeAppleM4A
+        exporter!.outputFileType = AVFileType.m4a
         exporter!.outputURL = trimmedSoundFileURL
         
         
@@ -1995,7 +1995,7 @@ func YTCompleteTrim2(_ notification:Notification){
         let stopTime = StopTrim
         
         
-        let exportTimeRange = CMTimeRangeFromTimeToTime(startTime, stopTime)
+        let exportTimeRange = CMTimeRangeFromTimeToTime(start: startTime, end: stopTime)
         exporter!.timeRange = exportTimeRange
         
         
@@ -2080,11 +2080,11 @@ func YTCompleteTrim2(_ notification:Notification){
     
     func rangeSliderValueChanged(_ rangeSlider: RangeSlider) {
         
-        StartTrim = CMTimeMake(Int64((rangeSlider.lowerValue * SongLength)), 1)
+        StartTrim = CMTimeMake(value: Int64((rangeSlider.lowerValue * SongLength)), timescale: 1)
         print("Start Trim Time = \(StartTrim)")
         
         
-        StopTrim = CMTimeMake(Int64((rangeSlider.upperValue * SongLength)), 1)
+        StopTrim = CMTimeMake(value: Int64((rangeSlider.upperValue * SongLength)), timescale: 1)
         
         let Starttemp =  Double(rangeSlider.lowerValue * SongLength)
         
@@ -2250,9 +2250,9 @@ func YTCompleteTrim2(_ notification:Notification){
         }
         
         
-        StartTrim = CMTimeMake(Int64((rangeSlider1.lowerValue * SongLength)), 1)
+        StartTrim = CMTimeMake(value: Int64((rangeSlider1.lowerValue * SongLength)), timescale: 1)
         
-        StopTrim = CMTimeMake(Int64((rangeSlider1.upperValue * SongLength)), 1)
+        StopTrim = CMTimeMake(value: Int64((rangeSlider1.upperValue * SongLength)), timescale: 1)
         
         UIView.animate(withDuration: 1.0, animations: { () -> Void in
             
@@ -2386,7 +2386,8 @@ func YTCompleteTrim2(_ notification:Notification){
        // let smallImage = PicPreview.image!.resize(0.5)
         
         
-        let imageData = UIImageJPEGRepresentation(image!, 0.6)
+        //let imageData = UIImageJPEGRepresentation(image!, 0.6)
+        let imageData = image!.jpegData(compressionQuality: 0.6)
         
         NewGamePictureData = imageData!.base64EncodedString(options: []) as NSString
         

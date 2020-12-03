@@ -283,7 +283,7 @@ class ImageViewController: UIViewController,UIImagePickerControllerDelegate,UINa
             
             
             
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
             let blurEffectView = UIVisualEffectView(effect: blurEffect)
             blurEffectView.frame = view.bounds
             blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
@@ -792,7 +792,7 @@ class ImageViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         }
     }
     
-      func googleImage(_ notification:Notification) {
+    @objc func googleImage(_ notification:Notification) {
         
         let data = (notification as NSNotification).userInfo
         let googleImageData2 = data!["data"] as! Data
@@ -810,7 +810,7 @@ class ImageViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         
         
         resizeIMG.image = image
-        resizeIMG.contentMode = UIViewContentMode.scaleAspectFit
+        resizeIMG.contentMode = UIView.ContentMode.scaleAspectFit
         resizeHEIGHT.constant = self.view.frame.width - 50
         resizeWIDTH.constant = self.view.frame.width - 50
         
@@ -1028,7 +1028,7 @@ class ImageViewController: UIViewController,UIImagePickerControllerDelegate,UINa
 
         
                 resizeIMG.image = image
-                resizeIMG.contentMode = UIViewContentMode.scaleAspectFit
+                resizeIMG.contentMode = UIView.ContentMode.scaleAspectFit
         resizeHEIGHT.constant = self.view.frame.width - 50
         resizeWIDTH.constant = self.view.frame.width - 50
                 
@@ -1250,7 +1250,7 @@ class ImageViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         
          self.pasteIMGBTN.isHidden = true
         
-         self.lockBTN.setImage(UIImage(named: "resizeIconWhite.png"), for: UIControlState())
+         self.lockBTN.setImage(UIImage(named: "resizeIconWhite.png"), for: UIControl.State())
         self.resizeIMG.isHidden = true
         let DeviceH = self.view.frame.height
         //let halfH = DeviceH / 2;
@@ -1494,7 +1494,7 @@ class ImageViewController: UIViewController,UIImagePickerControllerDelegate,UINa
  
       }
          NotificationCenter.default.addObserver(self, selector: #selector(ImageViewController.HandleAlertMessageIVC(_:)), name: NSNotification.Name(rawValue: "HandleAlertMessageIVC"),  object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ImageViewController.displayForegroundDetails), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ImageViewController.displayForegroundDetails), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     @IBAction func View1CloseBTN(_ sender: AnyObject) {
@@ -2047,7 +2047,9 @@ func SubmitPic () -> NSString {
     //    let smallImage = image.resize(0.5)
     
      //   let imageData = UIImageJPEGRepresentation(smallImage, 0.6)
-    let imageData = UIImageJPEGRepresentation(image, 1.0)
+    //let imageData = UIImageJPEGRepresentation(image, 1.0)
+    let imageData = image.jpegData(compressionQuality: 1.0)
+    
     
     //DONT DELETE BELOW
     var base64Image = String()
@@ -2362,7 +2364,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
 
     
     func uploadImageOne(){
-        let imageData = UIImagePNGRepresentation(image)
+        let imageData = image.pngData()
         
         if imageData != nil{
             let request = NSMutableURLRequest(url: URL(string:"\(ServerInfo.sharedInstance)/Apps/TelePictionary/UpdateGame.php")!)
@@ -3107,7 +3109,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
             
             if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
                 picker.allowsEditing = false
-                picker.sourceType = UIImagePickerControllerSourceType.camera
+                picker.sourceType = UIImagePickerController.SourceType.camera
                 picker.cameraCaptureMode = .photo
                 present(picker, animated: true, completion: nil)
                 // mainImageView.image =
@@ -3126,7 +3128,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
         
         if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
             picker.allowsEditing = false
-            picker.sourceType = UIImagePickerControllerSourceType.camera
+            picker.sourceType = UIImagePickerController.SourceType.camera
             picker.cameraCaptureMode = .photo
             present(picker, animated: true, completion: nil)
             // mainImageView.image =
@@ -3204,7 +3206,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
                   
                     if UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil {
                         self.picker.allowsEditing = false
-                        self.picker.sourceType = UIImagePickerControllerSourceType.Camera
+                        self.picker.sourceType = UIImagePickerController.SourceType.Camera
                         self.picker.cameraCaptureMode = .Photo
                         self.presentViewController(self.picker, animated: true, completion: nil)
                         // mainImageView.image =
@@ -3268,7 +3270,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
                     
                     if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
                         self.picker.allowsEditing = false
-                        self.picker.sourceType = UIImagePickerControllerSourceType.camera
+                        self.picker.sourceType = UIImagePickerController.SourceType.camera
                         self.picker.cameraCaptureMode = .photo
                         self.present(self.picker, animated: true, completion: nil)
                         // mainImageView.image =
@@ -3297,7 +3299,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
                     
                     if UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil {
                         self.picker.allowsEditing = false
-                        self.picker.sourceType = UIImagePickerControllerSourceType.Camera
+                        self.picker.sourceType = UIImagePickerController.SourceType.Camera
                         self.picker.cameraCaptureMode = .Photo
                         self.presentViewController(self.picker, animated: true, completion: nil)
                         // mainImageView.image =
@@ -3470,7 +3472,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
 
     
  
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey  : Any]) {
             
             
             
@@ -3483,7 +3485,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
             
             print("GIF Info = \(info)")
             
-            if let imageURL = info[UIImagePickerControllerReferenceURL] as? URL {
+            if let imageURL = info[UIImagePickerController.InfoKey.referenceURL] as? URL {
                 let imageName = imageURL.lastPathComponent
                 // let imageURLTest = imageURL.
                 //GIFData = NSData(contentsOfURL: imageURL)!
@@ -3611,7 +3613,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
                     
                 } else {
                     
-                    chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
+                    chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage //2
                     
                     
                    // PicPreview.contentMode = .ScaleAspectFit //3
@@ -3708,7 +3710,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
             
             
            // resizeIMG.image = chosenImage
-           // resizeIMG.contentMode = UIViewContentMode.ScaleAspectFit
+           // resizeIMG.contentMode = UIView.ContentMode.ScaleAspectFit
             
             pencilLocked = true
              self.trimBTN.isHidden = false
@@ -3754,7 +3756,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
             self.resizeIMG.clipsToBounds = true
             
             self.lockBTN.isHidden = false
-            self.lockBTN.setImage(UIImage(named: "resizeIconWhite.png"), for: UIControlState())
+            self.lockBTN.setImage(UIImage(named: "resizeIconWhite.png"), for: UIControl.State())
             print("pencil is locked")
             
             // tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
@@ -3915,12 +3917,12 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
         stopButton.isEnabled = true
     let url = Image64Data
         do {
-        try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             
            // .setCategory(AVAudioSessionCategoryPlayback, error: nil)
             
         try AVAudioSession.sharedInstance().setActive(true)
-        player = try AVAudioPlayer(data: Image64Data_Audio, fileTypeHint: AVFileTypeAppleM4A)
+            player = try AVAudioPlayer(data: Image64Data_Audio, fileTypeHint: AVFileType.m4a.rawValue)
        // player = AVAudioPlayer(data: url, fileTypeHing: AVFileTypeMPEGLayer3, error: nil)
         player.prepareToPlay()
         player.play()
@@ -3969,7 +3971,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
         let currentRoute = AVAudioSession.sharedInstance().currentRoute
         if currentRoute.outputs.count > 0 {
             for description in currentRoute.outputs {
-                if description.portType == AVAudioSessionPortHeadphones {
+                if description.portType == AVAudioSession.Port.headphones {
                     print("headphones are plugged in")
                     break
                 } else {
@@ -3982,7 +3984,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
     }
  
 
-    func updateMusicMeter(_ timer:Timer) {
+    @objc func updateMusicMeter(_ timer:Timer) {
 
         //  if recorder.recording {
         let min = Int((player?.currentTime)! / 60)
@@ -4102,27 +4104,27 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
     
     @IBAction func ScaleBoth(_ sender: AnyObject) {
         
-        scaleBothBTN.setImage(UIImage(named: "hwIconCHECK.png"), for: UIControlState())
-        scaleHBTN.setImage(UIImage(named: "heightIcon.png"), for: UIControlState())
-        scaleWBTN.setImage(UIImage(named: "widthIcon.png"), for: UIControlState())
+        scaleBothBTN.setImage(UIImage(named: "hwIconCHECK.png"), for: UIControl.State())
+        scaleHBTN.setImage(UIImage(named: "heightIcon.png"), for: UIControl.State())
+        scaleWBTN.setImage(UIImage(named: "widthIcon.png"), for: UIControl.State())
         
         ScaleItem = "both"
     }
     
     @IBAction func ScaleHeight(_ sender: AnyObject) {
         
-        scaleBothBTN.setImage(UIImage(named: "hwIcon.png"), for: UIControlState())
-        scaleHBTN.setImage(UIImage(named: "heightIconCHECK.png"), for: UIControlState())
-        scaleWBTN.setImage(UIImage(named: "widthIcon.png"), for: UIControlState())
+        scaleBothBTN.setImage(UIImage(named: "hwIcon.png"), for: UIControl.State())
+        scaleHBTN.setImage(UIImage(named: "heightIconCHECK.png"), for: UIControl.State())
+        scaleWBTN.setImage(UIImage(named: "widthIcon.png"), for: UIControl.State())
             ScaleItem = "height"
     }
     
     
     @IBAction func ScaleWidth(_ sender: AnyObject) {
         
-        scaleBothBTN.setImage(UIImage(named: "hwIcon.png"), for: UIControlState())
-        scaleHBTN.setImage(UIImage(named: "heightIcon.png"), for: UIControlState())
-        scaleWBTN.setImage(UIImage(named: "widthIconCHECK.png"), for: UIControlState())
+        scaleBothBTN.setImage(UIImage(named: "hwIcon.png"), for: UIControl.State())
+        scaleHBTN.setImage(UIImage(named: "heightIcon.png"), for: UIControl.State())
+        scaleWBTN.setImage(UIImage(named: "widthIconCHECK.png"), for: UIControl.State())
         
             ScaleItem = "width"
     }
@@ -4170,7 +4172,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
     
     /*
     
-    var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+    var blurEffect = UIBlurEffect(style: UIBlurEffect.Style.Light)
     var blurEffectView = UIVisualEffectView(effect: blurEffect)
     blurEffectView.frame = view.bounds
     blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
@@ -5007,7 +5009,7 @@ print("*****GAMETURN INFO: \(base64ImageName)*****")
         self.snipImage.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-       // self.snipImage.contentMode = UIViewContentMode.ScaleAspectFit
+       // self.snipImage.contentMode = UIView.ContentMode.ScaleAspectFit
         
         self.snipImage.isHidden = false
         self.trimView.isHidden = false
@@ -5099,7 +5101,7 @@ else {
         UIGraphicsEndImageContext()
     }
 
-    
+    @objc  
     
     func HandleAlertMessageIVC(_ notification:Notification)  {
     
@@ -5237,7 +5239,7 @@ else {
         
     }
     
-    func displayForegroundDetails() {
+    @objc func displayForegroundDetails() {
         print("APP ENTERED THE FOREGROUND")
         
         
@@ -5314,7 +5316,7 @@ else {
     
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         
         
     }
@@ -5380,7 +5382,7 @@ extension ImageViewController {
 extension UIImage {
     func resize(scale:CGFloat)-> UIImage {
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: size.width*scale, height: size.height*scale)))
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        imageView.contentMode = UIView.ContentMode.ScaleAspectFit
         imageView.image = self
         UIGraphicsBeginImageContext(imageView.bounds.size)
         imageView.layer.renderInContext(UIGraphicsGetCurrentContext())
@@ -5390,7 +5392,7 @@ extension UIImage {
     }
     func resizeToWidth(width:CGFloat)-> UIImage {
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))))
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        imageView.contentMode = UIView.ContentMode.ScaleAspectFit
         imageView.image = self
         UIGraphicsBeginImageContext(imageView.bounds.size)
         imageView.layer.renderInContext(UIGraphicsGetCurrentContext())

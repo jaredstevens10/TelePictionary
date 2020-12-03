@@ -95,7 +95,7 @@ class FBAlbumStartViewController: UIViewController,UITableViewDataSource,UITable
         
     }
     
-    func selectRowAtIndexPath(_ indexPath: IndexPath!, animated: Bool, scrollPosition: UITableViewScrollPosition){
+    func selectRowAtIndexPath(_ indexPath: IndexPath!, animated: Bool, scrollPosition: UITableView.ScrollPosition){
         
     }
     
@@ -105,7 +105,7 @@ class FBAlbumStartViewController: UIViewController,UITableViewDataSource,UITable
         
     let cell = albumTable.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath) as! BasicCell
         
-    //    cell.selectionStyle = UITableViewCellSelectionStyle.None
+    //    cell.selectionStyle = UITableViewCell.SelectionStyle.None
         
     cell.backgroundColor = UIColor.clear
         
@@ -349,7 +349,7 @@ print("token is not nil")
         
     }
 
-    func executeAlbum(_ notification:Notification){
+    @objc func executeAlbum(_ notification:Notification){
         
         let resultdict = (notification as NSNotification).userInfo as! NSDictionary
         print("Result Dict: \(resultdict)")
@@ -366,7 +366,7 @@ print("token is not nil")
         self.albumTable.reloadData();
     }
     
-    func executeHandle(_ notification:Notification){
+    @objc func executeHandle(_ notification:Notification){
         let userData = notification.object as! User;
         
         let name = userData.name as! String;

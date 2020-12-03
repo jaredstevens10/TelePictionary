@@ -151,7 +151,7 @@ class SwipeTurnBackgroundViewController: UIViewController {
         
         self.title = "Turns"
         if let font = UIFont(name: "DK Cool Crayon", size: 25.0) {
-            self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.white]
+            self.navigationController!.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
         }
         
         navigationController!.navigationBar.barTintColor = UIColor(red: 0.235294, green: 0.62745, blue: 0.81960, alpha: 1.0)
@@ -210,12 +210,12 @@ class SwipeTurnBackgroundViewController: UIViewController {
             
       //  }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(SwipeTurnBackgroundViewController.displayForegroundDetails), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SwipeTurnBackgroundViewController.displayForegroundDetails), name: UIApplication.willEnterForegroundNotification, object: nil)
         
     }
     
     
-    func displayForegroundDetails() {
+    @objc func displayForegroundDetails() {
         print("APP ENTERED THE FOREGROUND")
         
         
@@ -339,7 +339,7 @@ class SwipeTurnBackgroundViewController: UIViewController {
     
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         /*
         if let superView = resultSearchController.view.superview
         {
@@ -389,7 +389,7 @@ class SwipeTurnBackgroundViewController: UIViewController {
                 
                 
                 
-                //  UIView.transitionFromView(fromView!, toView: toView, duration: 0.325, options: UIViewAnimationOptions.CurveEaseInOut, completion: nil)
+                //  UIView.transitionFromView(fromView!, toView: toView, duration: 0.325, options: UIView.AnimationOptions.CurveEaseInOut, completion: nil)
                 
                 
             } else {
@@ -597,25 +597,25 @@ class SwipeTurnBackgroundViewController: UIViewController {
         self.undoView.alpha = 0.0
         self.refreshView.alpha = 0.0
         // kolodaView.resetCurrentCardNumber()
-        UIView.animate(withDuration: 0.5, delay: 0.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.5, options: UIView.AnimationOptions.curveEaseIn, animations: {
             
             self.yesView.alpha = 1.0
             
             }, completion: nil)
         
-        UIView.animate(withDuration: 0.5, delay: 1.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.5, delay: 1.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
             
             self.noView.alpha = 1.0
             
             }, completion: nil)
         
-        UIView.animate(withDuration: 0.5, delay: 1.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.5, delay: 1.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
             
             self.undoView.alpha = 0.7
             
             }, completion: nil)
         
-        UIView.animate(withDuration: 0.5, delay: 1.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.5, delay: 1.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
             
             self.refreshView.alpha = 0.7
             
@@ -2466,7 +2466,7 @@ class SwipeTurnBackgroundViewController: UIViewController {
     }
     
     
-    func pokePlayerClicked(_ sender: UIButton!) {
+    @objc func pokePlayerClicked(_ sender: UIButton!) {
        let  GameRowSelected = sender.tag
         let DeviceTKN = "FIND"
         let TurnInfoTest = "Test"

@@ -112,7 +112,7 @@ class LoginViewController: UIViewController {
                 //theAlert.dismissViewControllerAnimated(false, completion: nil)
                 // UIApplication.sharedApplication().keyWindow?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
               //  self.IsHandlingAlertMessage = false
-                // theAlert.removeFromParentViewController()
+                // theAlert.removeFromParent()
                 print("about to dismiss the root view controller????")
                 
                 
@@ -826,7 +826,7 @@ class LoginViewController: UIViewController {
         textField.resignFirstResponder()
         return true
     }
-    func DismissKeyboard(){
+    @objc func DismissKeyboard(){
         view.endEditing(true)
     }
     
@@ -1159,7 +1159,7 @@ class LoginViewController: UIViewController {
         
 //   -> {(NSString, NSString) {
         print("LoginVC - login called")
-        //localPlayer = GKLocalPlayer.localPlayer()
+        //localPlayer = GKLocalPlayer.local
         
         self.localPlayer.authenticateHandler = {(ViewController: UIViewController?, error: Error?) -> Void in
             
@@ -1178,8 +1178,8 @@ class LoginViewController: UIViewController {
                 print("Player authenticated")
                 
                 //self.player = localPlayer.displayName
-                self.playerid = self.localPlayer.playerID! as NSString
-                self.player = self.localPlayer.alias! as NSString
+                self.playerid = self.localPlayer.playerID as NSString
+                self.player = self.localPlayer.alias as NSString
                 
                 print("GC player: \(self.player)")
                 print("GC playerid: \(self.playerid)")

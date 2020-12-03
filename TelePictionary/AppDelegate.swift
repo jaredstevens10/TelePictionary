@@ -307,7 +307,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("received Remote Notification, will now handle")
         
         
-        if application.applicationState == UIApplicationState.background || application.applicationState == UIApplicationState.inactive
+        if application.applicationState == UIApplication.State.background || application.applicationState == UIApplication.State.inactive
         {
             let notificationDetails: NSDictionary = userInfo as NSDictionary
             
@@ -410,7 +410,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return ret
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         
       //  UIViewController.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Automatic
@@ -432,7 +432,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var performShortcutDelegate = true
         
         if #available(iOS 9.0, *) {
-            if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+            if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
                 
                 print("shortcut Item available in App Delegate")
                 self.shortcutItem = shortcutItem
@@ -453,7 +453,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Fallback on earlier versions
         }
         
-        let remoteNotif: AnyObject? = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as AnyObject?
+        let remoteNotif: AnyObject? = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as AnyObject?
         
         //Accept push notification when app is not open
         if ((remoteNotif) != nil) {
@@ -621,13 +621,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        */
         
         
-        if application.applicationState != UIApplicationState.background {
+        if application.applicationState != UIApplication.State.background {
             print("responds to background state")
             let preBackgroundPush = !application.responds(to: #selector(getter: UIApplication.backgroundRefreshStatus))
             let oldPushHandlerOnly = !self.responds(to: "application:didReceiveRemoteNotification")
             var pushPayload = false
             if let options = launchOptions {
-                pushPayload = options[UIApplicationLaunchOptionsKey.remoteNotification] != nil
+                pushPayload = options[UIApplication.LaunchOptionsKey.remoteNotification] != nil
             }
             if (preBackgroundPush || oldPushHandlerOnly || pushPayload) {
              //   PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
@@ -793,7 +793,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("View Controller not showing 1")
         }
         
-        if application.applicationState == UIApplicationState.background || application.applicationState == UIApplicationState.inactive
+        if application.applicationState == UIApplication.State.background || application.applicationState == UIApplication.State.inactive
         {
             
    

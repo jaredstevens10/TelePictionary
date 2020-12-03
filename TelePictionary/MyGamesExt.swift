@@ -12,7 +12,12 @@ import Foundation
 extension MyGamesViewController {
 
     
-    func gamesegmentValueChanged(_ sender: AnyObject?){
+    @objc func gamesegmentValueChanged(_ sender: AnyObject?){
+        
+        
+        print("games segment value changed")
+        
+        print("gameSegment.selectedIndex: \(gameSegment.selectedIndex)")
         
         if gameSegment.selectedIndex == 0 {
             self.actInd.isHidden = false
@@ -80,7 +85,7 @@ extension MyGamesViewController {
         }
     }
     
-    func segmentValueChanged(_ sender: AnyObject?){
+ @objc func segmentValueChanged(_ sender: AnyObject?){
         
         if segmentControl.selectedIndex == 0 {
             

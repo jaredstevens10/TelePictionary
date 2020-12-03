@@ -26,7 +26,7 @@ var ImagesInAlbum = [UIImage]()
     var sources:[UIImage] = [UIImage]();
     // var singlePhotoViewController:SinglePhotoViewController?;
     
-    func photoExecuted(_ notification:Notification){
+    @objc func photoExecuted(_ notification:Notification){
         /*
         let photos = notification.userInfo.valueForKey("photos") as [UIImage];
         self.sources = photos;
